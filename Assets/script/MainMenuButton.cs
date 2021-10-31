@@ -1,42 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
 namespace MainMenu
 {
     public class MainMenuButton : MonoBehaviour
     {
-        Button btn;
+        List<Button> ButtonList;
 
         private void Awake()
         {
-            btn = GetComponent<Button>();
+            ButtonList = new List<Button>(this.transform.GetComponentsInChildren<Button>());
         }
         private void Start()
         {
-            switch (transform.name)
-            {
-                case "Start":
-                    btn.onClick.RemoveAllListeners();
-                    btn.onClick.AddListener(StartButtonClicked);
-                    break;
-                case "Continue":
-                    btn.onClick.RemoveAllListeners();
-                    btn.onClick.AddListener(RestartButtonClicked);
-                    break;
-                case "Config":
-                    btn.onClick.RemoveAllListeners();
-                    btn.onClick.AddListener(ConfigButtonClicked);
-                    break;
-                case "Exit":
-                    btn.onClick.RemoveAllListeners();
-                    btn.onClick.AddListener(QuitButtonClicked);
-                    break;
-                default:
-                    break;
-            }
+            ButtonList[0].onClick.AddListener(StartButtonClicked);
+            ButtonList[1].onClick.AddListener(ContinueButtonClicked);
+            ButtonList[2].onClick.AddListener(ConfigButtonClicked);
+            ButtonList[3].onClick.AddListener(QuitButtonClicked);
         }
 
         void StartButtonClicked()
@@ -47,9 +29,9 @@ namespace MainMenu
         {
             Application.Quit();
         }
-        void RestartButtonClicked()
+        void ContinueButtonClicked()
         {
-            SceneManager.LoadScene("LoadScene");
+            SceneManager.LoadScene("ContinueScene");
         }
         void ConfigButtonClicked()
         {
