@@ -1,0 +1,4 @@
+repository "Macau journey@ssl://jnu-game-develop-organization@sh01-plasticscm.unity.cn:8787"
+  path "/"
+    smartbranch "/main/1816920320" 
+     
