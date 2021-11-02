@@ -1,44 +1,46 @@
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
-using System.Collections.Generic;
+using UnityEngine.UI;
 
 namespace MainMenu
 {
     public class MainMenuButton : BottonPanel
-    {
-
+    {      
+        private float time;//等待时间
         new private void Awake()
         {
             base.Awake();
             //设置回调函数
-            settingListerners(StartButtonClicked, ContinueButtonClicked, ConfigButtonClicked, ExitButtonClicked);
+            time=1.5f;
+            settingListerners(() =>
+            {
+                setPressed();
+                StartCoroutine(WAIT.onWaiting(time, () => { SceneManager.LoadScene("GameScene"); }));
+            }, () =>
+            {
+                setPressed();
+                StartCoroutine(WAIT.onWaiting(time, () => { SceneManager.LoadScene("ContinueScene"); }));
+            }, () =>
+            {
+                setPressed();
+                StartCoroutine(WAIT.onWaiting(time, () => { SceneManager.LoadScene("ConfigScene"); }));
+            }, () =>
+            {
+                setPressed();
+                StartCoroutine(WAIT.onWaiting(time, () => { Application.Quit(); }));
+            });
 
         }
-        new private void Start()
-        {
-            base.Start();
-        }
 
-        void StartButtonClicked()
+        private void setPressed()
         {
-            //切换至游戏场景
-            SceneManager.LoadScene("GameScene");
-        }
-        void ContinueButtonClicked()
-        {
-            //打开读档界面
-            SceneManager.LoadScene("ContinueScene");
-        }
-        void ConfigButtonClicked()
-        {
-            //打开设置界面
-            SceneManager.LoadScene("ConfigScene");
-        }
-        void ExitButtonClicked()
-        {
-            //退出应用
-            Application.Quit();
+            //从全局点击事件中获取正在被选择的按钮
+            Button button = EventSystem.current.currentSelectedGameObject.GetComponent<Button>();
+            //禁用按钮防止二次点击
+            button.enabled = false;
+            //禁用按钮后会重置所有animator trigger，因此需要激活trigger
+            button.animator.SetTrigger("Pressed");
         }
     }
 }
