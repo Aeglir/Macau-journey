@@ -1,7 +1,6 @@
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using System.Collections.Generic;
+using UnityEngine.UI;
 
 namespace MainMenu
 {
@@ -20,10 +19,15 @@ namespace MainMenu
             base.Start();
         }
 
+        private void SwitchScene(string sceneName){
+            Invoke("SwitchToGameScene",1);
+        }
+
         void StartButtonClicked()
         {
             //切换至游戏场景
-            SceneManager.LoadScene("GameScene");
+            Button button = getSourceButton(StartButtonClicked);
+            Invoke("SwitchToGameScene",1);
         }
         void ContinueButtonClicked()
         {
