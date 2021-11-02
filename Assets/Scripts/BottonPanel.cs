@@ -6,13 +6,11 @@ abstract public class BottonPanel : MonoBehaviour
 {
     List<Button> buttonList;
     List<UnityEngine.Events.UnityAction> callBackList;
-    List<Animator> animatorList;
 
     public void Awake()
     {
         //获取子组件列表
         buttonList = new List<Button>(this.transform.GetComponentsInChildren<Button>());
-        getAnimator();
     }
     public void Start()
     {
@@ -30,16 +28,5 @@ abstract public class BottonPanel : MonoBehaviour
         }else{
             return false;
         }
-    }
-
-    private void getAnimator(){
-        animatorList=new List<Animator>();
-        foreach(Button b in buttonList){
-            animatorList.Add(b.GetComponent<Animator>());
-        }
-    }
-
-    protected Button getSourceButton(UnityEngine.Events.UnityAction call){
-        return buttonList[callBackList.IndexOf(call)];
     }
 }
