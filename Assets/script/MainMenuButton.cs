@@ -5,37 +5,40 @@ using System.Collections.Generic;
 
 namespace MainMenu
 {
-    public class MainMenuButton : MonoBehaviour
+    public class MainMenuButton : BottonPanel
     {
-        List<Button> ButtonList;
 
-        private void Awake()
+        new private void Awake()
         {
-            ButtonList = new List<Button>(this.transform.GetComponentsInChildren<Button>());
+            base.Awake();
+            //设置回调函数
+            settingListerners(StartButtonClicked, ContinueButtonClicked, ConfigButtonClicked, ExitButtonClicked);
+
         }
-        private void Start()
+        new private void Start()
         {
-            ButtonList[0].onClick.AddListener(StartButtonClicked);
-            ButtonList[1].onClick.AddListener(ContinueButtonClicked);
-            ButtonList[2].onClick.AddListener(ConfigButtonClicked);
-            ButtonList[3].onClick.AddListener(QuitButtonClicked);
+            base.Start();
         }
 
         void StartButtonClicked()
         {
+            //切换至游戏场景
             SceneManager.LoadScene("GameScene");
-        }
-        void QuitButtonClicked()
-        {
-            Application.Quit();
         }
         void ContinueButtonClicked()
         {
+            //打开读档界面
             SceneManager.LoadScene("ContinueScene");
         }
         void ConfigButtonClicked()
         {
+            //打开设置界面
             SceneManager.LoadScene("ConfigScene");
+        }
+        void ExitButtonClicked()
+        {
+            //退出应用
+            Application.Quit();
         }
     }
 }
