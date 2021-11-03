@@ -4,15 +4,15 @@ using UnityEngine.UI;
 
 abstract public class BottonPanel : MonoBehaviour
 {
-    List<Button> buttonList;
-    List<UnityEngine.Events.UnityAction> callBackList;
+    protected List<Button> buttonList;
+    protected List<UnityEngine.Events.UnityAction> callBackList;
 
-    public void Awake()
+    protected void Awake()
     {
         //获取子组件列表
         buttonList = new List<Button>(this.transform.GetComponentsInChildren<Button>());
     }
-    public void Start()
+    protected void Start()
     {
         //添加监听器
         int len=buttonList.Count<callBackList.Count?buttonList.Count:callBackList.Count;
@@ -22,7 +22,7 @@ abstract public class BottonPanel : MonoBehaviour
     }
 
     //设置回调函数列表
-    public bool settingListerners(params UnityEngine.Events.UnityAction[] call){
+    protected bool settingListerners(params UnityEngine.Events.UnityAction[] call){
         if((callBackList = new List<UnityEngine.Events.UnityAction>(call))!=null){
             return true;
         }else{
