@@ -17,6 +17,7 @@ abstract public class BottonPanel : MonoBehaviour
         //添加监听器
         int len=buttonList.Count<callBackList.Count?buttonList.Count:callBackList.Count;
         for(int i=0;i<len;i++){
+            buttonList[i].onClick.RemoveAllListeners();
             buttonList[i].onClick.AddListener(callBackList[i]);
         }
     }
