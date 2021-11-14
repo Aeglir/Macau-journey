@@ -1,7 +1,5 @@
-using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using System.Collections.Generic;
+using Scripts.Universal;
 
 public class ConfigButton : BottonPanel
 {
@@ -9,7 +7,7 @@ public class ConfigButton : BottonPanel
     new private void Awake()
     {
         base.Awake();
-        //ÉèÖÃ»Øµ÷º¯Êý
+        //ï¿½ï¿½ï¿½Ã»Øµï¿½ï¿½ï¿½ï¿½ï¿½
         settingListerners(ReturnButtonClicked);
 
     }
@@ -20,7 +18,7 @@ public class ConfigButton : BottonPanel
 
     void ReturnButtonClicked()
     {
-        //ÇÐ»»ÖÁÓÎÏ·³¡¾°
+        //ï¿½Ð»ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½
         SceneManager.LoadScene("MAINMENU");
     }
 }

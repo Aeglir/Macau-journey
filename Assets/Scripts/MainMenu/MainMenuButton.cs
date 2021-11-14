@@ -1,14 +1,16 @@
+using Scripts.MainMenu.LoadDialog;
+using Scripts.Universal;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-namespace MainMenu
+namespace Scripts.MainMenu
 {
     public class MainMenuButton : BottonPanel
     {
         private float time;//等待时间
-        public LoadingDialogClass loadingPanel;
+        public LoadingDialog loadingPanel;
         new private void Awake()
         {
             base.Awake();

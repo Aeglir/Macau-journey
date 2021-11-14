@@ -1,7 +1,9 @@
 
-namespace MainMenu
+using Scripts.Universal;
+
+namespace Scripts.MainMenu.LoadDialog
 {
-    public class LoadingDialogClass : BottonPanel
+    public class LoadingDialog : BottonPanel
     {
         private new void Awake()
         {
