@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using Universal;
 using UnityEngine;
 using UnityEngine.UI;
+using Managers;
 
 namespace MainMenu.ConfigMenu
 {
-    public class ResolutionSwitcher : BottonPanel
+    public class ResolutionSwitcher : ButtonPanel
     {
         private List<Tuple<int, int>> resolutionList;
         private char link;
         private int position;
         private Text resolutionText;
-        private new void Awake()
+        private void Awake()
         {
-            base.Awake();
             //初始化分辨率元组
             resolutionList = new List<Tuple<int, int>>();
             resolutionList.Add(new Tuple<int, int>(1920, 1080));
@@ -72,6 +72,9 @@ namespace MainMenu.ConfigMenu
             }
             //更改文本内容
             resolutionText.text = resoluTuple.Item1 + link.ToString() + resoluTuple.Item2;
+            //更新全局设置值
+            ConfigManager.Instance.setVriable<int>(ConfigManager.WIDTH,resoluTuple.Item1);
+            ConfigManager.Instance.setVriable<int>(ConfigManager.HEIGHT,resoluTuple.Item2);
             //根据元组切换分辨率
             switch (resoluTuple.Item1)
             {

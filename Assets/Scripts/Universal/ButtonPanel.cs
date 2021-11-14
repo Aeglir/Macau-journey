@@ -10,7 +10,7 @@ namespace Universal
     /// 可按顺序设置监听器
     /// 可返回指定button
     /// </summary>
-    abstract public class BottonPanel : MonoBehaviour
+    abstract public class ButtonPanel : MonoBehaviour
     {
 
         #region c# variables
@@ -20,13 +20,6 @@ namespace Universal
         #endregion
 
         #region C# base Fuction
-
-        /// <summary>
-        /// 获取Panel中的所有按钮控件，顺序按unity从上到下排序 
-        /// </summary>
-        protected void Awake()
-        {
-        }
         /// <summary>
         /// 根据callBackList为所有button设置onClick函数
         /// 按钮不足时多余的回调将被抛弃

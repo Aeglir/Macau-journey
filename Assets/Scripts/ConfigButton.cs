@@ -1,13 +1,11 @@
 using UnityEngine.SceneManagement;
 using Universal;
 
-public class ConfigButton : BottonPanel
+public class ConfigButton : ButtonPanel
 {
 
-    new private void Awake()
+    private void Awake()
     {
-        base.Awake();
-        //���ûص�����
         settingListerners(ReturnButtonClicked);
 
     }

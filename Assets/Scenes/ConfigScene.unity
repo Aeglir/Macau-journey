@@ -3431,7 +3431,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23ceb1d4536cfe04196ede77cff2d54d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttonList: []
+  buttonList:
+  - {fileID: 1276816412}
+  - {fileID: 1486961309}
 --- !u!222 &1932916762
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -4,22 +4,24 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Managers;
 
 namespace MainMenu
 {
-    public class MainMenuButton : BottonPanel
+    public class MainMenuButton : ButtonPanel
     {
         private float time;//等待时间
         public LoadingDialog loadingPanel;
-        new private void Awake()
+        private void Awake()
         {
-            base.Awake();
             //设置回调函数
             time = 0.5f;
             settingListerners(() =>
             {
                 setPressed();
-                StartCoroutine(WAIT.onWaiting(time, () => { SceneManager.LoadScene("GameScene"); }));
+                StartCoroutine(WAIT.onWaiting(time, () => { 
+                    GameManager.Instance.newGame();
+                    SceneManager.LoadScene("GameScene"); }));
                 reloadButton();
             }, () =>
             {

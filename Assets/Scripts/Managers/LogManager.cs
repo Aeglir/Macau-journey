@@ -8,11 +8,16 @@ namespace Managers
     {
 
         private StreamWriter SW;
+        private string path;
 
-        private string LogFileName = "Log.txt";
+        private string LogFileName;
         private void Awake()
         {
-            SW = new StreamWriter(Application.persistentDataPath + "/" + LogFileName, true);
+            path = Application.persistentDataPath + "/Logs";
+            LogFileName = path + "/" + "Log" + ".txt";
+            System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(path);
+            di.Create();
+            SW = new StreamWriter(LogFileName, true);
         }
 
         private void Start()
@@ -32,8 +37,6 @@ namespace Managers
                 SW.WriteLine("Logged at: " + System.DateTime.Now.ToString()
                 + " - Log Desc: " + condition + " - Trance: " + stackTrace + " - Type: " + type.ToString());
             }
-
-            Debug.Log(Application.persistentDataPath + "/" + LogFileName);
         }
 
         private void OnDestroy()
