@@ -1,11 +1,11 @@
 using Scripts.MainMenu.LoadDialog;
-using Scripts.Universal;
+using Universal;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-namespace Scripts.MainMenu
+namespace MainMenu
 {
     public class MainMenuButton : BottonPanel
     {
@@ -62,3 +62,5 @@ namespace Scripts.MainMenu
         }
     }
 }
+
+

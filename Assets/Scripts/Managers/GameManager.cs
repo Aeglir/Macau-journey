@@ -10,7 +10,8 @@ namespace Managers
 
         public static GameManager Instance
         {
-            get{
+            get
+            {
                 return instance;
             }
         }
@@ -23,8 +24,9 @@ namespace Managers
         public ArchiveManager archiveManager;
 
         #endregion
-        private void Awake() {
-            if(instance)
+        private void Awake()
+        {
+            if (instance)
             {
                 DestroyImmediate(gameObject);
                 return;
@@ -35,12 +37,16 @@ namespace Managers
             DontDestroyOnLoad(gameObject);
         }
 
-        public bool gameSave(){
+        public bool gameSave()
+        {
             return false;
         }
 
-        public bool gameLoad(){
+        public bool gameLoad()
+        {
             return false;
         }
     }
 }
+
+

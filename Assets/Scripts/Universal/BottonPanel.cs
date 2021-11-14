@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-namespace Scripts.Universal
+namespace Universal
 {
     /// <summary>
     /// 自动获取布局中的所有button compotent
@@ -83,3 +83,4 @@ namespace Scripts.Universal
         }
     }
 }
+

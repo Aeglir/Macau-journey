@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Scripts.MainMenu.ConfigMenu
+namespace MainMenu.ConfigMenu
 {
     public class FullScrreen : MonoBehaviour
     {
@@ -30,3 +30,5 @@ namespace Scripts.MainMenu.ConfigMenu
         }
     }
 }
+
+

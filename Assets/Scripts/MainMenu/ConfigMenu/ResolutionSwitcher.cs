@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
-using Scripts.Universal;
+using Universal;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Scripts.MainMenu.ConfigMenu
+namespace MainMenu.ConfigMenu
 {
     public class ResolutionSwitcher : BottonPanel
     {
@@ -34,15 +34,15 @@ namespace Scripts.MainMenu.ConfigMenu
             //设置向左切换的监听器
             settingListerners(() =>
             {
-                //列表位置减一后更改分辨率和分辨率文本
-                position--;
+            //列表位置减一后更改分辨率和分辨率文本
+            position--;
                 switchResolution(resolutionList[position % resolutionList.Count]);
             },
             //设置向右切换的监听器
             () =>
             {
-                //列表位置加一后更改分辨率和分辨率文本
-                position++;
+            //列表位置加一后更改分辨率和分辨率文本
+            position++;
                 switchResolution(resolutionList[position % resolutionList.Count]);
             }
             );
@@ -88,3 +88,5 @@ namespace Scripts.MainMenu.ConfigMenu
         }
     }
 }
+
+

@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace Scripts.Universal
+namespace Universal
 {
     /// <summary>
     /// 协同等待
@@ -23,5 +23,6 @@ namespace Scripts.Universal
                 action();
         }
     }
-
 }
+
+

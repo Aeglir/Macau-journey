@@ -1,5 +1,5 @@
 using UnityEngine.SceneManagement;
-using Scripts.Universal;
+using Universal;
 
 public class ConfigButton : BottonPanel
 {

@@ -1,24 +1,23 @@
 
-using Scripts.Universal;
+using Universal;
 
-namespace Scripts.MainMenu.LoadDialog
+namespace Scripts.MainMenu.LoadDialog;
+
+public class LoadingDialog : BottonPanel
 {
-    public class LoadingDialog : BottonPanel
+    private new void Awake()
     {
-        private new void Awake()
-        {
-            gameObject.SetActive(false);
-            base.Awake();
-        }
-        new void Start()
-        {
-            settingListerners(() => switchActive());
-            base.Start();
-        }
+        gameObject.SetActive(false);
+        base.Awake();
+    }
+    new void Start()
+    {
+        settingListerners(() => switchActive());
+        base.Start();
+    }
 
-        public void switchActive()
-        {
-            gameObject.SetActive(!gameObject.activeInHierarchy);
-        }
+    public void switchActive()
+    {
+        gameObject.SetActive(!gameObject.activeInHierarchy);
     }
 }

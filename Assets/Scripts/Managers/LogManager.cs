@@ -10,8 +10,9 @@ namespace Managers
         private StreamWriter SW;
 
         private string LogFileName = "Log.txt";
-        private void Awake() {
-            SW = new StreamWriter(Application.persistentDataPath + "/" + LogFileName,true);
+        private void Awake()
+        {
+            SW = new StreamWriter(Application.persistentDataPath + "/" + LogFileName, true);
         }
 
         private void Start()
@@ -40,5 +41,6 @@ namespace Managers
             SW.Close();
         }
     }
-
 }
+
+
