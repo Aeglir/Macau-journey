@@ -6,7 +6,7 @@ namespace Universal
     /// <summary>
     /// 协同等待
     /// </summary>
-    public class WAIT : MonoBehaviour
+    public sealed class WAIT : MonoBehaviour
     {
         /// <summary>
         /// 等待函数，等待指定时间后自动执行传入的回调函数

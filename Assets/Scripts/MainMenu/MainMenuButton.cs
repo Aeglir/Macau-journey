@@ -10,7 +10,13 @@ namespace MainMenu
 {
     public class MainMenuButton : ButtonPanel
     {
-        private float time;//等待时间
+        /// <summary>
+        /// 等待时间
+        /// </summary>
+        private float time;
+        /// <summary>
+        /// 载入窗体
+        /// </summary>
         public LoadingDialog loadingPanel;
         private void Awake()
         {
@@ -40,7 +46,9 @@ namespace MainMenu
                 reloadButton();
             });
         }
-
+        /// <summary>
+        /// 禁用按钮防止二次点击并激活animator trigger
+        /// </summary>
         private void setPressed()
         {
             //禁用按钮防止二次点击
@@ -53,7 +61,9 @@ namespace MainMenu
             //禁用按钮后会重置所有animator trigger，因此需要激活trigger
             button.animator.SetTrigger("Pressed");
         }
-
+        /// <summary>
+        /// 重置按钮状态为开启
+        /// </summary>
         private void reloadButton()
         {
             //重置按钮

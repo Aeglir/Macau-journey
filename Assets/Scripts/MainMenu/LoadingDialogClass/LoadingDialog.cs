@@ -5,11 +5,6 @@ namespace Scripts.MainMenu.LoadDialog
 {
     public class LoadingDialog : ButtonPanel
     {
-        private void Awake()
-        {
-            //初始化active
-            gameObject.SetActive(false);
-        }
         new void Start()
         {
             //设置监听器
@@ -17,10 +12,7 @@ namespace Scripts.MainMenu.LoadDialog
             base.Start();
         }
 
-        public void switchActive()
-        {
-            //切换active状态
-            gameObject.SetActive(!gameObject.activeInHierarchy);
-        }
+        //切换active状态
+        public void switchActive() => gameObject.SetActive(!gameObject.activeInHierarchy);
     }
 }

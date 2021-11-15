@@ -73,8 +73,8 @@ namespace MainMenu.ConfigMenu
             //更改文本内容
             resolutionText.text = resoluTuple.Item1 + link.ToString() + resoluTuple.Item2;
             //更新全局设置值
-            ConfigManager.Instance.setVriable<int>(ConfigManager.WIDTH,resoluTuple.Item1);
-            ConfigManager.Instance.setVriable<int>(ConfigManager.HEIGHT,resoluTuple.Item2);
+            GameManager.Instance.configManager.configData.width = resoluTuple.Item1;
+            GameManager.Instance.configManager.configData.height = resoluTuple.Item2;
             //根据元组切换分辨率
             switch (resoluTuple.Item1)
             {

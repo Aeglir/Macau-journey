@@ -1,3 +1,5 @@
+using Managers.Archive;
+using Managers.Config;
 using UnityEngine;
 
 namespace Managers
@@ -22,6 +24,8 @@ namespace Managers
         public LogManager logManager;
         //数据存储管理器
         public ArchiveManager archiveManager;
+
+        public ConfigManager configManager;
         #endregion
         private void Awake()
         {
@@ -38,22 +42,39 @@ namespace Managers
             DontDestroyOnLoad(gameObject);
         }
 
-        public void newGame(){
-            //开始新游戏则初始化存档
+        /// <summary>
+        /// 开始新游戏
+        /// </summary>
+        public void newGame()
+        {
             archiveManager.init();
         }
+        /// <summary>
+        /// 保存存档
+        /// </summary>
+        public void gameSave() => archiveManager.saveGame();
 
-        public void gameSave()
-        {
-            //存档。。。
-            archiveManager.saveGame();
-        }
+        /// <summary>
+        /// 加载存档
+        /// </summary>
+        /// <returns></returns>
+        public bool gameLoad() => archiveManager.loadGame();
 
-        public bool gameLoad()
-        {
-            //载入存档
-            return false;
-        }
+        /// <summary>
+        /// 自动存档
+        /// </summary>
+        public void autoSave() => archiveManager.autoSave();
+
+        /// <summary>
+        /// 保存设置
+        /// </summary>
+        public void configSave() => configManager.save();
+
+
+        /// <summary>
+        /// 加载设置
+        /// </summary>
+        public void configLoad() => configManager.load();
     }
 }
 

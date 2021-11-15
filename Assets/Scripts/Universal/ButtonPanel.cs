@@ -14,7 +14,13 @@ namespace Universal
     {
 
         #region c# variables
+        /// <summary>
+        /// 按钮列表
+        /// </summary>
         public List<Button> buttonList;
+        /// <summary>
+        /// 回调函数列表
+        /// </summary>
         protected List<UnityEngine.Events.UnityAction> callBackList;
 
         #endregion
