@@ -3736,6 +3736,8 @@ MonoBehaviour:
   buttonList:
   - {fileID: 676926395}
   - {fileID: 1711839053}
+  switcher: {fileID: 1932916760}
+  fullToggle: {fileID: 957932819}
 --- !u!1 &2115094534
 GameObject:
   m_ObjectHideFlags: 0

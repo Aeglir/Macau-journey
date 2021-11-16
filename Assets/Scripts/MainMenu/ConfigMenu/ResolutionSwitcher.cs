@@ -34,15 +34,15 @@ namespace MainMenu.ConfigMenu
             //设置向左切换的监听器
             settingListerners(() =>
             {
-            //列表位置减一后更改分辨率和分辨率文本
-            position--;
+                //列表位置减一后更改分辨率和分辨率文本
+                position--;
                 switchResolution(resolutionList[position % resolutionList.Count]);
             },
             //设置向右切换的监听器
             () =>
             {
-            //列表位置加一后更改分辨率和分辨率文本
-            position++;
+                //列表位置加一后更改分辨率和分辨率文本
+                position++;
                 switchResolution(resolutionList[position % resolutionList.Count]);
             }
             );
@@ -75,20 +75,10 @@ namespace MainMenu.ConfigMenu
             //更新全局设置值
             GameManager.Instance.configManager.configData.width = resoluTuple.Item1;
             GameManager.Instance.configManager.configData.height = resoluTuple.Item2;
-            //根据元组切换分辨率
-            switch (resoluTuple.Item1)
-            {
-                case 1920:
-                    GameManager.Instance.setResolution(1920,1080);
-                    break;
-                case 1280:
-                    GameManager.Instance.setResolution(1280,720);
-                    break;
-                default:
-                    GameManager.Instance.setResolution(1280,720);
-                    break;
-            }
         }
+
+        public int getWidth() => resolutionList[position % resolutionList.Count].Item1;
+        public int getHeight() => resolutionList[position % resolutionList.Count].Item2;
     }
 }
 
