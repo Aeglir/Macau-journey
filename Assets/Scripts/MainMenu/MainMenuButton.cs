@@ -13,21 +13,24 @@ namespace MainMenu
         /// <summary>
         /// 等待时间
         /// </summary>
-        private float time;
+        [SerializeField]
+        private float time = 0.5f;
         /// <summary>
         /// 载入窗体
         /// </summary>
-        public LoadingDialog loadingPanel;
+        [SerializeField]
+        private LoadingDialog loadingPanel;
         private void Awake()
         {
             //设置回调函数
-            time = 0.5f;
             settingListerners(() =>
             {
                 setPressed();
-                StartCoroutine(WAIT.onWaiting(time, () => { 
+                StartCoroutine(WAIT.onWaiting(time, () =>
+                {
                     GameManager.Instance.newGame();
-                    SceneManager.LoadScene("GameScene"); }));
+                    SceneManager.LoadSceneAsync("GameScene");
+                }));
                 reloadButton();
             }, () =>
             {
@@ -37,7 +40,7 @@ namespace MainMenu
             }, () =>
             {
                 setPressed();
-                StartCoroutine(WAIT.onWaiting(time, () => { SceneManager.LoadScene("ConfigScene"); }));
+                StartCoroutine(WAIT.onWaiting(time, () => { SceneManager.LoadSceneAsync("ConfigScene"); }));
                 reloadButton();
             }, () =>
             {

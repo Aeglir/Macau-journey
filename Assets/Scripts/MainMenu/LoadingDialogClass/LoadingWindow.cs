@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Managers;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Universal;
@@ -13,7 +14,8 @@ public class LoadingWindow : ButtonPanel
     /// <summary>
     /// Text控件列表
     /// </summary>
-    public List<Text> textList;
+    [SerializeField]
+    private List<Text> textList;
     /// <summary>
     /// 存档名字典
     /// </summary>
@@ -23,7 +25,7 @@ public class LoadingWindow : ButtonPanel
     {
         //初始化字典
         saveDictionary = new Dictionary<string, int>();
-        string[] saveNames = GameManager.Instance.archiveManager.getSaveNames();
+        string[] saveNames = ArchiveManager.Instance.getSaveNames();
         for (int i = 0; i < saveNames.Length; i++)
         {
             saveDictionary.Add(saveNames[i], i);
@@ -52,9 +54,9 @@ public class LoadingWindow : ButtonPanel
     {
         //根据当前点击按钮获取索引并设置存档管理器的索引
         Button button = EventSystem.current.currentSelectedGameObject.GetComponent<Button>();
-        GameManager.Instance.archiveManager.position = buttonList.IndexOf(button);
+        ArchiveManager.Instance.position = buttonList.IndexOf(button);
         //设置好索引后加载存档
-        GameManager.Instance.gameLoad();
+        ArchiveManager.Instance.loadGame();
     }
 
 

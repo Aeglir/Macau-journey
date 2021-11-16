@@ -1,4 +1,3 @@
-using Managers;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,12 +8,13 @@ namespace MainMenu.ConfigMenu
         /// <summary>
         /// 开关控件
         /// </summary>
-        public Toggle toggle;
+        [SerializeField]
+        private Toggle toggle;
 
         private void Awake()
         {
             //根据当前是否全屏初始化开关
-            toggle.isOn = GameManager.Instance.configManager.isFull;
+            toggle.isOn = Screen.fullScreen;
         }
     }
 }

@@ -1,3 +1,4 @@
+using System.Collections;
 using MainMenu.ConfigMenu;
 using Managers;
 using UnityEngine.SceneManagement;
@@ -26,8 +27,8 @@ public class ConfigButton : ButtonPanel
 
     void SaveButtonClicked()
     {
-        GameManager.Instance.setResolution(switcher.getWidth(), switcher.getHeight(), fullToggle.isOn);
-        GameManager.Instance.configSave();
         SceneManager.LoadScene("MAINMENU");
+        ConfigManager.Instance.setResolution(switcher.getWidth(), switcher.getHeight(), fullToggle.isOn);
+        ConfigManager.Instance.saveData();
     }
 }

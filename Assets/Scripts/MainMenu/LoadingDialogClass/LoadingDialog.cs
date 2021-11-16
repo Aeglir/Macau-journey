@@ -1,4 +1,3 @@
-
 using Universal;
 
 namespace Scripts.MainMenu.LoadDialog

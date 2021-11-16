@@ -2012,6 +2012,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 651c4010c849d4e46a1a8d4a3d573392, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  configData:
+    width: 1280
+    height: 720
+    isFull: 0
 --- !u!1 &1136434294
 GameObject:
   m_ObjectHideFlags: 0
@@ -2286,6 +2290,7 @@ MonoBehaviour:
   - {fileID: 365025171}
   - {fileID: 1440962878}
   - {fileID: 2065848430}
+  time: 0.5
   loadingPanel: {fileID: 1809031374}
 --- !u!1 &1334013147
 GameObject:

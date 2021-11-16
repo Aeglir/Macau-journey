@@ -3,15 +3,25 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text;
+using System.Threading;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// 存档管理器
 /// </summary>
-namespace Managers.Archive
+namespace Managers
 {
     public class ArchiveManager : MonoBehaviour
     {
+        #region c# properties
+        //对象单例化
+        private static ArchiveManager instance = null;
+        public static ArchiveManager Instance
+        {
+            get => instance;
+        }
+        #endregion
         #region c# vriable
         /// <summary>
         /// 各个数据对应的管理器
@@ -26,14 +36,8 @@ namespace Managers.Archive
         /// <value>路径属性</value>
         public string path
         {
-            get
-            {
-                return m_path;
-            }
-            set
-            {
-                m_path = basePath + "/" + value;
-            }
+            get => m_path;
+            set => m_path = basePath + "/" + value;
         }
         /// <summary>
         /// 
@@ -41,15 +45,8 @@ namespace Managers.Archive
         /// <value>现有存档数</value>
         public int savesCount
         {
-            get
-            {
-                return headData.savesCount;
-            }
-            set
-            {
-                //与首部数据同步
-                headData.savesCount = value;
-            }
+            get => headData.savesCount;
+            set => headData.savesCount = value;
         }
         private int m_position;
         /// <summary>
@@ -58,10 +55,7 @@ namespace Managers.Archive
         /// <value>当前存档索引</value>
         public int position
         {
-            get
-            {
-                return m_position;
-            }
+            get => m_position;
             set
             {
                 //设置对应的文件名和文件路径、存档名
@@ -81,10 +75,7 @@ namespace Managers.Archive
         /// <value>文件名</value>
         public string fileNmae
         {
-            get
-            {
-                return m_fileNmae;
-            }
+            get => m_fileNmae;
             set
             {
                 //设置对应文件路径、若首部数据中不包含该文件名则建立新建flag并设置对应索引
@@ -104,10 +95,7 @@ namespace Managers.Archive
         /// <value>存档名</value>
         public string saveName
         {
-            get
-            {
-                return m_saveName;
-            }
+            get => m_saveName;
             set
             {
                 //若为新建存档则初始化索引、文件名以及文件路径
@@ -133,6 +121,10 @@ namespace Managers.Archive
 
         private void Awake()
         {
+            if (Instance == null)
+            {
+                instance = this;
+            }
             //初始化路径
             basePath = Application.persistentDataPath + "/Saves";
             //若文件路径不存在则创建文件路径，否则无影响
@@ -174,7 +166,7 @@ namespace Managers.Archive
         /// <summary>
         /// 自动存档
         /// </summary>
-        public void autoSave()
+        private void autoSave()
         {
             string saveName = "AutoSave";
             //若首部数据中不存在该文件名则添加索引、文件名、存档名、创建时间和最后修改时间
@@ -199,10 +191,13 @@ namespace Managers.Archive
             //遍历数据管理器保存数据
             foreach (ArchiveDataManager m in archiveDataManagers)
             {
-                m.saveData(basePath + "/" + saveName, m.getArchiveType(), m.getArchiveData());
+                saveData(m);
             }
         }
-
+        public void asyncAutoSave()
+        {
+            ThreadStart childref = new ThreadStart(autoSave);
+        }
         /// <summary>
         /// 返回存档名称数组
         /// </summary>
@@ -218,7 +213,51 @@ namespace Managers.Archive
             DirectoryInfo di = new DirectoryInfo(path);
             di.Create();
         }
-
+        /// <summary>
+        /// 加载数据
+        /// </summary>
+        /// <returns>bool</returns>
+        public bool loadData(ArchiveDataManager manager)
+        {
+            string type = manager.getArchiveType();
+            if (!new FileInfo(path + "/" + type + ".json").Exists)
+            {
+                return false;
+            }
+            //创建输入流
+            StreamReader sr = new StreamReader(path + "/" + type + ".json", Encoding.UTF8);
+            if (sr == null)
+            {
+                return false;
+            }
+            //json反序列化
+            JsonUtility.FromJsonOverwrite(sr.ReadToEnd().Replace("\n", "").Replace(" ", "").Replace("\t", "").Replace("\r", ""), manager.getArchiveData());
+            //关闭流
+            sr.Close();
+            return true;
+        }
+        /// <summary>
+        /// 保存数据
+        /// </summary>
+        /// <returns>bool</returns>
+        public bool saveData(ArchiveDataManager manager)
+        {
+            string type = manager.getArchiveType();
+            new DirectoryInfo(path).Create();
+            //创建输出流
+            StreamWriter sw = new StreamWriter(path + "/" + type + ".json"
+            , false, Encoding.UTF8);
+            if (sw == null)
+            {
+                return false;
+            }
+            //序列化object
+            string json = manager.getArchiveData().getJson();
+            sw.WriteLine(json);
+            //关闭输出流
+            sw.Close();
+            return true;
+        }
         /// <summary>
         /// 保存游戏存档
         /// </summary>
@@ -246,7 +285,7 @@ namespace Managers.Archive
             //遍历数据管理器保存数据
             foreach (ArchiveDataManager m in archiveDataManagers)
             {
-                m.saveData(path, m.getArchiveType(), m.getArchiveData());
+                saveData(m);
             }
         }
 
@@ -260,7 +299,7 @@ namespace Managers.Archive
             foreach (ArchiveDataManager m in archiveDataManagers)
             {
                 //尝试获取存档
-                if (!m.tryToLoad(m_path))
+                if (!loadData(m))
                 {
                     //失败时进行的action
                     failToLoad();
@@ -281,7 +320,6 @@ namespace Managers.Archive
             headData.createTime.Remove(headData.createTime[position]);
             headData.lastModifiedTime.Remove(headData.lastModifiedTime[position]);
         }
-
         /// <summary>
         /// 保存头部数据
         /// </summary>
@@ -333,7 +371,6 @@ namespace Managers.Archive
                 return false;
             }
         }
-
         /// <summary>
         /// 首部数据类
         /// </summary>
@@ -370,7 +407,6 @@ namespace Managers.Archive
             }
         }
     }
-
     /// <summary>
     /// 存档数据基类
     /// </summary>
@@ -381,78 +417,14 @@ namespace Managers.Archive
         /// </summary>
         /// <returns>string</returns>
         public string getJson() => JsonUtility.ToJson(this, true);
-        /// <summary>
-        /// 把json序列字符串反序列化为类
-        /// </summary>
-        /// <returns>T</returns>
-        public static T getObject<T>(string json) => JsonUtility.FromJson<T>(json);
     }
     /// <summary>
     /// 存档数据管理器，需要至少拥有一个存档数据基类或其子类的实体
     /// </summary>
     abstract public class ArchiveDataManager : MonoBehaviour
     {
-        /// <summary>
-        /// 尝试读取存档
-        /// </summary>
-        /// <param name="path">存档路径</param>
-        /// <returns>bool</returns>
-        public abstract bool tryToLoad(string path);
-        /// <summary>
-        /// 保存数据
-        /// </summary>
-        /// <param name="path">存档目录</param>
-        /// <param name="type">存档类型</param>
-        /// <param name="data">存档数据基类或子类其实体</param>
-        /// <returns></returns>
-        public bool saveData(string path, string type, ArchiveData data)
-        {
-            //创建输出流
-            StreamWriter sw = new StreamWriter(path + "/" + type + ".json"
-            , false, Encoding.UTF8);
-            if (sw == null)
-            {
-                return false;
-            }
-            //序列化object
-            string json = data.getJson();
-            sw.WriteLine(json);
-            //关闭输出流
-            sw.Close();
-            return true;
-        }
-        /// <summary>
-        /// 加载数据
-        /// </summary>
-        /// <param name="path">存档目录</param>
-        /// <param name="type">存档类型</param>
-        /// <typeparam name="T">存档数据类型，例如ArchiveData</typeparam>
-        /// <returns>T</returns>
-        public T loadData<T>(string path, string type)
-        {
-            if (!new FileInfo(path + "/" + type + ".json").Exists)
-            {
-                return default(T);
-            }
-            //创建输入流
-            StreamReader sr = new StreamReader(path + "/" + type + ".json", Encoding.UTF8);
-            if (sr == null)
-            {
-                return default(T);
-            }
-            //json反序列化
-            T data = JsonUtility.FromJson<T>(sr.ReadToEnd().Replace("\n", "").Replace(" ", "").Replace("\t", "").Replace("\r", ""));
-            //关闭流
-            sr.Close();
-            if (data != null)
-            {
-                return data;
-            }
-            else
-            {
-                return default(T);
-            }
-        }
+        public void setDataField<T>(string fieldName, T value) where T : ArchiveData => getArchiveDataType().GetField(fieldName).SetValue(getArchiveData(), value);
+        public T getDataField<T>(string fieldName) where T : ArchiveData => (T)getArchiveDataType().GetField(fieldName).GetValue(getArchiveData());
         /// <summary>
         /// 返回存档类型
         /// </summary>
@@ -462,12 +434,11 @@ namespace Managers.Archive
         /// 返回存档数据实例
         /// </summary>
         /// <returns>ArchiveData</returns>
-        /// public abstract ref T getArchiveData<T>();
+        public abstract ArchiveData getArchiveData();
         /// <summary>
-        /// 放回存档数据类型，例如ArchiveData.GetType()
+        /// 获得存档数据类型
         /// </summary>
         /// <returns>Type</returns>
         public abstract Type getArchiveDataType();
-        public abstract ArchiveData getArchiveData();
     }
 }

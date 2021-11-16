@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using Universal;
 using UnityEngine;
 using UnityEngine.UI;
-using Managers;
 
 namespace MainMenu.ConfigMenu
 {
     public class ResolutionSwitcher : ButtonPanel
     {
         private List<Tuple<int, int>> resolutionList;
+        [SerializeField]
         private char link;
         private int position;
         private Text resolutionText;
@@ -19,8 +19,6 @@ namespace MainMenu.ConfigMenu
             resolutionList = new List<Tuple<int, int>>();
             resolutionList.Add(new Tuple<int, int>(1920, 1080));
             resolutionList.Add(new Tuple<int, int>(1280, 720));
-            //初始化连接符号
-            link = 'X';
             //获取分辨率显示文本控件
             resolutionText = GetComponentsInChildren<Text>()[1];
             //获取当前列表位置
@@ -72,9 +70,6 @@ namespace MainMenu.ConfigMenu
             }
             //更改文本内容
             resolutionText.text = resoluTuple.Item1 + link.ToString() + resoluTuple.Item2;
-            //更新全局设置值
-            GameManager.Instance.configManager.configData.width = resoluTuple.Item1;
-            GameManager.Instance.configManager.configData.height = resoluTuple.Item2;
         }
 
         public int getWidth() => resolutionList[position % resolutionList.Count].Item1;
