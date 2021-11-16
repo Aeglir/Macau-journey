@@ -109,30 +109,17 @@ namespace Managers.Config
         /// 加载设置存档数据
         /// </summary>
         /// <returns></returns>
-        public bool load() => tryToLoad(dirPath);
-        /// <summary>
-        /// 设置屏幕分辨率
-        /// </summary>
-        /// <param name="width">宽度</param>
-        /// <param name="height">长度</param>
-        public void setResolution(int width, int height)
+        public bool load()
         {
-            configData.width = width;
-            configData.height = height;
-            Screen.SetResolution(width, height, Screen.fullScreenMode);
-        }
-        /// <summary>
-        /// 设置屏幕分辨率
-        /// </summary>
-        /// <param name="width">宽度</param>
-        /// <param name="height">长度</param>
-        /// <param name="isFull">全屏</param>
-        public void setResolution(int width, int height, bool isFull)
-        {
-            configData.width = width;
-            configData.height = height;
-            configData.isFull = isFull;
-            Screen.SetResolution(width, height, isFull);
+            if (tryToLoad(dirPath))
+            {
+                Screen.SetResolution(configData.width, configData.height, isFull);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public class ConfigData : ArchiveData
@@ -141,16 +128,21 @@ namespace Managers.Config
             /// <summary>
             /// 屏幕宽度数据
             /// </summary>
-            public int width = 1920;
+            public int width = 1280;
             /// <summary>
             /// 屏幕高度数据
             /// </summary>
-            public int height = 1080;
+            public int height = 720;
             /// <summary>
             /// 屏幕全屏flag
             /// </summary>
             public bool isFull = true;
             #endregion
+
+            public ConfigData()
+            {
+
+            }
         }
     }
 }

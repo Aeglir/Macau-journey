@@ -75,6 +75,30 @@ namespace Managers
         /// 加载设置
         /// </summary>
         public void configLoad() => configManager.load();
+        /// <summary>
+        /// 设置屏幕分辨率
+        /// </summary>
+        /// <param name="width">宽度</param>
+        /// <param name="height">长度</param>
+        public void setResolution(int width, int height)
+        {
+            configManager.configData.width = width;
+            configManager.configData.height = height;
+            Screen.SetResolution(width, height, Screen.fullScreenMode);
+        }
+        /// <summary>
+        /// 设置屏幕分辨率
+        /// </summary>
+        /// <param name="width">宽度</param>
+        /// <param name="height">长度</param>
+        /// <param name="isFull">全屏</param>
+        public void setResolution(int width, int height, bool isFull)
+        {
+            configManager.configData.width = width;
+            configManager.configData.height = height;
+            configManager.configData.isFull = isFull;
+            Screen.SetResolution(width, height, isFull);
+        }
     }
 }
 

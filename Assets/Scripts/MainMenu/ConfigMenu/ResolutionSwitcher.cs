@@ -79,13 +79,13 @@ namespace MainMenu.ConfigMenu
             switch (resoluTuple.Item1)
             {
                 case 1920:
-                    Screen.SetResolution(1920, 1080, Screen.fullScreen);
+                    GameManager.Instance.setResolution(1920,1080);
                     break;
                 case 1280:
-                    Screen.SetResolution(1280, 720, Screen.fullScreen);
+                    GameManager.Instance.setResolution(1280,720);
                     break;
                 default:
-                    Screen.SetResolution(1920, 1080, Screen.fullScreen);
+                    GameManager.Instance.setResolution(1280,720);
                     break;
             }
         }
