@@ -260,7 +260,7 @@ namespace Managers.Archive
             foreach (ArchiveDataManager m in archiveDataManagers)
             {
                 //尝试获取存档
-                if (!m.tryToLoad(path))
+                if (!m.tryToLoad(m_path))
                 {
                     //失败时进行的action
                     failToLoad();
@@ -269,7 +269,6 @@ namespace Managers.Archive
             }
             return true;
         }
-
         /// <summary>
         /// 存档读取失败时采取的行为
         /// </summary>
@@ -394,9 +393,9 @@ namespace Managers.Archive
     abstract public class ArchiveDataManager : MonoBehaviour
     {
         /// <summary>
-        /// 尝试加载存档
+        /// 尝试读取存档
         /// </summary>
-        /// <param name="path">存档目录</param>
+        /// <param name="path">存档路径</param>
         /// <returns>bool</returns>
         public abstract bool tryToLoad(string path);
         /// <summary>
@@ -431,6 +430,10 @@ namespace Managers.Archive
         /// <returns>T</returns>
         public T loadData<T>(string path, string type)
         {
+            if (!new FileInfo(path + "/" + type + ".json").Exists)
+            {
+                return default(T);
+            }
             //创建输入流
             StreamReader sr = new StreamReader(path + "/" + type + ".json", Encoding.UTF8);
             if (sr == null)
@@ -459,11 +462,12 @@ namespace Managers.Archive
         /// 返回存档数据实例
         /// </summary>
         /// <returns>ArchiveData</returns>
-        public abstract ArchiveData getArchiveData();
+        /// public abstract ref T getArchiveData<T>();
         /// <summary>
         /// 放回存档数据类型，例如ArchiveData.GetType()
         /// </summary>
         /// <returns>Type</returns>
         public abstract Type getArchiveDataType();
+        public abstract ArchiveData getArchiveData();
     }
 }

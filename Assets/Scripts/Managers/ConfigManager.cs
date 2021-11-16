@@ -52,12 +52,15 @@ namespace Managers.Config
             //初始化文件路径和文件名、创建设置数据实例
             dirPath = Application.persistentDataPath + "/Saves";
             fileNmae = type + ".json";
-            configData = new ConfigData();
             //创建文件路径
             DirectoryInfo di = new DirectoryInfo(dirPath);
             di.Create();
             //加载设置数据
-            load();
+            if (!load())
+            {
+                configData = new ConfigData();
+                save();
+            }
         }
         /// <summary>
         /// 获取类型
