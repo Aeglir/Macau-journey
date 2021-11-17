@@ -1,15 +1,20 @@
-using Scripts.MainMenu.LoadDialog;
 using Universal;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Managers;
+using System.Collections.Generic;
 
 namespace MainMenu
 {
-    public class MainMenuButton : ButtonPanel
+    public class MainMenuButton : MonoBehaviour
     {
+        /// <summary>
+        /// 按钮列表
+        /// </summary>
+        [SerializeField]
+        private List<Button> buttonList;
         /// <summary>
         /// 等待时间
         /// </summary>
@@ -19,48 +24,42 @@ namespace MainMenu
         /// 载入窗体
         /// </summary>
         [SerializeField]
-        private LoadingDialog loadingPanel;
-        private void Awake()
+        private GameObject loadingPanel;
+        [SerializeField]
+        private GameObject configPanel;
+        public void startButton(Button button)
         {
-            //设置回调函数
-            settingListerners(() =>
+            setPressed(button);
+            StartCoroutine(WAIT.onWaiting(time, () =>
             {
-                setPressed();
-                StartCoroutine(WAIT.onWaiting(time, () =>
-                {
-                    GameManager.Instance.newGame();
-                    SceneManager.LoadSceneAsync("GameScene");
-                }));
-                reloadButton();
-            }, () =>
-            {
-                setPressed();
-                loadingPanel.switchActive();
-                reloadButton();
-            }, () =>
-            {
-                setPressed();
-                StartCoroutine(WAIT.onWaiting(time, () => { SceneManager.LoadSceneAsync("ConfigScene"); }));
-                reloadButton();
-            }, () =>
-            {
-                setPressed();
-                StartCoroutine(WAIT.onWaiting(time, () => { Application.Quit(); }));
-                reloadButton();
-            });
+                GameManager.Instance.newGame();
+                SceneManager.LoadSceneAsync("GameScene");
+            }));
+            reloadButton();
         }
+        public void continueButton(Button button)
+        {
+            setPressed(button);
+            StartCoroutine(WAIT.onWaiting(time, () => { loadingPanel.SetActive(!loadingPanel.activeSelf); }));
+            reloadButton();
+        }
+        public void configButton(Button button)
+        {
+            setPressed(button);
+            StartCoroutine(WAIT.onWaiting(time, () => { configPanel.SetActive(!configPanel.activeSelf); }));
+            reloadButton();
+        }
+        public void exitButton() => Application.Quit();
         /// <summary>
         /// 禁用按钮防止二次点击并激活animator trigger
         /// </summary>
-        private void setPressed()
+        private void setPressed(Button button)
         {
             //禁用按钮防止二次点击
             foreach (Button bt in buttonList)
             {
                 bt.enabled = false;
             }
-            //从全局点击事件中获取正在被选择的按钮
-            Button button = EventSystem.current.currentSelectedGameObject.GetComponent<Button>();
             //禁用按钮后会重置所有animator trigger，因此需要激活trigger
             button.animator.SetTrigger("Pressed");
         }

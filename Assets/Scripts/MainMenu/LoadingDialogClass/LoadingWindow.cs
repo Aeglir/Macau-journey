@@ -2,13 +2,11 @@ using System.Collections.Generic;
 using System.Linq;
 using Managers;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using Universal;
 /// <summary>
 /// 存档加载窗口
 /// </summary>
-public class LoadingWindow : ButtonPanel
+public class LoadingWindow : MonoBehaviour
 {
     #region c# vriables
     /// <summary>
@@ -20,6 +18,7 @@ public class LoadingWindow : ButtonPanel
     /// 存档名字典
     /// </summary>
     private Dictionary<string, int> saveDictionary;
+    private List<Button> buttonList;
     #endregion
     private void Awake()
     {
@@ -37,24 +36,12 @@ public class LoadingWindow : ButtonPanel
             textList[i].text = saveDictionary.Keys.ToList()[i];
         }
     }
-    private new void Start()
-    {
-        //初始化回调函数列表
-        callBackList = new List<UnityEngine.Events.UnityAction>();
-        for (int i = 0; i < buttonList.Count; i++)
-        {
-            callBackList.Add(getSaveName);
-        }
-        base.Start();
-    }
     /// <summary>
     /// 获取存档名称回调函数
     /// </summary>
-    private void getSaveName()
+    public void getSaveName(int index)
     {
-        //根据当前点击按钮获取索引并设置存档管理器的索引
-        Button button = EventSystem.current.currentSelectedGameObject.GetComponent<Button>();
-        ArchiveManager.Instance.position = buttonList.IndexOf(button);
+        ArchiveManager.Instance.position = index;
         //设置好索引后加载存档
         ArchiveManager.Instance.loadGame();
     }

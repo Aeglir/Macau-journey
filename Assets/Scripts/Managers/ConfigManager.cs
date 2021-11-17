@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Text;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Managers
 {
@@ -36,6 +37,36 @@ namespace Managers
             get => configData.height;
             set => configData.height = value;
         }
+        public float mainVolume
+        {
+            get => configData.mainVolume;
+            set => configData.mainVolume = value;
+        }
+        public float bgmVolume
+        {
+            get => configData.bgmVolume;
+            set => configData.bgmVolume = value;
+        }
+        public float seVolume
+        {
+            get => configData.seVolume;
+            set => configData.seVolume = value;
+        }
+        public bool MVEnable
+        {
+            get => configData.mainVolumeEnable;
+            set => configData.mainVolumeEnable = value;
+        }
+        public bool BGMEnable
+        {
+            get => configData.bgmVolumeEnable;
+            set => configData.bgmVolumeEnable = value;
+        }
+        public bool SEEnable
+        {
+            get => configData.seVolumeEnable;
+            set => configData.seVolumeEnable = value;
+        }
         #endregion
         #region c# vriables
         /// <summary>
@@ -59,23 +90,30 @@ namespace Managers
 
         private void Awake()
         {
-            if (Instance == null)
+            if (!Instance)
             {
                 instance = this;
+                //初始化文件路径和文件名、创建设置数据实例
+                dirPath = Application.persistentDataPath + "/Saves";
+                fileNmae = type + ".json";
+                //创建文件路径
+                DirectoryInfo di = new DirectoryInfo(dirPath);
+                di.Create();
+                //加载设置数据
+                if (!loadData())
+                {
+                    saveData();
+                }
             }
-            //初始化文件路径和文件名、创建设置数据实例
-            dirPath = Application.persistentDataPath + "/Saves";
-            fileNmae = type + ".json";
-            //创建文件路径
-            DirectoryInfo di = new DirectoryInfo(dirPath);
-            di.Create();
-            //加载设置数据
-            configData = new ConfigData();
-            if (!loadData())
+        }
+        private void setConfig()
+        {
+            Screen.SetResolution(width, height, isFull);
+            if (AudioManager.Instance)
             {
-                saveData();
+                AudioManager.Instance.setAllVolume(mainVolume, bgmVolume, seVolume);
+                AudioManager.Instance.enableAudioSource(MVEnable & BGMEnable);
             }
-            setResolution(width, height, isFull);
         }
         /// <summary>
         /// 获取类型
@@ -87,6 +125,8 @@ namespace Managers
         /// </summary>
         /// <returns>ArchiveData</returns>
         public override ArchiveData getArchiveData() => configData;
+        public void loadConfig() => loadData();
+        public void saveConfig() => saveData();
         /// <summary>
         /// 加载本地数据文件
         /// </summary>
@@ -107,7 +147,7 @@ namespace Managers
             JsonUtility.FromJsonOverwrite(sr.ReadToEnd().Replace("\n", "").Replace(" ", "").Replace("\t", "").Replace("\r", ""), configData);
             //关闭流
             sr.Close();
-
+            setConfig();
             return true;
         }
         /// <summary>
@@ -129,33 +169,9 @@ namespace Managers
             sw.WriteLine(json);
             //关闭输出流
             sw.Close();
+            setConfig();
             return true;
         }
-        /// <summary>
-        /// 设置屏幕分辨率
-        /// </summary>
-        /// <param name="width">宽度</param>
-        /// <param name="height">长度</param>
-        public void setResolution(int width, int height)
-        {
-            this.width = width;
-            this.height = height;
-            Screen.SetResolution(width, height, Screen.fullScreenMode);
-        }
-        /// <summary>
-        /// 设置屏幕分辨率
-        /// </summary>
-        /// <param name="width">宽度</param>
-        /// <param name="height">长度</param>
-        /// <param name="isFull">全屏</param>
-        public void setResolution(int width, int height, bool isFull)
-        {
-            this.width = width;
-            this.height = height;
-            this.isFull = isFull;
-            Screen.SetResolution(width, height, isFull);
-        }
-
         public override Type getArchiveDataType() => configData.GetType();
 
         [Serializable]
@@ -165,15 +181,24 @@ namespace Managers
             /// <summary>
             /// 屏幕宽度数据
             /// </summary>
-            public int width = 1280;
+            public int width;
             /// <summary>
             /// 屏幕高度数据
             /// </summary>
-            public int height = 720;
+            public int height;
             /// <summary>
             /// 屏幕全屏flag
             /// </summary>
-            public bool isFull = false;
+            public bool isFull;
+            [Range(0, 1)]
+            public float mainVolume;
+            [Range(0, 1)]
+            public float bgmVolume;
+            [Range(0, 1)]
+            public float seVolume;
+            public bool mainVolumeEnable;
+            public bool bgmVolumeEnable;
+            public bool seVolumeEnable;
             #endregion
         }
     }

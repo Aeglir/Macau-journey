@@ -1,11 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Reflection;
 using System.Text;
 using System.Threading;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 /// <summary>
 /// 存档管理器
@@ -121,19 +119,19 @@ namespace Managers
 
         private void Awake()
         {
-            if (Instance == null)
+            if (!Instance)
             {
                 instance = this;
-            }
-            //初始化路径
-            basePath = Application.persistentDataPath + "/Saves";
-            //若文件路径不存在则创建文件路径，否则无影响
-            initPath(basePath);
-            //若加载首部数据失败则新建首部并保存
-            if (!loadHead())
-            {
-                headData = new HeadData();
-                saveHead();
+                //初始化路径
+                basePath = Application.persistentDataPath + "/Saves";
+                //若文件路径不存在则创建文件路径，否则无影响
+                initPath(basePath);
+                //若加载首部数据失败则新建首部并保存
+                if (!loadHead())
+                {
+                    headData = new HeadData();
+                    saveHead();
+                }
             }
         }
 

@@ -22,11 +22,13 @@ namespace Managers
         private ArchiveManager archiveManager;
         [SerializeField]
         private ConfigManager configManager;
+        [SerializeField]
+        private AudioManager audioManager;
         #endregion
         private void Awake()
         {
             //若已存在实例则销毁当前新建的gameObject
-            if (instance)
+            if (Instance)
             {
                 DestroyImmediate(gameObject);
                 return;
