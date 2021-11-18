@@ -4,6 +4,7 @@ using System.IO;
 using System.Text;
 using System.Threading;
 using UnityEngine;
+using Universal;
 
 /// <summary>
 /// 存档管理器
@@ -125,7 +126,7 @@ namespace Managers
                 //初始化路径
                 basePath = Application.persistentDataPath + "/Saves";
                 //若文件路径不存在则创建文件路径，否则无影响
-                initPath(basePath);
+                INIWriter.CheckPath(basePath);
                 //若加载首部数据失败则新建首部并保存
                 if (!loadHead())
                 {
@@ -218,7 +219,7 @@ namespace Managers
         public bool loadData(ArchiveDataManager manager)
         {
             string type = manager.getArchiveType();
-            if (!new FileInfo(path + "/" + type + ".json").Exists)
+            if (!INIWriter.CheckFile(path + "/" + type + ".json"))
             {
                 return false;
             }
@@ -241,7 +242,7 @@ namespace Managers
         public bool saveData(ArchiveDataManager manager)
         {
             string type = manager.getArchiveType();
-            new DirectoryInfo(path).Create();
+            INIWriter.CheckPath(path);
             //创建输出流
             StreamWriter sw = new StreamWriter(path + "/" + type + ".json"
             , false, Encoding.UTF8);

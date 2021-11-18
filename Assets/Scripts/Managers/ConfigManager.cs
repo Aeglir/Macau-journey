@@ -2,14 +2,14 @@ using System;
 using System.IO;
 using System.Text;
 using UnityEngine;
-using UnityEngine.UI;
+using Universal;
 
 namespace Managers
 {
     /// <summary>
     /// 设置管理器
     /// </summary>
-    public class ConfigManager : ArchiveDataManager
+    public class ConfigManager : MonoBehaviour
     {
         #region c# properties
         //对象单例化
@@ -74,18 +74,26 @@ namespace Managers
         /// </summary>
         private string dirPath;
         /// <summary>
-        /// 类型
-        /// </summary>
-        private string type = "Config";
-        /// <summary>
         /// 文件名
         /// </summary>
-        private string fileNmae;
+        private string fileNmae = "Config.ini";
         /// <summary>
         /// 设置数据对象
         /// </summary>
         [SerializeField]
         private ConfigData configData;
+        private string sectionResolution = "Resolution";
+        private string sectionFullScreen = "FullScreen";
+        private string sectionVolume = "Volume";
+        private string keyResolutionWidth = "Width";
+        private string keyResolutionHeight = "Height";
+        private string keyFullScreen = "isFull";
+        private string keyMainVolume = "Main";
+        private string keyBGMVolume = "BGM";
+        private string keySEVolume = "SE";
+        private string keyMainEnable = "Main Enable";
+        private string keyBGMEnable = "BGM Enable";
+        private string keySEEnable = "SE Enable";
         #endregion
 
         private void Awake()
@@ -93,20 +101,21 @@ namespace Managers
             if (!Instance)
             {
                 instance = this;
-                //初始化文件路径和文件名、创建设置数据实例
-                dirPath = Application.persistentDataPath + "/Saves";
-                fileNmae = type + ".json";
+                //初始化文件路径、创建设置数据实例
+                dirPath = Application.persistentDataPath;
                 //创建文件路径
-                DirectoryInfo di = new DirectoryInfo(dirPath);
-                di.Create();
-                //加载设置数据
-                if (!loadData())
-                {
-                    saveData();
-                }
+                INIWriter.CheckPath(dirPath);
+            }
+            if (loadINI())
+            {
+                setConfig();
+            }
+            else
+            {
+                saveINI();
             }
         }
-        private void setConfig()
+        public void setConfig()
         {
             Screen.SetResolution(width, height, isFull);
             if (AudioManager.Instance)
@@ -115,64 +124,45 @@ namespace Managers
                 AudioManager.Instance.enableAudioSource(MVEnable & BGMEnable);
             }
         }
-        /// <summary>
-        /// 获取类型
-        /// </summary>
-        /// <returns>string</returns>
-        public override string getArchiveType() => type;
-        /// <summary>
-        /// 获取设置存档数据实例
-        /// </summary>
-        /// <returns>ArchiveData</returns>
-        public override ArchiveData getArchiveData() => configData;
-        public void loadConfig() => loadData();
-        public void saveConfig() => saveData();
-        /// <summary>
-        /// 加载本地数据文件
-        /// </summary>
-        /// <returns>bool</returns>
-        public bool loadData()
+
+        private bool loadINI()
         {
-            if (!new FileInfo(dirPath + "/config.json").Exists)
+            string filePath = dirPath + "/" + fileNmae;
+            INIWriter.CheckPath(dirPath);
+            if (!INIWriter.CheckFile(filePath))
             {
                 return false;
             }
-            //创建输入流
-            StreamReader sr = new StreamReader(dirPath + "/config.json", Encoding.UTF8);
-            if (sr == null)
-            {
-                return false;
-            }
-            //json反序列化
-            JsonUtility.FromJsonOverwrite(sr.ReadToEnd().Replace("\n", "").Replace(" ", "").Replace("\t", "").Replace("\r", ""), configData);
-            //关闭流
-            sr.Close();
-            setConfig();
+            width = int.Parse(INIWriter.Read(sectionResolution, keyResolutionWidth, "1280", filePath));
+            height = int.Parse(INIWriter.Read(sectionResolution, keyResolutionHeight, "720", filePath));
+            isFull = bool.Parse(INIWriter.Read(sectionFullScreen, keyFullScreen, "false", filePath));
+            mainVolume = float.Parse(INIWriter.Read(sectionVolume, keyMainVolume, "1.0", filePath));
+            bgmVolume = float.Parse(INIWriter.Read(sectionVolume, keyBGMVolume, "1.0", filePath));
+            seVolume = float.Parse(INIWriter.Read(sectionVolume, keySEVolume, "1.0", filePath));
+            MVEnable = bool.Parse(INIWriter.Read(sectionVolume, keyMainEnable, "true", filePath));
+            BGMEnable = bool.Parse(INIWriter.Read(sectionVolume, keyBGMEnable, "true", filePath));
+            SEEnable = bool.Parse(INIWriter.Read(sectionVolume, keySEEnable, "true", filePath));
             return true;
         }
-        /// <summary>
-        /// 保存数据到本地
-        /// </summary>
-        /// <returns>bool</returns>
-        public bool saveData()
+
+        public void saveINI()
         {
-            new DirectoryInfo(dirPath).Create();
-            //创建输出流
-            StreamWriter sw = new StreamWriter(dirPath + "/config.json"
-            , false, Encoding.UTF8);
-            if (sw == null)
+            string filePath = dirPath + "/" + fileNmae;
+            if (!INIWriter.CheckFile(filePath))
             {
-                return false;
+                new FileInfo(filePath).Create();
             }
-            //序列化object
-            string json = configData.getJson();
-            sw.WriteLine(json);
-            //关闭输出流
-            sw.Close();
-            setConfig();
-            return true;
+            INIWriter.CheckPath(dirPath);
+            INIWriter.Write(sectionResolution, keyResolutionWidth, width.ToString(), filePath);
+            INIWriter.Write(sectionResolution, keyResolutionHeight, height.ToString(), filePath);
+            INIWriter.Write(sectionFullScreen, keyFullScreen, isFull.ToString(), filePath);
+            INIWriter.Write(sectionVolume, keyMainVolume, mainVolume.ToString(), filePath);
+            INIWriter.Write(sectionVolume, keyBGMVolume, bgmVolume.ToString(), filePath);
+            INIWriter.Write(sectionVolume, keySEVolume, seVolume.ToString(), filePath);
+            INIWriter.Write(sectionVolume, keyMainEnable, MVEnable.ToString(), filePath);
+            INIWriter.Write(sectionVolume, keyBGMEnable, BGMEnable.ToString(), filePath);
+            INIWriter.Write(sectionVolume, keySEEnable, SEEnable.ToString(), filePath);
         }
-        public override Type getArchiveDataType() => configData.GetType();
 
         [Serializable]
         public class ConfigData : ArchiveData

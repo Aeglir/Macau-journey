@@ -29,17 +29,20 @@ namespace Managers
         public void SetMasterVolume(float value)   //�����������ĺ���
         {
             audioSource.volume = ConfigManager.Instance.bgmVolume * value;
+            ConfigManager.Instance.mainVolume = value;
             // MasterVolueΪ���Ǳ�¶������Master�Ĳ���
         }
 
         public void SetMusicVolume(float value)   //���Ʊ������������ĺ���
         {
             audioSource.volume = ConfigManager.Instance.mainVolume * value;
+            ConfigManager.Instance.bgmVolume = value;
             // MasterVolueΪ���Ǳ�¶������Music�Ĳ���
         }
 
         public void SetSoundEffectVolume(float value)   //������Ч�����ĺ���
         {
+            ConfigManager.Instance.seVolume = value;
             // MasterVolueΪ���Ǳ�¶������SoundEffect�Ĳ���
         }
 
