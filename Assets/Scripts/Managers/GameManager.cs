@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace Managers
 {
+    [DefaultExecutionOrder(-1)]
     public class GameManager : MonoBehaviour
     {
         #region c# properties
@@ -14,9 +15,6 @@ namespace Managers
         #endregion
 
         #region c# vriables
-        //日志输出管理器
-        [SerializeField]
-        private LogManager logManager;
         //数据存储管理器
         [SerializeField]
         private ArchiveManager archiveManager;
@@ -27,6 +25,7 @@ namespace Managers
         #endregion
         private void Awake()
         {
+            Application.targetFrameRate = 60;
             //若已存在实例则销毁当前新建的gameObject
             if (Instance)
             {

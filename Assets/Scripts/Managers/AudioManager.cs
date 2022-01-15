@@ -13,7 +13,7 @@ namespace Managers
         }
         #endregion
         [SerializeField]
-        private AudioSource audioSource;       //���п��Ƶ�Mixer����
+        private AudioSource audioSource;
         private void Awake()
         {
             if (!Instance)
@@ -21,29 +21,26 @@ namespace Managers
                 instance = this;
                 if (ConfigManager.Instance)
                 {
-                    setAllVolume(ConfigManager.Instance.mainVolume, ConfigManager.Instance.bgmVolume, ConfigManager.Instance.seVolume);
-                    enableAudioSource(ConfigManager.Instance.MVEnable & ConfigManager.Instance.BGMEnable);
+                    // setAllVolume(ConfigManager.Instance.mainVolume, ConfigManager.Instance.bgmVolume, ConfigManager.Instance.seVolume);
+                    // enableAudioSource(ConfigManager.Instance.MVEnable & ConfigManager.Instance.BGMEnable);
                 }
             }
         }
-        public void SetMasterVolume(float value)   //�����������ĺ���
+        public void SetMasterVolume(float value)
         {
-            audioSource.volume = ConfigManager.Instance.bgmVolume * value;
-            ConfigManager.Instance.mainVolume = value;
-            // MasterVolueΪ���Ǳ�¶������Master�Ĳ���
+            // audioSource.volume = ConfigManager.Instance.bgmVolume * value;
+            // ConfigManager.Instance.mainVolume = value;
         }
 
-        public void SetMusicVolume(float value)   //���Ʊ������������ĺ���
+        public void SetMusicVolume(float value) 
         {
-            audioSource.volume = ConfigManager.Instance.mainVolume * value;
-            ConfigManager.Instance.bgmVolume = value;
-            // MasterVolueΪ���Ǳ�¶������Music�Ĳ���
+            // audioSource.volume = ConfigManager.Instance.mainVolume * value;
+            // ConfigManager.Instance.bgmVolume = value;
         }
 
-        public void SetSoundEffectVolume(float value)   //������Ч�����ĺ���
+        public void SetSoundEffectVolume(float value)
         {
-            ConfigManager.Instance.seVolume = value;
-            // MasterVolueΪ���Ǳ�¶������SoundEffect�Ĳ���
+            // ConfigManager.Instance.seVolume = value;
         }
 
         public void setAllVolume(float mainVolume, float bgmVolume, float seVolume)
