@@ -25,7 +25,6 @@ namespace Managers
         #endregion
         private void Awake()
         {
-            Application.targetFrameRate = 60;
             //若已存在实例则销毁当前新建的gameObject
             if (Instance)
             {

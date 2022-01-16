@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Managers;
+using UnityEngine.Audio;
+using Managers.Config;
 
 namespace MainMenu.Config
 {
@@ -19,29 +21,16 @@ namespace MainMenu.Config
         [SerializeField]
         private Slider seSlider;
         [SerializeField]
-        private Toggle maintoogle;
-        [SerializeField]
-        private Toggle bgmtoogle;
-        [SerializeField]
-        private Toggle setoogle;
-        [SerializeField]
         private Toggle fulltoogle;
+        [SerializeField]
+        private AudioMixer audioMixer;
+        private ConfigPresenter presenter;
         private void Awake()
         {
             //初始化分辨率元组
             resolutionList = new List<string>();
             resolutionList.Add(ConfigManager.DefaultDPI);
             resolutionList.Add(ConfigManager.HD);
-            //获取当前列表位置
-            // position = getPosition();
-            //根据位置初始化文本内容
-            // resolutionText.text = ConfigManager.Instance.width + link + ConfigManager.Instance.height;
-            // mainSlider.value = ConfigManager.Instance.mainVolume;
-            // bgmSlider.value = ConfigManager.Instance.bgmVolume;
-            // seSlider.value = ConfigManager.Instance.seVolume;
-            // maintoogle.isOn = ConfigManager.Instance.MVEnable;
-            // bgmtoogle.isOn = ConfigManager.Instance.BGMEnable;
-            // setoogle.isOn = ConfigManager.Instance.SEEnable;
         }
 
         private void OnEnable()
@@ -49,15 +38,31 @@ namespace MainMenu.Config
             ConfigManager manager = ConfigManager.Instance;
             if (manager != null)
             {
-                manager.init();
-                initGUI(manager);
+                presenter = manager.getPresenter();
+                initGUI();
                 position = getPosition();
             }
         }
-        private void initGUI(ConfigManager manager)
+        private int getPosition()
         {
-            fulltoogle.isOn = manager.IsFull;
-            resolutionText.text = manager.DPI;
+            //根据当前屏幕数据初始化位置
+            switch (presenter.DPI)
+            {
+                case "1280X720":
+                    return 0 + resolutionList.Count;
+                case "1920X1080":
+                    return 1 + resolutionList.Count;
+                default:
+                    return 0 + resolutionList.Count;
+            }
+        }
+        private void initGUI()
+        {
+            fulltoogle.isOn = presenter.IsFull;
+            resolutionText.text = presenter.DPI;
+            mainSlider.value = presenter.MAINVOLUME;
+            bgmSlider.value = presenter.BGM;
+            seSlider.value = presenter.SE;
         }
         public void leftButtonClick()
         {
@@ -70,23 +75,8 @@ namespace MainMenu.Config
             switchResolution(resolutionList[position % resolutionList.Count]);
         }
 
-        private int getPosition()
-        {
-            //根据当前屏幕数据初始化位置
-            switch (ConfigManager.Instance.DPI)
-            {
-                case "1280X720":
-                    return 0 + resolutionList.Count;
-                case "1920X1080":
-                    return 1 + resolutionList.Count;
-                default:
-                    return 0 + resolutionList.Count;
-            }
-        }
-
         private void switchResolution(string dpi)
         {
-            ConfigManager manager = ConfigManager.Instance;
             //确保位置数值大小不为负数
             if (position < resolutionList.Count)
             {
@@ -94,36 +84,57 @@ namespace MainMenu.Config
             }
             //更改文本内容
             resolutionText.text = dpi;
-            if (manager != null)
+            if (presenter != null)
             {
-                manager.changeSetting(ConfigManager.TYPE.DPI, dpi);
+                presenter.changeSetting(ConfigManager.TYPE.DPI, dpi);
             }
         }
 
         public void switchFullscreen(bool value)
         {
-            ConfigManager manager = ConfigManager.Instance;
-            if (manager != null)
+            if (presenter != null)
             {
-                manager.changeSetting(ConfigManager.TYPE.FULLSCREEN, value);
+                presenter.changeSetting(ConfigManager.TYPE.FULLSCREEN, value);
             }
         }
 
         public void confirmSetting()
         {
-            ConfigManager manager = ConfigManager.Instance;
-            if (manager != null)
+            if (presenter != null)
             {
-                manager.confirmSetting();
+                presenter.confirmSetting();
             }
         }
 
         public void cancelSetting()
         {
-            ConfigManager manager = ConfigManager.Instance;
-            if (manager != null)
+            if (presenter != null)
             {
-                manager.cancelSetting();
+                presenter.cancelSetting();
+            }
+        }
+        public void changeMainVolume(float value)
+        {
+            if (presenter != null)
+            {
+                audioMixer.SetFloat("MAINVolume", SettingUpdater.transitionToVolume(value));
+                presenter.changeSetting(ConfigManager.TYPE.MAINVOLUME, value);
+            }
+        }
+        public void changeBgmVolume(float value)
+        {
+            if (presenter != null)
+            {
+                audioMixer.SetFloat("BGMVolume", SettingUpdater.transitionToVolume(value));
+                presenter.changeSetting(ConfigManager.TYPE.BGM, value);
+            }
+        }
+        public void changeSeVolume(float value)
+        {
+            if (presenter != null)
+            {
+                audioMixer.SetFloat("SEVolume", SettingUpdater.transitionToVolume(value));
+                presenter.changeSetting(ConfigManager.TYPE.SE, value);
             }
         }
     }

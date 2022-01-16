@@ -11,10 +11,13 @@ namespace Managers.Config
 
     public class DataSaver
     {
-        public readonly static string FileName = "Config.ini";
-        public readonly static string Section = "Config";
-        public readonly static string FullScreenKey = "fullscreen";
-        public readonly static string DPIKey = "dpi";
+        private readonly static string FileName = "Config.ini";
+        private readonly static string Section = "Config";
+        private readonly static string MAINVolumeKey = "main volume";
+        private readonly static string BGMVolumeKey = "bgm volume";
+        private readonly static string SEVolumeKey = "se volume";
+        private readonly static string FullScreenKey = "fullscreen";
+        private readonly static string DPIKey = "dpi";
         public string path;
         private Action saveAction;
         private Action<Data> loadAction;
@@ -24,17 +27,28 @@ namespace Managers.Config
         {
             path = Application.persistentDataPath;
         }
+        /// <summary>
+        /// 设置保存回调
+        /// </summary>
+        /// <param name="action">回调函数</param>
         public void setSaveAction(Action action)
         {
             saveAction = action;
         }
+        /// <summary>
+        /// 设置加载回调
+        /// </summary>
+        /// <param name="action">回调函数</param>
         public void setLoadAction(Action<Data> action)
         {
             loadAction = action;
         }
+        /// <summary>
+        /// 获取文件完整路径（包括文件名及其后缀）
+        /// </summary>
+        /// <returns></returns>
         private string getFullName()
         {
-
             DirectoryInfo di = new DirectoryInfo(path);
             if (!di.Exists)
             {
@@ -42,8 +56,12 @@ namespace Managers.Config
             }
 
             return path + "/" + FileName;
-
         }
+        /// <summary>
+        /// 检查文件是否存在
+        /// </summary>
+        /// <param name="fileName">文件完整路径</param>
+        /// <returns>文件存在返回ture，否则返回false</returns>
         private bool checkFile(string fileName)
         {
             FileInfo info = new FileInfo(fileName);
@@ -56,6 +74,10 @@ namespace Managers.Config
             return true;
         }
         #endregion
+        /// <summary>
+        /// 加载数据
+        /// </summary>
+        /// <returns></returns>
         public async void load()
         {
             Data data = new Data();
@@ -64,11 +86,17 @@ namespace Managers.Config
                 string fileName = getFullName();
                 if (!checkFile(fileName))
                 {
+                    INIWriter.Write(Section, MAINVolumeKey, data.mainVolume.ToString(), fileName);
+                    INIWriter.Write(Section, BGMVolumeKey, data.bgm.ToString(), fileName);
+                    INIWriter.Write(Section, SEVolumeKey, data.se.ToString(), fileName);
                     INIWriter.Write(Section, FullScreenKey, data.isFull.ToString(), fileName);
                     INIWriter.Write(Section, DPIKey, data.dpi, fileName);
                 }
                 else
                 {
+                    data.mainVolume = float.Parse(INIWriter.Read(Section, MAINVolumeKey, ConfigManager.DefaultVolume.ToString(), fileName));
+                    data.bgm = float.Parse(INIWriter.Read(Section, BGMVolumeKey, ConfigManager.DefaultVolume.ToString(), fileName));
+                    data.se = float.Parse(INIWriter.Read(Section, SEVolumeKey, ConfigManager.DefaultVolume.ToString(), fileName));
                     data.isFull = bool.Parse(INIWriter.Read(Section, FullScreenKey, ConfigManager.DefaultFullScreen.ToString(), fileName));
                     data.dpi = INIWriter.Read(Section, DPIKey, ConfigManager.DefaultDPI, fileName);
                 }
@@ -76,6 +104,11 @@ namespace Managers.Config
             if (loadAction != null)
                 loadAction.Invoke(data);
         }
+        /// <summary>
+        /// 保存数据
+        /// </summary>
+        /// <param name="o">待保存数据</param>
+        /// <returns></returns>
         public async void save(System.Object o)
         {
             await Task.Run(() =>
@@ -83,6 +116,9 @@ namespace Managers.Config
                 Data data = o as Data;
                 string fileName = getFullName();
 
+                INIWriter.Write(Section, MAINVolumeKey, data.mainVolume.ToString(), fileName);
+                INIWriter.Write(Section, BGMVolumeKey, data.bgm.ToString(), fileName);
+                INIWriter.Write(Section, SEVolumeKey, data.se.ToString(), fileName);
                 INIWriter.Write(Section, FullScreenKey, data.isFull.ToString(), fileName);
                 INIWriter.Write(Section, DPIKey, data.dpi, fileName);
             });
