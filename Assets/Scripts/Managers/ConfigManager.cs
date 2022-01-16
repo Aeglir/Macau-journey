@@ -79,17 +79,20 @@ namespace Managers
         private SettingUpdater updater;
         private void Awake()
         {
-            instance = this;
-            Application.targetFrameRate = 60;
-            dataSaver = new DataSaver();
-            dataSaver.setLoadAction(d =>
+            if (instance == null)
             {
-                data = d;
-                dataChanger = new DataChanger(data);
-                updater = new SettingUpdater(data, audioMixer);
-                updater.apply();
-            });
-            dataSaver.load();
+                instance = this;
+                Application.targetFrameRate = 60;
+                dataSaver = new DataSaver();
+                dataSaver.setLoadAction(d =>
+                {
+                    data = d;
+                    dataChanger = new DataChanger(data);
+                    updater = new SettingUpdater(data, audioMixer);
+                    updater.apply();
+                });
+                dataSaver.load();
+            }
         }
         public ConfigPresenter getPresenter()
         {
