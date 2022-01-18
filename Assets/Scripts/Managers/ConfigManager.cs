@@ -20,7 +20,7 @@ namespace Managers
         [Header("默认音量")]
         public readonly static float DefaultVolume = 100;
         [Header("起始音量")]
-        public readonly static float StartVolume = 5;
+        public readonly static float StartVolume = 0;
         [Header("音量转换因子")]
         public readonly static float VolumeFactor = 4.5f;
         public static ConfigManager Instance
@@ -79,20 +79,22 @@ namespace Managers
         private SettingUpdater updater;
         private void Awake()
         {
-            if (instance == null)
+            if (Instance)
             {
-                instance = this;
-                Application.targetFrameRate = 60;
-                dataSaver = new DataSaver();
-                dataSaver.setLoadAction(d =>
-                {
-                    data = d;
-                    dataChanger = new DataChanger(data);
-                    updater = new SettingUpdater(data, audioMixer);
-                    updater.apply();
-                });
-                dataSaver.load();
+                DestroyImmediate(gameObject);
+                return;
             }
+            instance = this;
+            Application.targetFrameRate = 60;
+            dataSaver = new DataSaver();
+            dataSaver.setLoadAction(d =>
+            {
+                data = d;
+                dataChanger = new DataChanger(data);
+                updater = new SettingUpdater(data, audioMixer);
+                updater.apply();
+            });
+            dataSaver.load();
         }
         public ConfigPresenter getPresenter()
         {

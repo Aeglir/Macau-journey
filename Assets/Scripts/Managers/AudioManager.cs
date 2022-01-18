@@ -30,14 +30,17 @@ namespace Managers
                 {
                     tagList.Add(data.tag);
                 }
-                Presenter presenter = new Presenter(audioList, tagList, sourceList, gameObject);
+                AudioPresenter presenter = new AudioPresenter(audioList, tagList, sourceList, gameObject);
                 presenter.turnOnAudio("op");
             }
         }
-
-        public Presenter GetPresenter()
+        /// <summary>
+        /// 获取音频控制器
+        /// </summary>
+        /// <returns>音频控制器</returns>
+        public AudioPresenter GetPresenter()
         {
-            return new Presenter(audioList, tagList, sourceList, gameObject);
+            return new AudioPresenter(audioList, tagList, sourceList, gameObject);
         }
     }
 }

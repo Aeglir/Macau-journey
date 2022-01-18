@@ -24,24 +24,44 @@ namespace MainMenu
         /// 载入窗体
         /// </summary>
         [SerializeField]
-        private GameObject loadingPanel;
-        [SerializeField]
         private GameObject configPanel;
+        [Header("加载窗体")]
+        public GameObject loadPanel;
         public void startButton(Button button)
         {
             setPressed(button);
             StartCoroutine(WAIT.onWaiting(time, () =>
             {
                 GameManager.Instance.newGame();
-                SceneManager.LoadSceneAsync("GameScene");
+                // SceneManager.LoadSceneAsync("GameScene");
             }));
             reloadButton();
         }
         public void continueButton(Button button)
         {
+            if (ArchiveManager.Instance == null)
+            {
+                return;
+            }
             setPressed(button);
-            StartCoroutine(WAIT.onWaiting(time, () => { loadingPanel.SetActive(!loadingPanel.activeSelf); }));
+            StartCoroutine(WAIT.onWaiting(time, () =>
+            {
+                loadPanel.SetActive(true);
+            }));
             reloadButton();
+        }
+        public void collectionButton(Button button)
+        {
+            // if (ArchiveManager.Instance == null)
+            // {
+            //     return;
+            // }
+            // setPressed(button);
+            // StartCoroutine(WAIT.onWaiting(time, () =>
+            // {
+            //     ArchiveManager.Instance.enableLoadScene(false);
+            // }));
+            // reloadButton();
         }
         public void configButton(Button button)
         {

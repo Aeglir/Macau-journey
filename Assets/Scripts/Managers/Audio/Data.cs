@@ -18,6 +18,7 @@ namespace Managers.Audio
         [Header("是否循环")]
         public bool loop;
         [Header("音量")]
+        [Range(0,1)]
         public float Volume;
         public Data(string tag, AudioClip audio, AudioMixerGroup outPutGroup = null, bool playOnAwake = true, bool loop = false, float volume = 1)
         {

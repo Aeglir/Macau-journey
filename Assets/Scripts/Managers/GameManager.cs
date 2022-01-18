@@ -1,5 +1,6 @@
+using System;
 using UnityEngine;
-
+using UnityEngine.Events;
 namespace Managers
 {
     [DefaultExecutionOrder(-1)]
@@ -17,11 +18,28 @@ namespace Managers
         #region c# vriables
         //数据存储管理器
         [SerializeField]
+        [Header("存档管理器")]
         private ArchiveManager archiveManager;
         [SerializeField]
+        [Header("设置管理器")]
         private ConfigManager configManager;
         [SerializeField]
+        [Header("音频管理器")]
         private AudioManager audioManager;
+        [SerializeField]
+        [Header("开始游戏事件")]
+        private UnityEvent newGameEvent;
+        [SerializeField]
+        [Header("自动保存事件")]
+        private UnityEvent autoSaveEvent;
+        private bool isNew;
+        public bool isNewGame
+        {
+            get
+            {
+                return isNew;
+            }
+        }
         #endregion
         private void Awake()
         {
@@ -33,6 +51,7 @@ namespace Managers
             }
 
             instance = this;
+            isNew = false;
 
             //防止被销毁
             DontDestroyOnLoad(gameObject);
@@ -43,7 +62,18 @@ namespace Managers
         /// </summary>
         public void newGame()
         {
-            archiveManager.init();
+            isNew = true;
+            if (newGameEvent != null)
+            {
+                newGameEvent.Invoke();
+            }
+        }
+        /// <summary>
+        /// 自动保存
+        /// </summary>
+        public void autoSave()
+        {
+            autoSaveEvent.Invoke();
         }
     }
 }
