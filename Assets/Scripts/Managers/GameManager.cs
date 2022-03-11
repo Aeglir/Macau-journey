@@ -4,18 +4,9 @@ using UnityEngine.Events;
 namespace Managers
 {
     [DefaultExecutionOrder(-1)]
-    public class GameManager : MonoBehaviour
+    public class GameManager : Singleton<GameManager>
     {
-        #region c# properties
-        //对象单例化
-        private static GameManager instance = null;
-        public static GameManager Instance
-        {
-            get => instance;
-        }
-        #endregion
-
-        #region c# vriables
+        #region private fields
         //数据存储管理器
         [SerializeField]
         [Header("存档管理器")]
@@ -33,34 +24,33 @@ namespace Managers
         [Header("自动保存事件")]
         private UnityEvent autoSaveEvent;
         private bool isNew;
-        public bool isNewGame
-        {
-            get
-            {
-                return isNew;
-            }
-        }
         #endregion
+        #region properties
+        public bool isNewGame { get => isNew; }
+        public ArchiveManager ArchiveManager { get => archiveManager; }
+        public ConfigManager ConfigManager { get => configManager; }
+        public AudioManager AudioManager { get => audioManager; }
+        public UnityEvent NewGameEvent { get => newGameEvent; }
+        public UnityEvent AutoSaveEvent { get => autoSaveEvent; }
+        #endregion
+        #region private methods
         private void Awake()
         {
             //若已存在实例则销毁当前新建的gameObject
-            if (Instance)
+            if (_instance != null)
             {
                 DestroyImmediate(gameObject);
                 return;
             }
-
-            instance = this;
-            isNew = false;
-
+            _instance = this;
             //防止被销毁
             DontDestroyOnLoad(gameObject);
         }
-
+        #endregion
         /// <summary>
         /// 开始新游戏
         /// </summary>
-        public void newGame()
+        public void NewGame()
         {
             isNew = true;
             if (newGameEvent != null)
@@ -71,7 +61,7 @@ namespace Managers
         /// <summary>
         /// 自动保存
         /// </summary>
-        public void autoSave()
+        public void AutoSave()
         {
             autoSaveEvent.Invoke();
         }

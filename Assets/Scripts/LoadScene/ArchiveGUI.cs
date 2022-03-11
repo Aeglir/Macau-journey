@@ -6,8 +6,7 @@ namespace ArchiveGUI
 {
     public class ArchiveGUI : MonoBehaviour
     {
-        public readonly static string ItemPath = "Resources/Prefabs/LoadScene/Item";
-        public readonly static int ItemCount = 20;
+        public const int ItemCount = 20;
         private ArchivePresenter presenter;
         [Header("Item预制体")]
         public GameObject Item;
@@ -17,7 +16,7 @@ namespace ArchiveGUI
         public bool isLoad;
         private void OnEnable()
         {
-            ArchiveManager manager = ArchiveManager.Instance;
+            ArchiveManager manager = GameManager.Instance.ArchiveManager;
             if (manager == null)
             {
                 return;
@@ -35,7 +34,7 @@ namespace ArchiveGUI
         }
         private void addContent()
         {
-            int count = presenter.getCount();
+            int count = presenter.Count;
             for (int i = 0; i < count; i++)
             {
                 createItem(i, false);

@@ -7,6 +7,7 @@ namespace Managers.Archive
         protected List<ArchiveInfo> infoList;
         protected Dictionary<string, ArchiveBank> archives;
         protected ArchiveInfo currentInfo;
+        public int Count{get=>infoList.Count;}
         /// <summary>
         /// 构造函数
         /// </summary>
@@ -30,11 +31,6 @@ namespace Managers.Archive
         /// <param name="tag">tag</param>
         /// <returns></returns>
         public string getName(int tag) => infoList[tag].name;
-        /// <summary>
-        /// 获取存档列表长度
-        /// </summary>
-        /// <returns>存档列表长度</returns>
-        public int getCount() => infoList.Count;
         public abstract void cilckAction(int targetTag);
         /// <summary>
         /// 是否为无效存档

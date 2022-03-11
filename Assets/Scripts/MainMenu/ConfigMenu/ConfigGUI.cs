@@ -32,13 +32,12 @@ namespace MainMenu.Config
             resolutionList.Add(ConfigManager.DefaultDPI);
             resolutionList.Add(ConfigManager.HD);
         }
-
         private void OnEnable()
         {
-            ConfigManager manager = ConfigManager.Instance;
+            ConfigManager manager = GameManager.Instance.ConfigManager;
             if (manager != null)
             {
-                presenter = manager.getPresenter();
+                presenter = manager.presenter;
                 initGUI();
                 position = getPosition();
             }
@@ -86,31 +85,28 @@ namespace MainMenu.Config
             resolutionText.text = dpi;
             if (presenter != null)
             {
-                presenter.changeSetting(ConfigManager.TYPE.DPI, dpi);
+                presenter.ChangeSetting(ConfigManager.TYPE.DPI, dpi);
             }
         }
-
         public void switchFullscreen(bool value)
         {
             if (presenter != null)
             {
-                presenter.changeSetting(ConfigManager.TYPE.FULLSCREEN, value);
+                presenter.ChangeSetting(ConfigManager.TYPE.FULLSCREEN, value);
             }
         }
-
         public void confirmSetting()
         {
             if (presenter != null)
             {
-                presenter.confirmSetting();
+                presenter.ConfirmSetting();
             }
         }
-
         public void cancelSetting()
         {
             if (presenter != null)
             {
-                presenter.cancelSetting();
+                presenter.CancelSetting();
             }
         }
         public void changeMainVolume(float value)
@@ -118,7 +114,7 @@ namespace MainMenu.Config
             if (presenter != null)
             {
                 audioMixer.SetFloat("MAINVolume", SettingUpdater.transitionToVolume(value));
-                presenter.changeSetting(ConfigManager.TYPE.MAINVOLUME, value);
+                presenter.ChangeSetting(ConfigManager.TYPE.MAINVOLUME, value);
             }
         }
         public void changeBgmVolume(float value)
@@ -126,7 +122,7 @@ namespace MainMenu.Config
             if (presenter != null)
             {
                 audioMixer.SetFloat("BGMVolume", SettingUpdater.transitionToVolume(value));
-                presenter.changeSetting(ConfigManager.TYPE.BGM, value);
+                presenter.ChangeSetting(ConfigManager.TYPE.BGM, value);
             }
         }
         public void changeSeVolume(float value)
@@ -134,7 +130,7 @@ namespace MainMenu.Config
             if (presenter != null)
             {
                 audioMixer.SetFloat("SEVolume", SettingUpdater.transitionToVolume(value));
-                presenter.changeSetting(ConfigManager.TYPE.SE, value);
+                presenter.ChangeSetting(ConfigManager.TYPE.SE, value);
             }
         }
     }

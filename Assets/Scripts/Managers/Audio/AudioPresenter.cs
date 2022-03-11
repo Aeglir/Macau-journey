@@ -5,11 +5,13 @@ namespace Managers.Audio
 {
     public class AudioPresenter
     {
-        public List<Data> audioList;
+        #region private fields
+        private List<AudioData> audioList;
         private List<string> tagList;
         private Dictionary<string, AudioSource> sourceList;
         private GameObject gameObject;
-        public AudioPresenter(List<Data> audioList, List<string> tagList, Dictionary<string, AudioSource> sourceList, GameObject gameObject)
+        #endregion
+        public AudioPresenter(List<AudioData> audioList, List<string> tagList, Dictionary<string, AudioSource> sourceList, GameObject gameObject)
         {
             this.audioList = audioList;
             this.tagList = tagList;
@@ -32,7 +34,7 @@ namespace Managers.Audio
                 return true;
             }
             int index = tagList.IndexOf(tag);
-            Data data = audioList[index];
+            AudioData data = audioList[index];
             AudioSource audioSource = gameObject.AddComponent<AudioSource>();
             sourceList.Add(tag, audioSource);
             audioSource.clip = data.audio;

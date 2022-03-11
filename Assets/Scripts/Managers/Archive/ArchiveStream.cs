@@ -6,7 +6,7 @@ namespace Managers.Archive
 {
     public class ArchiveStream
     {
-        private readonly static string filePrefix = "save_";
+        private const string filePrefix = "save_";
         /// <summary>
         /// 返回完整文件名不包括后缀
         /// </summary>
@@ -32,7 +32,7 @@ namespace Managers.Archive
         /// <param name="nullAction">当存档为不存在时执行该回调</param>
         public static async void loadData(int tag, Action<int> nullAction = null)
         {
-            ArchiveManager manager = ArchiveManager.Instance;
+            ArchiveManager manager = GameManager.Instance.ArchiveManager;
             if (manager == null)
             {
                 return;

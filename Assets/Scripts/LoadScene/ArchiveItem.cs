@@ -9,8 +9,8 @@ namespace ArchiveGUI
 {
     public class ArchiveItem : MonoBehaviour
     {
-        public readonly static string DefaultDesctiption = "这个人很懒什么都没有写...";
-        public readonly static string DefaultTitle = "这里什么都没有";
+        public const string DefaultDesctiption = "这个人很懒什么都没有写...";
+        public const string DefaultTitle = "这里什么都没有";
         private int archiveTag;
         [Header("存档图片")]
         public Image image;

@@ -2,14 +2,14 @@ using System;
 namespace Managers.Config
 {
     [Serializable]
-    public class Data : ICloneable
+    public class ConfigData : ICloneable
     {
         public bool isFull;
         public string dpi;
         public float mainVolume;
         public float bgm;
         public float se;
-        public Data()
+        public ConfigData()
         {
             this.isFull = ConfigManager.DefaultFullScreen;
             this.dpi = ConfigManager.DefaultDPI;
@@ -21,7 +21,7 @@ namespace Managers.Config
         /// <returns>返回数据的拷贝</returns>
         public object Clone()
         {
-            Data data = new Data();
+            ConfigData data = new ConfigData();
             data.isFull = this.isFull;
             data.dpi = this.dpi;
             return data;

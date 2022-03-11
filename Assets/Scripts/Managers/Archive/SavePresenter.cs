@@ -17,7 +17,7 @@ namespace Managers.Archive
         }
         private void SaveArchive(int targetTag)
         {
-            ArchiveManager manager = ArchiveManager.Instance;
+            ArchiveManager manager = GameManager.Instance.ArchiveManager;
             if (manager == null)
             {
                 return;

@@ -20,7 +20,7 @@ namespace Managers.Archive
         /// </summary>
         public static async void loadInfoData()
         {
-            ArchiveManager manager = ArchiveManager.Instance;
+            ArchiveManager manager = GameManager.Instance.ArchiveManager;
             if(manager==null)
             {
                 return;

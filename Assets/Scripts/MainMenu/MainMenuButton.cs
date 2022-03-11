@@ -20,6 +20,7 @@ namespace MainMenu
         /// </summary>
         [SerializeField]
         private float time = 0.5f;
+        private bool isPressed;
         /// <summary>
         /// 载入窗体
         /// </summary>
@@ -27,30 +28,29 @@ namespace MainMenu
         private GameObject configPanel;
         [Header("加载窗体")]
         public GameObject loadPanel;
-        public void startButton(Button button)
+        public async void startButton()
         {
-            setPressed(button);
-            StartCoroutine(WAIT.onWaiting(time, () =>
-            {
-                GameManager.Instance.newGame();
-                // SceneManager.LoadSceneAsync("GameScene");
-            }));
-            reloadButton();
-        }
-        public void continueButton(Button button)
-        {
-            if (ArchiveManager.Instance == null)
+            if (isPressed)
             {
                 return;
             }
-            setPressed(button);
-            StartCoroutine(WAIT.onWaiting(time, () =>
-            {
-                loadPanel.SetActive(true);
-            }));
-            reloadButton();
+            isPressed=true;
+            await System.Threading.Tasks.Task.Delay(500);
+            GameManager.Instance.NewGame();
+            isPressed=false;
         }
-        public void collectionButton(Button button)
+        public async void continueButton()
+        {
+            if (isPressed || GameManager.Instance.ArchiveManager == null)
+            {
+                return;
+            }
+            isPressed=true;
+            await System.Threading.Tasks.Task.Delay(500);
+            loadPanel.SetActive(true);
+            isPressed=false;
+        }
+        public void collectionButton()
         {
             // if (ArchiveManager.Instance == null)
             // {
@@ -63,36 +63,20 @@ namespace MainMenu
             // }));
             // reloadButton();
         }
-        public void configButton(Button button)
+        public async void configButton()
         {
-            setPressed(button);
-            StartCoroutine(WAIT.onWaiting(time, () => { configPanel.SetActive(!configPanel.activeSelf); }));
-            reloadButton();
-        }
-        public void exitButton() => Application.Quit();
-        /// <summary>
-        /// 禁用按钮防止二次点击并激活animator trigger
-        /// </summary>
-        private void setPressed(Button button)
-        {
-            //禁用按钮防止二次点击
-            foreach (Button bt in buttonList)
+            if (isPressed)
             {
-                bt.enabled = false;
+                return;
             }
-            //禁用按钮后会重置所有animator trigger，因此需要激活trigger
-            button.animator.SetTrigger("Pressed");
+            isPressed=true;
+            await System.Threading.Tasks.Task.Delay(500);
+            configPanel.SetActive(!configPanel.activeSelf);
+            isPressed=false;
         }
-        /// <summary>
-        /// 重置按钮状态为开启
-        /// </summary>
-        private void reloadButton()
+        public void ExitButton()
         {
-            //重置按钮
-            foreach (Button bt in buttonList)
-            {
-                bt.enabled = true;
-            }
+            Application.Quit();
         }
     }
 }

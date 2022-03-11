@@ -6,41 +6,28 @@ namespace Managers
 {
     public class AudioManager : MonoBehaviour
     {
-        #region 单例
-        private AudioManager instance;
-        public AudioManager Instance
-        {
-            get
-            {
-                return instance;
-            }
-        }
-        #endregion
-        public List<Data> audioList;
+        public List<AudioData> audioList;
+        #region fields
         private List<string> tagList;
         private Dictionary<string, AudioSource> sourceList;
+        #endregion
+        #region properties
+        public List<string> TagList { get => tagList; }
+        public Dictionary<string, AudioSource> SourceList { get => sourceList; }
+        public AudioPresenter presenter { get => new AudioPresenter(audioList, tagList, sourceList, gameObject); }
+        #endregion
+        #region private methods
         private void Awake()
         {
-            if (instance == null)
+            tagList = new List<string>();
+            sourceList = new Dictionary<string, AudioSource>();
+            foreach (AudioData data in audioList)
             {
-                instance = this;
-                tagList = new List<string>();
-                sourceList = new Dictionary<string, AudioSource>();
-                foreach (Data data in audioList)
-                {
-                    tagList.Add(data.tag);
-                }
-                AudioPresenter presenter = new AudioPresenter(audioList, tagList, sourceList, gameObject);
-                presenter.turnOnAudio("op");
+                tagList.Add(data.tag);
             }
+            AudioPresenter presenter = new AudioPresenter(audioList, tagList, sourceList, gameObject);
+            presenter.turnOnAudio("op");
         }
-        /// <summary>
-        /// 获取音频控制器
-        /// </summary>
-        /// <returns>音频控制器</returns>
-        public AudioPresenter GetPresenter()
-        {
-            return new AudioPresenter(audioList, tagList, sourceList, gameObject);
-        }
+        #endregion
     }
 }

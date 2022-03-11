@@ -11,11 +11,11 @@ namespace Managers.Archive
         }
         private void loadArchive(int targetTag)
         {
-            if (targetTag >= infoList.Count || ArchiveManager.Instance == null)
+            if (targetTag >= infoList.Count || GameManager.Instance.ArchiveManager == null)
             {
                 return;
             }
-            ArchiveManager.Instance.loadArchive(infoList[targetTag]);
+            GameManager.Instance.ArchiveManager.loadArchive(infoList[targetTag]);
             finish();
         }
         /// <summary>
