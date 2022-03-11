@@ -5,7 +5,7 @@ using UnityEngine.Audio;
 namespace Managers.Audio
 {
     [Serializable]
-    public class Data
+    public class AudioData
     {
         [Header("tag")]
         public string tag;
@@ -20,7 +20,7 @@ namespace Managers.Audio
         [Header("音量")]
         [Range(0,1)]
         public float Volume;
-        public Data(string tag, AudioClip audio, AudioMixerGroup outPutGroup = null, bool playOnAwake = true, bool loop = false, float volume = 1)
+        public AudioData(string tag, AudioClip audio, AudioMixerGroup outPutGroup = null, bool playOnAwake = true, bool loop = false, float volume = 1)
         {
             this.tag = tag;
             this.audio = audio;

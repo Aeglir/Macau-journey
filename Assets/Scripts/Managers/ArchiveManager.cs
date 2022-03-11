@@ -9,34 +9,20 @@ namespace Managers
 {
     public class ArchiveManager : MonoBehaviour
     {
-        #region 单例
-        private static ArchiveManager instance;
-        public static ArchiveManager Instance
-        {
-            get
-            {
-                return instance;
-            }
-        }
-        #endregion
-        public readonly static string InfoKey = "Info";
-        public readonly static string InfoFileName = "Head.index";
-        public readonly static string DefaultInfoName = "存档 ";
+        public const string InfoKey = "Info";
+        public const string InfoFileName = "Head.index";
+        public const string DefaultInfoName = "存档 ";
         [Header("存档信息列表")]
         public List<ArchiveInfo> infos;
         public Dictionary<string, ArchiveBank> archives;
         [Header("当前存档信息")]
         public ArchiveInfo currentInfo;
+        #region private method
         private void Awake()
         {
-            if (Instance != null)
-            {
-                DestroyImmediate(this);
-                return;
-            }
-            instance = this;
             ArchiveInfoStream.loadInfoData();
         }
+        #endregion
         /// <summary>
         /// 创建新存档
         /// </summary>

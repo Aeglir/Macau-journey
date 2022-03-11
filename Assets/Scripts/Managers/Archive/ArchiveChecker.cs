@@ -4,8 +4,8 @@ namespace Managers.Archive
 {
     public class ArchiveChecker
     {
-        private readonly static string floderName = "Saves";
-        public readonly static string fileSuffix = "sav";
+        private const string floderName = "Saves";
+        public const string fileSuffix = "sav";
         /// <summary>
         /// 检查存档路径是否存在，若不存在则创建。返回存档路径
         /// </summary>

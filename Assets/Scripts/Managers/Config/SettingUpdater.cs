@@ -6,11 +6,16 @@ namespace Managers.Config
 {
     public class SettingUpdater
     {
-        private Data data;
-        private Data bakup;
+        #region private field
+        private ConfigData data;
+        private ConfigData bakup;
         private AudioMixer audioMixer;
-        #region init
-        public SettingUpdater(Data data, AudioMixer audioMixer)
+        #endregion
+        public static float transitionToVolume(float value)
+        {
+            return ConfigManager.StartVolume + 1 - (float)Math.Exp(ConfigManager.DefaultVolumeFactor - value / 100 * ConfigManager.DefaultVolumeFactor);
+        }
+        public SettingUpdater(ConfigData data, AudioMixer audioMixer)
         {
             this.data = data;
             this.audioMixer = audioMixer;
@@ -19,7 +24,7 @@ namespace Managers.Config
         /// 初始化设置更改
         /// </summary>
         /// <param name="bakup">目的设置数据</param>
-        public void enable(Data bakup)
+        public void enable(ConfigData bakup)
         {
             this.bakup = bakup;
         }
@@ -30,7 +35,6 @@ namespace Managers.Config
         {
             bakup = null;
         }
-        #endregion
         /// <summary>
         /// 更新设置数据
         /// </summary>
@@ -70,11 +74,6 @@ namespace Managers.Config
             audioMixer.SetFloat("MAINVolume", transitionToVolume(data.mainVolume));
             audioMixer.SetFloat("BGMVolume", transitionToVolume(data.bgm));
             audioMixer.SetFloat("SEVolume", transitionToVolume(data.se));
-        }
-
-        public static float transitionToVolume(float value)
-        {
-            return ConfigManager.StartVolume + 1 - (float)Math.Exp(ConfigManager.VolumeFactor - value / 100 * ConfigManager.VolumeFactor);
         }
     }
 }
