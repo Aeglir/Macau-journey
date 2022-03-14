@@ -18,6 +18,15 @@ namespace Managers
         [Header("音频管理器")]
         private AudioManager audioManager;
         [SerializeField]
+        [Header("输入管理器")]
+        private InputManager inputManager;
+        [SerializeField]
+        [Header("调试管理器")]
+        private ConsoleManager consoleManager;
+        [SerializeField]
+        [Header("场景初始化器")]
+        private SceneCaller sceneCaller;
+        [SerializeField]
         [Header("开始游戏事件")]
         private UnityEvent newGameEvent;
         [SerializeField]
@@ -30,6 +39,9 @@ namespace Managers
         public ArchiveManager ArchiveManager { get => archiveManager; }
         public ConfigManager ConfigManager { get => configManager; }
         public AudioManager AudioManager { get => audioManager; }
+        public InputSetable InputManager { get => inputManager; }
+        public ConsolePresenter ConsoleManager { get => consoleManager; }
+        public SceneCaller SceneCaller { get => sceneCaller; }
         public UnityEvent NewGameEvent { get => newGameEvent; }
         public UnityEvent AutoSaveEvent { get => autoSaveEvent; }
         #endregion
