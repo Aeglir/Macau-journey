@@ -72,6 +72,7 @@ namespace Managers
     }
     public class ConsoleManager : MonoBehaviour, ConsolePresenter
     {
+        #region inner class
         /// <summary>
         /// 命令类
         /// </summary>
@@ -331,9 +332,10 @@ namespace Managers
                 }
                 this.text.text = stringBuilder.ToString();
                 scrollRect.SetLayoutVertical();
-                scrollRect.verticalNormalizedPosition=1;
+                scrollRect.verticalNormalizedPosition = 1;
             }
         }
+        #endregion
         [Header("控制台面板")]
         public GameObject panel;
         #region private fields
@@ -358,17 +360,18 @@ namespace Managers
             runner = new CommandRunner();
             emitter = new ConsoleEmitter(GetComponentInChildren<ScrollRect>(true));
             inputToken = new InputToken(inputField, CommandTokenRunner);
-            GameManager.Instance.InputManager.SetInput(UnityEngine.InputSystem.Key.Tab, InputManager.Response.Canceled, "Console_Debug", (c) =>
-            {
-                panel.SetActive(!panel.activeSelf);
-                if (!panel.activeSelf)
-                {
-                    emitter.ClearText();
-                }
-                inputField.ActivateInputField();
-            });
+            GameManager.Instance.InputManager.AddInput(UnityEngine.InputSystem.Key.Tab, Name: "Console_Debug").AddListener(PanelControl).Enable();
             RegisterCommand(Help, "Help tips");
-        }    
+        }
+        private void PanelControl(UnityEngine.InputSystem.InputAction.CallbackContext context)
+        {
+            panel.SetActive(!panel.activeSelf);
+            if (!panel.activeSelf)
+            {
+                emitter.ClearText();
+            }
+            inputField.ActivateInputField();
+        }
         /// <summary>
         /// 帮助获取函数
         /// </summary>
@@ -381,6 +384,7 @@ namespace Managers
         }
         private void OnDisable()
         {
+            GameManager.Instance.InputManager.GetInputEvent(UnityEngine.InputSystem.Key.Tab).Dispose();
             RemoveCommand(Help);
         }
         #endregion
