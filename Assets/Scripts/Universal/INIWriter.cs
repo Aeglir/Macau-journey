@@ -1,10 +1,11 @@
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
+using UnityEngine;
 
 namespace Universal
 {
-    public class INIWriter
+    public static class INIWriter
     {
         /// <summary>
         /// 为INI文件中指定的节点取得字符串

@@ -1,4 +1,3 @@
-using Universal;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
@@ -19,7 +18,7 @@ namespace MainMenu
         /// 等待时间
         /// </summary>
         [SerializeField]
-        private float time = 0.5f;
+        private int time;
         private bool isPressed;
         /// <summary>
         /// 载入窗体
@@ -35,7 +34,12 @@ namespace MainMenu
                 return;
             }
             isPressed=true;
-            await System.Threading.Tasks.Task.Delay(500);
+            await System.Threading.Tasks.Task.Delay(time);
+            AsyncOperation operation =  SceneManager.LoadSceneAsync(1);
+            while(!operation.isDone)
+            {
+                await System.Threading.Tasks.Task.Yield();
+            }
             GameManager.Instance.NewGame();
             isPressed=false;
         }
@@ -46,7 +50,7 @@ namespace MainMenu
                 return;
             }
             isPressed=true;
-            await System.Threading.Tasks.Task.Delay(500);
+            await System.Threading.Tasks.Task.Delay(time);
             loadPanel.SetActive(true);
             isPressed=false;
         }
@@ -70,7 +74,7 @@ namespace MainMenu
                 return;
             }
             isPressed=true;
-            await System.Threading.Tasks.Task.Delay(500);
+            await System.Threading.Tasks.Task.Delay(time);
             configPanel.SetActive(!configPanel.activeSelf);
             isPressed=false;
         }
