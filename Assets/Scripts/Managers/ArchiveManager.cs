@@ -42,7 +42,8 @@ namespace Managers
                 return;
             }
             ArchiveInfoStream.saveInfoData(infos);
-            ArchiveStream.saveData(archives);
+            if(archives!=null)
+                ArchiveStream.saveData(archives);
         }
         /// <summary>
         /// 加载指定存档
