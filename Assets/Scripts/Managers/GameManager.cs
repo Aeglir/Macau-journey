@@ -53,6 +53,15 @@ namespace Managers
             _instance = this;
             //防止被销毁
             DontDestroyOnLoad(gameObject);
+            InstallCommand();
+        }
+        private async void InstallCommand()
+        {
+            await System.Threading.Tasks.Task.Delay(100);
+            ConsoleManager.RegisterCommand(AutoSave);
+        }
+        private void OnDestroy() {
+            ConsoleManager.RemoveCommand(AutoSave);
         }
         #endregion
         /// <summary>

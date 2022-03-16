@@ -290,6 +290,7 @@ namespace Managers
         }
         class ConsoleEmitter
         {
+            private const string SuccessfulText="\nsucceed!!!";
             private ScrollRect scrollRect;
             private Text text;
             private System.Text.StringBuilder stringBuilder;
@@ -330,6 +331,16 @@ namespace Managers
                     stringBuilder.Append(text);
                     isFirst = false;
                 }
+                this.text.text = stringBuilder.ToString();
+                scrollRect.SetLayoutVertical();
+                scrollRect.verticalNormalizedPosition = 1;
+            }
+            /// <summary>
+            /// 打印成功文本
+            /// </summary>
+            public void AppendSucceed()
+            {
+                stringBuilder.Append(SuccessfulText);
                 this.text.text = stringBuilder.ToString();
                 scrollRect.SetLayoutVertical();
                 scrollRect.verticalNormalizedPosition = 1;
@@ -398,6 +409,8 @@ namespace Managers
             if (runner.AnalyzeCommand(inputToken.GetTokens(token)) && !runner.RunCommand(commandHelper.GetCommand(runner.ObjectName, runner.MethodName)))
             {
                 emitter.AppendText(runner.ErrorMessage);
+            }else{
+                emitter.AppendSucceed();
             }
         }
         /// <summary>
