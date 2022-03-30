@@ -1,0 +1,34 @@
+@startuml CharacterSystem
+skinparam Dpi 200
+
+class CharacterSystem implements GameControlable
+{
+}
+interface GameControlable
+{
+
+}
+class CharacterDataBase
+{
+    +get()
+    +add()
+}
+class CharacterPool
+{
+    +getPlayer()
+    +getRandom()
+    +push()
+}
+class CharacterEmitter
+{
+    +enum Road
+    +AddRoad(Talkable, Road, Road)
+    +AddBackground(GameObject)
+}
+
+
+CharacterSystem *-- CharacterPool
+CharacterSystem *-- CharacterDataBase
+CharacterSystem *-- CharacterEmitter
+
+@enduml

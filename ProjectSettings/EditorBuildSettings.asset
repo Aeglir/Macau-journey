@@ -11,5 +11,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BlankScene.unity
     guid: 75ca0c0201b5fa84ba5c5dacbb00daaf
+  - enabled: 1
+    path: Assets/Scenes/VolunteerGameScene.unity
+    guid: 0309271d958d9f84a92d965a2aa8563b
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 8ad4214dbc6ecfb47a1e75e8a4c7f7f1, type: 2}

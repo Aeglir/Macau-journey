@@ -1,0 +1,123 @@
+@startuml ConsoleManager
+skinparam Dpi 200
+interface ConsolePresenter
+{
+    RegisterCommand<T...>(Action<T...>)
+    //指令登记
+    RemobeAllCommand(object)
+    //移除实例以注册的所有指令
+    RemoveCommand<T...>(Action<T...>)
+    //移除指令
+}
+note left:控制台控制器
+class ConsoleManager implements ConsolePresenter
+{
+    +GameObject panel
+    //控制台面板
+    -InputField inputField
+    //输入容器
+    -CommandHelper commandHelper
+    -InputToken inputToken
+    -CommandRunner runner
+    -ConsoleEmitter emitter
+    -void Awake()
+    -void Enable()
+    -PanelControl(CallbackContext context)
+    -OnDisable()
+    +CommandTokenRunner(string)
+    //获取输入命令并运行
+    -Help()
+    -OnDisable()
+    +SetCommand(Delegate, [string])
+    //初始化并设置命令
+}
+note right of ConsoleManager
+    控制台管理器
+end note
+class InputToken
+{
+    -InputField field
+    -System.Action<string> action
+    +InputToken(InputField, System.Action<string>)
+    //获取输入
+    +string[] GetTokens(string)
+    //获取输入词组
+    +FinishInput(string)
+    //输入完成回调
+}
+note bottom:输入读取器
+class ConsoleEmitter
+{
+    -const string SuccessfulText
+    //成功打印文本
+    -ScrollRect scrollRect
+    //滚动容器
+    -Text text
+    //文本容器
+    -System.Text.StringBuilder stringBuilder
+    //字符构造器
+    -bool isFirst
+    //是否为首条指令
+    +ConsoleEmitter(ScrollRect)
+    +ClearText()
+    //清楚容器文本
+    +AppendText(string)
+    //追加文本
+    +AppendSucceed()
+    //追加成功文本
+}
+note left:输出发射器
+class CommandHelper
+{
+    -Dictionary<string, Dictionary<string, Command>> commands
+    +SetCommand(string, string, Command)
+    //设置指令
+    +RemoveCommand(string)
+    +RemoveCommand(string, string)
+    //移除指令
+    +Command GetCommand(string, string)
+    //查找指令
+    +string[] GetHelp()
+    //获取帮助文本
+}
+note left:命令辅助器
+class Command
+{
+    +string CommandName
+    //指令名
+    +string tip
+    //帮助文本
+    +Delegate callback
+    //回调
+    -System.Object GetParameter(string, Type)
+    //获取参数类型
+    +Command(Delegate, [string])
+    +Call(params string[])
+    //启动回调
+    +string GetTip()
+    //获取帮助文本
+}
+
+note left:控制台命令单元
+class CommandRunner
+{
+    -string[] parameters
+    //参数字符串
+    +string objectName
+    //实例对象名
+    +string methodName
+    //方法名
+    +string errorMessage
+    //错问信息
+    +bool AnalyzeCommand(string[])
+    //分析指令
+    +bool RunCommand(Command)
+    //运行指令
+}
+note left:命令运行器
+ConsoleManager *-- InputToken
+ConsoleManager *-- ConsoleEmitter
+ConsoleManager *-- CommandHelper
+ConsoleManager *-- CommandRunner
+CommandHelper *-- Command
+@enduml

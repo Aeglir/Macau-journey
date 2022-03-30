@@ -1,0 +1,42 @@
+@startuml AudioManager
+skinparam Dpi 200
+class AudioManager <<MonoBehaviour>>
+{
+    +List<Data> audioList
+    //音频列表
+    --properties--
+    +List<string> TagList
+    //tag列表
+    +Dictionary<string, AudioSource> SourceList
+    //AudioSource控件列表
+    AudioPresenter presenter
+    //全局音频控制器
+}
+note right:全局音频管理器
+class AudioData
+{
+    +string tag
+    +AudioClip audio
+    +AudioMixerGroup OutPutGroup
+    +bool PlayOnAwake
+    +bool loop
+    +float Volume
+}
+note top:音频数据单元
+class AudioPresenter
+{
+    List<AudioData> audioList
+    List<string> tagList
+    Dictionary<string, AudioSource> sourceList
+    GameObject gameObject
+    --method--
+    +bool turnOnAudio(string)
+    //开启音频播放
+    +bool turnOffAudio(string)
+    //关闭音频播放
+}
+note top: 全局音频控制器
+AudioData o-- AudioManager
+AudioPresenter o-- AudioManager
+AudioManager o-- AudioData
+@enduml

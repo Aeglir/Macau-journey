@@ -1,0 +1,61 @@
+@startuml GameManager
+skinparam Dpi 200
+class GameManager <<Singleton>>
+{
+    --property--
+    + bool isNewGame
+    //是否已经开始新游戏
+    + ArchiveManager ArchiveManager
+    + ConfigManager ConfigManager
+    + AudioManager AudioManager
+    + UnityEvent NewGameEvent
+    + UnityEvent AutoSaveEvent
+    --method--
+    -async InstallCommand()
+    //注册控制台指令
+    + NewGame()
+    //开始新游戏
+    + AutoSave()
+    //自动存档
+}
+note top:全局游戏管理器
+class AudioManager <<MonoBehaviour>>
+{
+    +List<Data> audioList
+    --property--
+    +List<string> TagList
+    +Dictionary<string, AudioSource> SourceList
+    --method--
+    +AudioPresenter GetPresenter()
+}
+note top:全局音频管理器
+class ConfigManager <<MonoBehaviour>>
+{
+    +enmu TYPE
+    +AudioMixer audioMixer;
+    --property--
+    + bool IsFull
+    + string DPI
+    + float MAINVOLUME
+    + float BGM
+    + float SE
+    --method--
+    +ConfigPresenter getPresenter()
+}
+note top:全局设置管理器
+class ArchiveManager <<MonoBehaviour>>
+{
+    +List<ArchiveInfo> infos
+    +Dictionary<string, ArchiveBank> archives
+    +ArchiveInfo currentInfo
+    +createNewAchive()
+    +saveData()
+    +loadArchive(ArchiveInfo data)
+    +bool addArchiveData(ArchiveBank data, string key)
+    +ArchivePresenter GetPresenter(bool isLoad)
+}
+note top:全局存档管理器
+GameManager *-- AudioManager
+GameManager *-- ConfigManager
+GameManager *-- ArchiveManager
+@enduml

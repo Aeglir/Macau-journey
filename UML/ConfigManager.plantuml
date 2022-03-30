@@ -1,0 +1,178 @@
+@startuml ConfigManager
+skinparam dpi 200
+interface ICloneable
+{
+    object Clone()
+}
+class INIWriter
+{
+    --static method--
+    +{static}int GetPrivateProfileString(string
+    ,string,string,StringBuilder,int,string)
+    +{static}int WritePrivateProfileString(string
+    ,string,string,string)
+    +{static}string Read(string,string,string,string)
+    +{static}int Write(string,string,string,string)
+    +{static}int DeleteSection(string,string)
+    +{static}int DeleteKey(string,string,string)
+    +{static}CheckPath(string)
+    +{static}bool CheckFile(string)
+}
+note top:外部dll引入
+class ConfigManager <<MonoBehaviour>>
+{
+    +enum TYPE
+    { FULLSCREEN, DPI, MAINVOLUME, BGM, SE }
+    //设置选项枚举
+    +AudioMixer audioMixer
+    //音频混合器
+    +const bool DefaultFullScreen
+    //默认全屏设置
+    +const string HD
+    //HD分辨率大小
+    +const string DefaultDPI
+    //默认分辨率大小
+    +const float DefaultVolume
+    //默认音量
+    +const float StartVolume
+    //起始音量大小
+    +const float DefaultVolumeFactor
+    //默认音量因子
+    --property--
+    +bool IsFull
+    //是否为全屏
+    +string DPI
+    //分辨率大小
+    +float MAINVOLUME
+    //主音量大小
+    +float BGM
+    //背景音乐大小
+    +float SE
+    //效果音量大小
+    +ConfigData data
+    //设置数据
+    +DataSaver dataSaver
+    //设置保存器
+    +DataChanger dataChanger
+    //设置修改器
+    +SettingUpdater updater
+    //设置更新器
+    +ConfigPresenter presenter
+    //全局设置控制器
+}
+note right:全局设置管理器
+class ConfigData implements ICloneable
+{
+    +bool isFull
+    //是否全屏
+    +string dpi
+    //分辨率大小
+    +float mainVolume
+    //主音量大小
+    +float bgm
+    //背景音乐大小
+    +float se
+    //效果音量大小
+}
+note left of ConfigData
+    设置数据结构
+end note
+class ConfigPresenter
+{
+    -ConfigManager manager
+    --property--
+    +bool IsFull
+    +string DPI
+    +float MAINVOLUME
+    +float BGM
+    +float SE
+    --method--
+    +ChangeSetting(TYPE,Object)
+    +ConfirmSetting()
+    +CancelSetting()
+}
+note top:全局设置控制器
+class DataSaver
+{
+    -const string FileName
+    //文件名
+    -const string Section
+    //结点
+    -const string MAINVolumeKey
+    //主音量key
+    -const string BGMVolumeKey
+    //背景音量key
+    -const string SEVolumeKey
+    //效果音量key
+    -const string FullScreenKey
+    //全屏key
+    -const string DPIKey
+    //分辨率key
+    --property--
+    +string Path
+    //设置存档路径
+    +Action SaveAction
+    //保存回调
+    +Action<ConfigData> LoadAction
+    //加载回调
+    --async method--
+    +load()
+    //加载
+    +save(Object)
+    //保存
+}
+note right:设置数据保存器
+class DataChanger
+{
+    -ConfigData data
+    //设置数据
+    --property--
+    +ConfigData backup
+    //设置备份数据
+    -Object Dpi
+    -Object isFull
+    -Object MainVolume
+    -Object BGM
+    -Object SE
+    --method--
+    +enable()
+    //准备备份
+    +disable()
+    //取消准备
+    +changeSetting(TYPE,Object t)
+    //更改设置
+}
+note right:数设置数据修改器
+class SettingUpdater
+{
+    -ConfigData data
+    //设置数据
+    -ConfigData bakup
+    //设置备份数据
+    -AudioMixer audioMixer
+    //音频混合器
+    --method--
+    +{static}float transitionToVolume(float)
+    //音量转换
+    +enable(ConfigData)
+    //启动备份
+    +disable()
+    //取消备份
+    +update()
+    //更新设置
+    +apply()
+    //应用设置
+}
+note right:设置更新器
+ConfigData o-- ConfigManager
+ConfigPresenter o-- ConfigManager
+ConfigManager o-- ConfigData
+DataSaver o-- ConfigData
+DataChanger o-- ConfigData
+SettingUpdater o-- ConfigData
+ConfigManager o-- DataSaver
+INIWriter <.. DataSaver
+ConfigManager o-- DataChanger
+ConfigManager o-- SettingUpdater
+
+@enduml

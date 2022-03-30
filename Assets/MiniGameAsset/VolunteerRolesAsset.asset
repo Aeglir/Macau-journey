@@ -12,9 +12,237 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4e740e689a847c41a906016e18e8960, type: 3}
   m_Name: VolunteerRolesAsset
   m_EditorClassIdentifier: 
-  Player:
+  player:
     tag: 0
-    Tex: {fileID: 0}
-    isForwardToRight: 0
+    frameTex:
+    - {fileID: 21300000, guid: 53b67c271fe87844abecd4e9b4d61faf, type: 3}
+    alphaFrameTex: []
+    TexOffset: {x: 0, y: 0}
+    isRight: 0
+    painting: {fileID: 0}
     moveSpeed: 0
-  npcs: []
+    _sorceNeed: 0
+    _price: 0
+  activePlanting: {fileID: 21300000, guid: ff914fd348baa8644bc7c0f9f1b2c26b, type: 3}
+  perfabs: {fileID: 5107746608260473417, guid: 564dd20e73c29ad4c8b6f648b4b0277a, type: 3}
+  npcs:
+  - tag: 1
+    frameTex:
+    - {fileID: 21300000, guid: 6f25016d37863884d9bd775ab3661326, type: 3}
+    - {fileID: 21300000, guid: e722bacad84dd104a9c61b54cd64659e, type: 3}
+    alphaFrameTex: []
+    TexOffset: {x: 0, y: 0}
+    isRight: 0
+    painting: {fileID: 0}
+    moveSpeed: 100
+    _sorceNeed: 0
+    _price: 0
+  - tag: 2
+    frameTex:
+    - {fileID: 21300000, guid: 160c0c5cc53241942b91e402f35edf9b, type: 3}
+    - {fileID: 21300000, guid: e2429d508de102e48962d3e449fb385f, type: 3}
+    alphaFrameTex: []
+    TexOffset: {x: 0, y: 0}
+    isRight: 0
+    painting: {fileID: 0}
+    moveSpeed: 100
+    _sorceNeed: 0
+    _price: 0
+  - tag: 3
+    frameTex:
+    - {fileID: 21300000, guid: 64740caa014c7fc4c828ccb1465a3591, type: 3}
+    - {fileID: 21300000, guid: 30a8bbc7f664e354b8a61c6812e14681, type: 3}
+    alphaFrameTex: []
+    TexOffset: {x: 0, y: 0}
+    isRight: 0
+    painting: {fileID: 0}
+    moveSpeed: 100
+    _sorceNeed: 0
+    _price: 0
+  - tag: 4
+    frameTex:
+    - {fileID: 21300000, guid: 2cbc11c6c1658944ca7bc2974aec1b8d, type: 3}
+    - {fileID: 21300000, guid: 826fd00e7b5d184459186548e88c3bb8, type: 3}
+    alphaFrameTex: []
+    TexOffset: {x: 0, y: 0}
+    isRight: 1
+    painting: {fileID: 0}
+    moveSpeed: 100
+    _sorceNeed: 0
+    _price: 0
+  - tag: 5
+    frameTex:
+    - {fileID: 21300000, guid: 1f0c247dd3cde94459c4a101310ea359, type: 3}
+    - {fileID: 21300000, guid: f6a0bc265f6e2764e93eb97d5a0ec5f3, type: 3}
+    alphaFrameTex: []
+    TexOffset: {x: 0, y: 0}
+    isRight: 0
+    painting: {fileID: 0}
+    moveSpeed: 100
+    _sorceNeed: 0
+    _price: 0
+  - tag: 6
+    frameTex:
+    - {fileID: 21300000, guid: 9025e59e49029b842a38452d3f730570, type: 3}
+    - {fileID: 21300000, guid: 4ad051848d9fb3f4fad44bf1ca6882ea, type: 3}
+    alphaFrameTex: []
+    TexOffset: {x: 0, y: 0}
+    isRight: 0
+    painting: {fileID: 0}
+    moveSpeed: 100
+    _sorceNeed: 0
+    _price: 0
+  - tag: 7
+    frameTex:
+    - {fileID: 21300000, guid: 2e835c1e02a26394a819921bd732e92c, type: 3}
+    - {fileID: 21300000, guid: 584e2a409e1fa504d8c3e15d4622a9f6, type: 3}
+    alphaFrameTex: []
+    TexOffset: {x: 0, y: 0}
+    isRight: 0
+    painting: {fileID: 0}
+    moveSpeed: 100
+    _sorceNeed: 0
+    _price: 0
+  - tag: 8
+    frameTex:
+    - {fileID: 21300000, guid: 7ad0cc672a5c75a4893f37d0456bcf1c, type: 3}
+    - {fileID: 21300000, guid: 6f2bcba9aa72d8e4da585f145ececee1, type: 3}
+    alphaFrameTex: []
+    TexOffset: {x: 0, y: 0}
+    isRight: 0
+    painting: {fileID: 0}
+    moveSpeed: 100
+    _sorceNeed: 0
+    _price: 0
+  - tag: 9
+    frameTex:
+    - {fileID: 21300000, guid: 7de1e1d44c91e8a418b2a888ea4c50fc, type: 3}
+    - {fileID: 21300000, guid: b6a96f2656c1a1948ad8ccd50b1951c6, type: 3}
+    alphaFrameTex: []
+    TexOffset: {x: 0, y: 0}
+    isRight: 0
+    painting: {fileID: 0}
+    moveSpeed: 100
+    _sorceNeed: 0
+    _price: 0
+  - tag: 10
+    frameTex:
+    - {fileID: 21300000, guid: 7c1a928be9b18444a922f4c64c66132a, type: 3}
+    - {fileID: 21300000, guid: a64ad4cbfbf73a84d9bb8856fed21080, type: 3}
+    alphaFrameTex: []
+    TexOffset: {x: 0, y: 0}
+    isRight: 0
+    painting: {fileID: 0}
+    moveSpeed: 100
+    _sorceNeed: 0
+    _price: 0
+  - tag: 11
+    frameTex:
+    - {fileID: 21300000, guid: f33f20709e633cf4dba4829deb0597ed, type: 3}
+    - {fileID: 21300000, guid: 9782b6fa152fa6d4fbb1c7dd85bb26dc, type: 3}
+    alphaFrameTex: []
+    TexOffset: {x: 0, y: 0}
+    isRight: 0
+    painting: {fileID: 0}
+    moveSpeed: 100
+    _sorceNeed: 0
+    _price: 0
+  - tag: 12
+    frameTex:
+    - {fileID: 21300000, guid: 0766f39ee10efa249bcca62ee8ebc6e7, type: 3}
+    - {fileID: 21300000, guid: 11080b4822936d648825dae3dcdb4859, type: 3}
+    alphaFrameTex: []
+    TexOffset: {x: 0, y: 0}
+    isRight: 0
+    painting: {fileID: 0}
+    moveSpeed: 100
+    _sorceNeed: 0
+    _price: 0
+  - tag: 13
+    frameTex:
+    - {fileID: 21300000, guid: c9f98701a4b60834b82a6b04d8d7e6ce, type: 3}
+    - {fileID: 21300000, guid: d711d95d6a096b44c869f652a4aff1ab, type: 3}
+    alphaFrameTex: []
+    TexOffset: {x: 0, y: 0}
+    isRight: 1
+    painting: {fileID: 0}
+    moveSpeed: 100
+    _sorceNeed: 0
+    _price: 0
+  - tag: 14
+    frameTex:
+    - {fileID: 21300000, guid: 7d41a5cec478eda4d8b26e7dddb4e997, type: 3}
+    - {fileID: 21300000, guid: 6f00e935a56cfb143a0100fe9dbfad04, type: 3}
+    alphaFrameTex: []
+    TexOffset: {x: 0, y: 0}
+    isRight: 0
+    painting: {fileID: 0}
+    moveSpeed: 100
+    _sorceNeed: 0
+    _price: 0
+  - tag: 15
+    frameTex:
+    - {fileID: 21300000, guid: 63186b49025d53247a1c2693e4f5954d, type: 3}
+    - {fileID: 21300000, guid: 5e5306489b82f3049834b8b3dea0041c, type: 3}
+    alphaFrameTex: []
+    TexOffset: {x: 0, y: 0}
+    isRight: 0
+    painting: {fileID: 0}
+    moveSpeed: 100
+    _sorceNeed: 0
+    _price: 0
+  - tag: 16
+    frameTex:
+    - {fileID: 21300000, guid: a0ebdda226e9f8d4bab83e6d37fd5eb8, type: 3}
+    - {fileID: 21300000, guid: 98cd8e9edd0ff944c9b144c5a743f2fc, type: 3}
+    alphaFrameTex: []
+    TexOffset: {x: 0, y: 0}
+    isRight: 0
+    painting: {fileID: 0}
+    moveSpeed: 100
+    _sorceNeed: 0
+    _price: 0
+  - tag: 17
+    frameTex:
+    - {fileID: 21300000, guid: f154cabca9a77214aac07b5b928afb3a, type: 3}
+    - {fileID: 21300000, guid: b424932781d381747803a94b35dbd61c, type: 3}
+    alphaFrameTex: []
+    TexOffset: {x: 0, y: 0}
+    isRight: 0
+    painting: {fileID: 0}
+    moveSpeed: 100
+    _sorceNeed: 0
+    _price: 0
+  - tag: 18
+    frameTex:
+    - {fileID: 21300000, guid: fc63fd0bc0492bb4c81a7a2efb4635fe, type: 3}
+    - {fileID: 21300000, guid: 09728ece5983cb0488230998bcc289c7, type: 3}
+    alphaFrameTex: []
+    TexOffset: {x: 0, y: 0}
+    isRight: 0
+    painting: {fileID: 0}
+    moveSpeed: 100
+    _sorceNeed: 0
+    _price: 0
+  - tag: 19
+    frameTex:
+    - {fileID: 21300000, guid: d2dafdedd6bf63245993ca6cbcea2fc2, type: 3}
+    - {fileID: 21300000, guid: d0f2dc0162649a94aa0c229115903331, type: 3}
+    alphaFrameTex: []
+    TexOffset: {x: 0, y: 0}
+    isRight: 1
+    painting: {fileID: 0}
+    moveSpeed: 100
+    _sorceNeed: 0
+    _price: 0
+  - tag: 20
+    frameTex:
+    - {fileID: 21300000, guid: b34433b94472f6445802c701b2ed9335, type: 3}
+    - {fileID: 21300000, guid: 78ce637152359c1479e7b43c92dda767, type: 3}
+    alphaFrameTex: []
+    TexOffset: {x: 0, y: 0}
+    isRight: 0
+    painting: {fileID: 0}
+    moveSpeed: 100
+    _sorceNeed: 0
+    _price: 0
