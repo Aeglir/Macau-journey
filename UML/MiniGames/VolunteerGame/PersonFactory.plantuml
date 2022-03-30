@@ -1,0 +1,52 @@
+@startuml PersonFactory
+skinparam dpi 200
+
+class CharactersAsset extends ScriptableObject
+note left of CharactersAsset
+    配置文件
+end note
+class CharacterInfo
+{
+}
+
+CharactersAsset *-- CharacterInfo
+
+class CharacterPool
+{
+}
+package PersonFactory
+{
+    interface Talkable
+    {
+
+    }
+    interface Playable{
+        +TurnLeft()
+        +TurnRight()
+        +Call()
+    }
+    abstract class Person
+    {
+        +{static} Talkable GetInstance(GameObject obj, PersonType type)
+        +{static} Playable GetPlayInstance(GameObject obj)
+    }
+    class Man extends Person implements Talkable
+    {
+
+    }
+    class Woman extends Person implements Talkable
+    {
+
+    }
+    class Child extends Person implements Talkable
+    {
+
+    }
+    class Player extends Person implements Playable
+    {
+
+    }
+}
+CharacterPool <.. Person
+Person <.. CharactersAsset
+@enduml

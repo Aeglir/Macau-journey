@@ -1,0 +1,47 @@
+@startuml ConfigGUI
+skinparam Dpi 200
+class ConfigGUI <<MonoBehaviour>>
+{
+    -List<string> resolutionList
+    //分辨率文本
+    -int position
+    //分辨率文本索引位置
+    -Text resolutionText
+    //文本容器
+    -Slider mainSlider
+    //主音量滑动条
+    -Slider bgmSlider
+    //背景音乐滑动条
+    -Slider seSlider
+    //效果音量滑动条
+    -Toggle fulltoogle
+    //全屏触发器
+    -AudioMixer audioMixer
+    //音量混合器
+    -ConfigPresenter presenter
+    //全局设置控制器
+    --method--
+    -Awake()
+    -OnEnable()
+    -int getPosition()
+    -initGUI()
+    -switchResolution(string)
+    --click action--
+    +leftButtonClick()
+    //分辨率左箭头回调
+    +rightButtonClick()
+    //分辨率右箭头回调
+    +switchFullscreen(bool)
+    //全屏触发器回调
+    +confirmSetting()
+    //确定回调
+    +cancelSetting()
+    //取消回调
+    +changeMainVolume(float)
+    //主音量更改回调
+    +changeBgmVolume(float)
+    //背景音量更改回调
+    +changeSeVolume(float)
+    //特效音量更改回调
+}
+@enduml

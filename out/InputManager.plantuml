@@ -1,0 +1,92 @@
+@startuml InputManager
+skinparam Dpi 200
+interface InputSetable
+{
+    InputEvent AddInput(Key, InputActionType, string)
+    InputEvent AddInput(Mouse, InputActionType, string)
+    InputEvent AddInput(string), InputActionType, string)
+    //输入添加
+    InputEvent GetInputEvent(Key, InputActionType)
+    InputEvent GetInputEvent(Mouse, InputActionType)
+    InputEvent GetInputEvent(string, InputActionType)
+    //获取输入响应事件
+}
+note right:输入控制器接口
+class InputManager implements InputSetable
+{
+    +enum Response
+    {Started,Performed,Canceled}
+    //响应类型
+    +enum Mouse
+    {Left,Right，Position}
+    //鼠标key
+    -InputDataBank _data
+    -Awake()
+}
+note right of InputManager
+    输入管理器
+end note
+class InputDataBank
+{
+    -Dictionary<string, InputEvent> inputDic
+    -InputActionFactory factory
+    -string GetKey(string, string)
+    -RemoveInputEvent(string)
+    +InputEvent AddInput(Key, InputActionType, string)
+    +InputEvent AddInput(Mouse, InputActionType, string)
+    +InputEvent AddInput(string, InputActionType, string)
+    //输入添加
+    +InputEvent GetInputEvent(Key, InputActionType)
+    +InputEvent GetInputEvent(Mouse, InputActionType)
+    +InputEvent GetInputEvent(string, InputActionType)
+    //获取输入响应事件
+}
+note left:输入事件仓库
+class InputActionFactory
+{
+    +InputAction GetNewInstance(string, InputActionType, string)
+    //获取输入控制器
+    -InputBinding GetInputBinding(string, string)
+    //获取输入绑定器
+}
+note top:输入控制器工厂
+class InputEvent
+{
+    -string key;
+    -bool hasDisposed;
+    //是否已释放资源
+    -InputAction inputAction;
+    //输入控制器
+    -System.Action<string> disposeAction;
+    //销毁回调
+    -List<Action<CallbackContext>> startedActions;
+    //started事件
+    -List<Action<CallbackContext>> performedActions;
+    //performed事件
+    -List<Action<CallbackContext>> canceledActions;
+    //canceled事件
+    #InputEvent(string, InputAction, Action<string>)
+    +Dispose()
+    //资源释放函数
+    +InputEvent AddListener(Action<CallbackContext>, Response)
+    //委托添加
+    +InputEvent RemoveListener(Action<CallbackContext>, Response)
+    //委托移除
+    +Enable()
+    //启动输入控制器
+    +Disable()
+    //关闭输入控制器
+}
+note left:输入响应事件
+class InputCheckerHelper
+{
+    +{static}string GetInputPath(Key)
+    +{static}string GetInputPath(Mouse)
+    //获取输入路径
+}
+note top:输入路径获取
+InputManager *-- InputDataBank
+InputDataBank *-- InputActionFactory
+InputDataBank *-- InputEvent
+InputCheckerHelper <.. InputDataBank
+@enduml

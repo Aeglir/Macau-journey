@@ -1,0 +1,162 @@
+@startuml ArchiveManager
+skinparam Dpi 200
+class ArchiveManager <<MonoBehaviour>>
+{
+    +const string InfoKey
+    //存档key
+    +const string InfoFileName
+    //存档文件名
+    +const string DefaultInfoName
+    //默认信息名
+    +List<ArchiveInfo> infos
+    //存档信息列表
+    +Dictionary<string, ArchiveBank> archives
+    //存档字典
+    +ArchiveInfo currentInfo
+    //当前存档的信息
+    --method--
+    +createNewAchive()
+    //创建新存档
+    +saveData()
+    //保存存档
+    +loadArchive(ArchiveInfo)
+    //加载存档
+    +bool addArchiveData(ArchiveBank, string)
+    //将需要保存的数据添加到存档中
+    +ArchivePresenter GetPresenter(bool)
+    //存档控制器
+}
+note left:存档管理器
+abstract ArchiveBank
+note left:存档数据抽象层
+
+package 存档具体层
+{
+    class PlayerData extends ArchiveBank
+    class SceneData extends ArchiveBank
+    class MoreData extends ArchiveBank
+}
+
+class ArchiveInfo
+{
+    +int tag
+    //存档tag
+    +string name
+    //存档名
+    +bool isInvalid
+    //是否为有效存档
+}
+note top:存档信息数据结构
+class ArchiveInfoStream
+{
+    --method--
+    +{static}saveInfoData(List<ArchiveInfo>)
+    //保存信息数据
+    --async method--
+    +{static}loadInfoData()
+    //加载信息数据
+}
+note right:存档信息数据层
+class ArchiveStream
+{
+    -{static}string filePrefix
+    //存档前缀
+    +{static}string getFileName(int)
+    //存档名获取
+    +{static}saveData(Dictionary<string, ArchiveBank>)
+    //保存数据
+    +{static}loadData(int, Action<int>:null)
+    //加载数据
+}
+note left:存档数据层
+abstract ArchivePresenter
+{
+    #List<ArchiveInfo> infoList
+    //存档信息数据列表
+    #Dictionary<string, ArchiveBank> archives
+    //存档数据字典
+    #ArchiveInfo currentInfo
+    //当前存档数据信息
+    --method--
+    +string getName(int)
+    //获取存档名称
+    +abstract cilckAction(int)
+    //点击回调
+    +bool isInvalid(int)
+    //是否为有效存档
+    +abstract finish()
+    //存档数据异步操作完成回调
+}
+note top:存档控制器抽象层
+class LoadPresenter extends ArchivePresenter
+{
+    --method--
+    -loadArchive(int)
+    //加载存档
+    +cilckAction(int)
+    +finish()
+}
+note bottom of LoadPresenter
+    存档加载控制器
+end note
+class SavePresenter extends ArchivePresenter
+{
+    --method--
+    -SaveArchive(int)
+    //保存存档
+    -addFiller(int)
+    //添加空存档
+    -ArchiveInfoCopy(ArchiveInfo, ArchiveInfo)
+    //存档信息拷贝
+    +cilckAction(int)
+}
+note bottom of SavePresenter
+    存档保存控制器
+end note
+class JsonConvert
+note top:引入自Newtonsoft.json
+class FileStream
+{
+    --async method--
+    +{static}saveInfo(string)
+    //保存信息数据
+    +{static}saveData(string, string)
+    //保存存档数据
+    +{static}Task<string> getInfo()
+    //获取信息数据
+    +{static}Task<string> getData(string)
+    //获取存档数据
+}
+note top:存档文件流
+class ArchiveChecker
+{
+    -string floderName
+    //文件夹名称
+    +string fileSuffix
+    //文件后缀
+    +{static}string checkedAndgetPath()
+    //检查并获取存档路径
+    +{static}bool checkPath()
+    //检查路径
+    +{static}bool checkInfoFile()
+    //检查存档信息文件
+    +{static}bool checkDataFile(string)
+    //检查存档数据文件
+    +{static}string getInfoFileName()
+    //获取存档信息文件名
+    +{static}string getFileName(string)
+    //获取存档数据文件名
+}
+note right:存档文件检查器
+ArchiveManager o-- ArchiveBank
+ArchiveManager o-- ArchiveInfo
+ArchiveManager *-- LoadPresenter
+ArchiveManager *-- SavePresenter
+ArchiveInfoStream <.. ArchiveManager
+ArchiveStream <.. ArchiveManager
+FileStream <.. ArchiveStream
+FileStream <.. ArchiveInfoStream
+JsonConvert <.. ArchiveStream
+JsonConvert <.. ArchiveInfoStream
+ArchiveChecker <.. FileStream
+@enduml

@@ -1,0 +1,53 @@
+@startuml ArchiveGUI
+class ArchiveGUI <<MonoBehaviour>>
+{
+    +const int ItemCount
+    //子物体数量上限
+    -ArchivePresenter presenter
+    //存档控制器
+    +GameObject Item
+    //子物体预制体
+    +Sprite DefualtImage;
+    //默认图片
+    +bool isLoad
+    //是否为处于等待存档加载
+    --method--
+    -OnEnable()
+    -OnDisable()
+    -addContent()
+    -createItem(int, bool)
+    -initItem(int, ArchiveItem, bool)
+    -Sprite getImageSprite(int)
+    +finish()
+    //完成回调
+}
+class ArchiveItem <<MonoBehaviour>>
+{
+    -const string DefaultDesctiption
+    //默认描述文本
+    -const string DefaultTitle
+    //默认标题
+    -int archiveTag
+    //存档tag
+    +Image image
+    //图片容器
+    +TextMeshProUGUI titleText
+    //标题文本容器
+    +TextMeshProUGUI descriptionText
+    //描述文本容器
+    +Button button
+    //按钮
+    --method--
+    +initItem(Sprite, string, string, int, UnityAction<int>)
+    //初始化
+    -setImage(Sprite)
+    -setTitleString(string)
+    -setDescriptionString(string)
+    -setClickAction(UnityAction<int>)
+    +click()
+    //点击回调
+}
+
+ArchiveGUI *-- ArchiveItem
+
+@enduml
