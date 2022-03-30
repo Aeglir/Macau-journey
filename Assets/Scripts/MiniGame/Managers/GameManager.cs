@@ -57,6 +57,7 @@ namespace Managers
             DontDestroyOnLoad(gameObject);
             miniGameMananger = new MiniGameManager();
             InstallCommand();
+            InstallCommand();
         }
         private async void InstallCommand()
         {
@@ -68,6 +69,14 @@ namespace Managers
         {
             ConsoleManager.RemoveCommand(AutoSave);
             ConsoleManager.RemoveCommand(miniGameMananger.VolunteerGameStart);
+        }
+        private async void InstallCommand()
+        {
+            await System.Threading.Tasks.Task.Delay(100);
+            ConsoleManager.RegisterCommand(AutoSave);
+        }
+        private void OnDestroy() {
+            ConsoleManager.RemoveCommand(AutoSave);
         }
         #endregion
         /// <summary>
