@@ -192,8 +192,8 @@ namespace MiniGame.Volunteer
         private CharacterDataBase dataBase;
         private CharacterEmitter emitter;
         private bool isAppear;
-        private int tag=-1;
-        public int Tag { get => tag; }
+        private int _tag;
+        public int Tag { get => _tag; }
         private void Awake()
         {
             pool = new CharacterPool(gameObject);

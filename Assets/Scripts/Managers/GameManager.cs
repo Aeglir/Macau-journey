@@ -55,9 +55,6 @@ namespace Managers
             _instance = this;
             //防止被销毁
             DontDestroyOnLoad(gameObject);
-<<<<<<< HEAD:Assets/Scripts/Managers/GameManager.cs
-            InstallCommand();
-=======
             miniGameMananger = new MiniGameManager();
             InstallCommand();
         }
@@ -71,7 +68,6 @@ namespace Managers
         {
             ConsoleManager.RemoveCommand(AutoSave);
             ConsoleManager.RemoveCommand(miniGameMananger.VolunteerGameStart);
->>>>>>> MFK:Assets/Scripts/MiniGame/Managers/GameManager.cs
         }
         #endregion
         /// <summary>
