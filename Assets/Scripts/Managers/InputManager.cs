@@ -211,7 +211,12 @@ namespace Managers
         }
         public static class InputCheckHelper
         {
-            public static string GetInputPath(Key key) => Keyboard.current.FindKeyOnCurrentKeyboardLayout(key.ToString()).path;
+            public static string GetInputPath(Key key)
+            {
+                if(key==Key.Escape)
+                    return "keyboard/escape";
+                return Keyboard.current.FindKeyOnCurrentKeyboardLayout(key.ToString()).path;
+            }
             public static string GetInputPath(Mouse type)
             {
                 switch (type)

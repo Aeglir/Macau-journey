@@ -19,11 +19,11 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 53b67c271fe87844abecd4e9b4d61faf, type: 3}
     alphaFrameTex: []
     TexOffset: {x: 0, y: 0}
-    isRight: 0
+    isRight: 1
     painting:
-    - {fileID: 21300000, guid: 57187a4078ac5c344b51c12bb6b7314d, type: 3}
-    - {fileID: 21300000, guid: f9a5e67916fbc444ab5c83504f3bda9e, type: 3}
-    - {fileID: 21300000, guid: 76e5b7369ef8c6349a9a288551aa7c54, type: 3}
+    - {fileID: 21300000, guid: a2c58a9bf85ae0240b93a253bfdbed54, type: 3}
+    - {fileID: 21300000, guid: d68f5234a8b2c364d86669920ccee3be, type: 3}
+    - {fileID: 21300000, guid: 18ef34f1081dfd5498b338457f41c028, type: 3}
     moveSpeed: 0
     _sorceNeed: 0
     _price: 0
@@ -35,7 +35,9 @@ MonoBehaviour:
     frameTex:
     - {fileID: 21300000, guid: 6f25016d37863884d9bd775ab3661326, type: 3}
     - {fileID: 21300000, guid: e722bacad84dd104a9c61b54cd64659e, type: 3}
-    alphaFrameTex: []
+    alphaFrameTex:
+    - {fileID: 21300000, guid: 0d813c50f0acb5b4f8cebdf4f1802217, type: 3}
+    - {fileID: 21300000, guid: 1c808344aa758564c9acce737cf4083d, type: 3}
     TexOffset: {x: 0, y: 0}
     isRight: 0
     painting:
@@ -50,13 +52,15 @@ MonoBehaviour:
     frameTex:
     - {fileID: 21300000, guid: 160c0c5cc53241942b91e402f35edf9b, type: 3}
     - {fileID: 21300000, guid: e2429d508de102e48962d3e449fb385f, type: 3}
-    alphaFrameTex: []
+    alphaFrameTex:
+    - {fileID: 21300000, guid: 02709594b3ddb1844aab0b7adda2dd5f, type: 3}
+    - {fileID: 21300000, guid: 98d00764e2375c94481e352a65f6550d, type: 3}
     TexOffset: {x: 0, y: 0}
     isRight: 0
     painting:
-    - {fileID: 21300000, guid: 72b052e751485544a9e741f184e13a00, type: 3}
-    - {fileID: 21300000, guid: 97b2959479e632947bdeee379fb80af0, type: 3}
-    - {fileID: 21300000, guid: 4c88c1da146eadf4281f9be8b0d12684, type: 3}
+    - {fileID: 21300000, guid: 724a5598080158d44a5825b4089cd499, type: 3}
+    - {fileID: 21300000, guid: 434406a991d206944bf24eaf0f3a1ae9, type: 3}
+    - {fileID: 21300000, guid: ad10df39ed1e7f54cbb7348cfcb048e0, type: 3}
     moveSpeed: 100
     _sorceNeed: 0
     _price: 0
@@ -65,13 +69,15 @@ MonoBehaviour:
     frameTex:
     - {fileID: 21300000, guid: 64740caa014c7fc4c828ccb1465a3591, type: 3}
     - {fileID: 21300000, guid: 30a8bbc7f664e354b8a61c6812e14681, type: 3}
-    alphaFrameTex: []
+    alphaFrameTex:
+    - {fileID: 21300000, guid: 736ee41cb6da37f4cb5767d87b7a375d, type: 3}
+    - {fileID: 21300000, guid: 5caffd08ed4df5a499c9f5e3a7b9c572, type: 3}
     TexOffset: {x: 0, y: 0}
     isRight: 0
     painting:
-    - {fileID: 21300000, guid: ab88a8e40ec4d3c41b70e1c16373a82e, type: 3}
-    - {fileID: 21300000, guid: d3ad53db5ab41bd4fa11caa1e6a61039, type: 3}
-    - {fileID: 21300000, guid: ca367025b212b9f4a80974295cdfc02b, type: 3}
+    - {fileID: 21300000, guid: 830119c79245d4841a91b6cd6ce1a317, type: 3}
+    - {fileID: 21300000, guid: 77a8b44b555b7404fb931950ac3eed0b, type: 3}
+    - {fileID: 21300000, guid: 600c70cff89749347a6cee157167ce2d, type: 3}
     moveSpeed: 100
     _sorceNeed: 0
     _price: 0
@@ -80,13 +86,15 @@ MonoBehaviour:
     frameTex:
     - {fileID: 21300000, guid: 2cbc11c6c1658944ca7bc2974aec1b8d, type: 3}
     - {fileID: 21300000, guid: 826fd00e7b5d184459186548e88c3bb8, type: 3}
-    alphaFrameTex: []
+    alphaFrameTex:
+    - {fileID: 21300000, guid: fa641e4d830246a45b1cce9e81d93330, type: 3}
+    - {fileID: 21300000, guid: df4946bf246906c4eb346cf281a3fcca, type: 3}
     TexOffset: {x: 0, y: 0}
     isRight: 1
     painting:
-    - {fileID: 21300000, guid: 78b8de9119003aa4a9a7286e256e5609, type: 3}
-    - {fileID: 21300000, guid: 8d86bf6553ca6ac43ac10ac17a12ec0e, type: 3}
-    - {fileID: 21300000, guid: 69394541f739af74abebcd9336f3d281, type: 3}
+    - {fileID: 21300000, guid: 099481dccfb7c614388a8a7bc21425f5, type: 3}
+    - {fileID: 21300000, guid: 64c3e0138f535d4428da5489f469d83f, type: 3}
+    - {fileID: 21300000, guid: 4f21b99d2b8d2e942847adabe98c276f, type: 3}
     moveSpeed: 100
     _sorceNeed: 0
     _price: 0
@@ -95,13 +103,15 @@ MonoBehaviour:
     frameTex:
     - {fileID: 21300000, guid: 1f0c247dd3cde94459c4a101310ea359, type: 3}
     - {fileID: 21300000, guid: f6a0bc265f6e2764e93eb97d5a0ec5f3, type: 3}
-    alphaFrameTex: []
+    alphaFrameTex:
+    - {fileID: 21300000, guid: 72771cfd5d1b74145b2e7c9ed89dfbc6, type: 3}
+    - {fileID: 21300000, guid: 57b29c12e2d34fb4d97f49988d090cec, type: 3}
     TexOffset: {x: 0, y: 0}
     isRight: 0
     painting:
-    - {fileID: 21300000, guid: 98a1a21ab5cb8e943bef1b852a41ae9a, type: 3}
-    - {fileID: 21300000, guid: d087cc15f8e30764995ffce1ed341c33, type: 3}
-    - {fileID: 21300000, guid: c4244c7f46c905b4e9a29e52eb3c90d5, type: 3}
+    - {fileID: 21300000, guid: eaed7537fc276ec4dafeb497e8e70a0b, type: 3}
+    - {fileID: 21300000, guid: ba9a2d26a17dd8341aadd5e4012be1aa, type: 3}
+    - {fileID: 21300000, guid: e6108b3850f565744aa7f32eb20b92f6, type: 3}
     moveSpeed: 100
     _sorceNeed: 0
     _price: 0
@@ -110,13 +120,15 @@ MonoBehaviour:
     frameTex:
     - {fileID: 21300000, guid: 9025e59e49029b842a38452d3f730570, type: 3}
     - {fileID: 21300000, guid: 4ad051848d9fb3f4fad44bf1ca6882ea, type: 3}
-    alphaFrameTex: []
+    alphaFrameTex:
+    - {fileID: 21300000, guid: 13d10a5073cbf9c4785a7f8f10b9dc2f, type: 3}
+    - {fileID: 21300000, guid: 87eb51785b3a0fe4db1bcadb77dde0fa, type: 3}
     TexOffset: {x: 0, y: 0}
     isRight: 0
     painting:
-    - {fileID: 21300000, guid: f3ab4a29beb90e14eb6a37a763cc79c3, type: 3}
-    - {fileID: 21300000, guid: 1d75afd85129fc14ea35777c17668523, type: 3}
-    - {fileID: 21300000, guid: d8c97fe28b7cba74c84212e4d7957b9b, type: 3}
+    - {fileID: 21300000, guid: c5a3564e4211b804c873161b9cdc9bcb, type: 3}
+    - {fileID: 21300000, guid: 78b7622df3c4ab3438a31e5182ab854b, type: 3}
+    - {fileID: 21300000, guid: 43be372c236307e41a56a5aa708ef3da, type: 3}
     moveSpeed: 100
     _sorceNeed: 0
     _price: 0
@@ -125,13 +137,15 @@ MonoBehaviour:
     frameTex:
     - {fileID: 21300000, guid: 2e835c1e02a26394a819921bd732e92c, type: 3}
     - {fileID: 21300000, guid: 584e2a409e1fa504d8c3e15d4622a9f6, type: 3}
-    alphaFrameTex: []
+    alphaFrameTex:
+    - {fileID: 21300000, guid: 9a2da3ff7420af344a67ae49a8a6dca8, type: 3}
+    - {fileID: 21300000, guid: db65cc1beb9485d49b1796afabdd61f8, type: 3}
     TexOffset: {x: 0, y: 0}
     isRight: 0
     painting:
-    - {fileID: 21300000, guid: 5a5704019290b9c438b998838344183e, type: 3}
-    - {fileID: 21300000, guid: a714cd20c7e6f0d4e8d065737e7b09ff, type: 3}
-    - {fileID: 21300000, guid: 2663842c4c54ce843ba37d0fd2f6b0d7, type: 3}
+    - {fileID: 21300000, guid: 9115010f35fdd034389c69107e57b37e, type: 3}
+    - {fileID: 21300000, guid: ccf97b2e1ac9b6741b874245a0528a14, type: 3}
+    - {fileID: 21300000, guid: 789cb5b1d76cc5b4f86f2ef6c20b33aa, type: 3}
     moveSpeed: 100
     _sorceNeed: 0
     _price: 0
@@ -140,13 +154,15 @@ MonoBehaviour:
     frameTex:
     - {fileID: 21300000, guid: 7ad0cc672a5c75a4893f37d0456bcf1c, type: 3}
     - {fileID: 21300000, guid: 6f2bcba9aa72d8e4da585f145ececee1, type: 3}
-    alphaFrameTex: []
+    alphaFrameTex:
+    - {fileID: 21300000, guid: b91153830cfc36f46b73dc2b7a41e50a, type: 3}
+    - {fileID: 21300000, guid: 1936cff431705914f87e8623625463b8, type: 3}
     TexOffset: {x: 0, y: 0}
     isRight: 0
     painting:
-    - {fileID: 21300000, guid: b63f958cacd776046a3484d26b044bf9, type: 3}
-    - {fileID: 21300000, guid: b07082e5a8bcf1f4e85b11db4faa66df, type: 3}
-    - {fileID: 21300000, guid: 9c45f228e122fcd4da18eb2ae187e09e, type: 3}
+    - {fileID: 21300000, guid: 0404ac39c87dff74aa027b05dd812470, type: 3}
+    - {fileID: 21300000, guid: b9f8933fdcf4e23458351a0eedb37c47, type: 3}
+    - {fileID: 21300000, guid: d58d7ec6f210d9d4db819fd6009551cc, type: 3}
     moveSpeed: 100
     _sorceNeed: 0
     _price: 0
@@ -155,13 +171,15 @@ MonoBehaviour:
     frameTex:
     - {fileID: 21300000, guid: 7de1e1d44c91e8a418b2a888ea4c50fc, type: 3}
     - {fileID: 21300000, guid: b6a96f2656c1a1948ad8ccd50b1951c6, type: 3}
-    alphaFrameTex: []
+    alphaFrameTex:
+    - {fileID: 21300000, guid: a423ddf0ab6897b45be1e435e31f59ae, type: 3}
+    - {fileID: 21300000, guid: 9c72d564315195f41a15040cb7f42a3f, type: 3}
     TexOffset: {x: 0, y: 0}
     isRight: 0
     painting:
-    - {fileID: 21300000, guid: 924daefb07dafca478b035b7befb90b1, type: 3}
-    - {fileID: 21300000, guid: 24591e2c3f6749d459591c3c6ec86be7, type: 3}
-    - {fileID: 21300000, guid: e7552f72433252f43b6d9232b5c996ac, type: 3}
+    - {fileID: 21300000, guid: b5124d391be66bd46beaecc5e0437e6c, type: 3}
+    - {fileID: 21300000, guid: 123536615e0956f4ebac0fb4a65d23f7, type: 3}
+    - {fileID: 21300000, guid: 958741dc77662e14694d9f876faea5af, type: 3}
     moveSpeed: 100
     _sorceNeed: 0
     _price: 0
@@ -170,13 +188,15 @@ MonoBehaviour:
     frameTex:
     - {fileID: 21300000, guid: 7c1a928be9b18444a922f4c64c66132a, type: 3}
     - {fileID: 21300000, guid: a64ad4cbfbf73a84d9bb8856fed21080, type: 3}
-    alphaFrameTex: []
+    alphaFrameTex:
+    - {fileID: 21300000, guid: 7132016288091c84588900298525da34, type: 3}
+    - {fileID: 21300000, guid: 01e3730c90df8bf4499b0eb354fffe8f, type: 3}
     TexOffset: {x: 0, y: 0}
     isRight: 0
     painting:
-    - {fileID: 21300000, guid: 6feecfee105c3f84f9e954fbcd262eab, type: 3}
-    - {fileID: 21300000, guid: de450fbe3758d90428f1f98e82ffb520, type: 3}
-    - {fileID: 21300000, guid: f98be976362574341bcc13a9d574b54b, type: 3}
+    - {fileID: 21300000, guid: 8134bb903810cb84abb4ac94374f775c, type: 3}
+    - {fileID: 21300000, guid: 5da821c7c97c63a47939c33fda05e681, type: 3}
+    - {fileID: 21300000, guid: eac755daacb6b784d951f7dbbc6d9bf3, type: 3}
     moveSpeed: 100
     _sorceNeed: 0
     _price: 0
@@ -185,13 +205,15 @@ MonoBehaviour:
     frameTex:
     - {fileID: 21300000, guid: f33f20709e633cf4dba4829deb0597ed, type: 3}
     - {fileID: 21300000, guid: 9782b6fa152fa6d4fbb1c7dd85bb26dc, type: 3}
-    alphaFrameTex: []
+    alphaFrameTex:
+    - {fileID: 21300000, guid: 0da14ecf2505d7b40ba55219f11cb6ea, type: 3}
+    - {fileID: 21300000, guid: 9b869218f9b99e84594ce680ddb2221c, type: 3}
     TexOffset: {x: 0, y: 0}
     isRight: 0
     painting:
-    - {fileID: 21300000, guid: 42aed2aa30970654c8665260203cbe15, type: 3}
-    - {fileID: 21300000, guid: b66feb1f55d64c94ba9288fbf80cb348, type: 3}
-    - {fileID: 21300000, guid: 53f35db1dfb40a94ea60d42d3e3890ba, type: 3}
+    - {fileID: 21300000, guid: 8349d877d401ca44290536695fb93299, type: 3}
+    - {fileID: 21300000, guid: c5eef6ea52d93fd45a1c700f616ba009, type: 3}
+    - {fileID: 21300000, guid: 72bb37c5c704d8c4fbec7e0cc5ab3cd9, type: 3}
     moveSpeed: 100
     _sorceNeed: 0
     _price: 0
@@ -200,13 +222,15 @@ MonoBehaviour:
     frameTex:
     - {fileID: 21300000, guid: 0766f39ee10efa249bcca62ee8ebc6e7, type: 3}
     - {fileID: 21300000, guid: 11080b4822936d648825dae3dcdb4859, type: 3}
-    alphaFrameTex: []
+    alphaFrameTex:
+    - {fileID: 21300000, guid: a66b64bf09563ab41a4ff8b435cfd648, type: 3}
+    - {fileID: 21300000, guid: b3288b865c9ca814cadae24b48f26d88, type: 3}
     TexOffset: {x: 0, y: 0}
     isRight: 0
     painting:
-    - {fileID: 21300000, guid: 565d444624835dd44823d7e22f39ccb5, type: 3}
-    - {fileID: 21300000, guid: 6dac4e9c92eff9a438bcdac9c24b6e02, type: 3}
-    - {fileID: 21300000, guid: 6eb42eaa817d8774797f8bb5559ad6ab, type: 3}
+    - {fileID: 21300000, guid: e981c2a412acef9428c5988d8870fe37, type: 3}
+    - {fileID: 21300000, guid: d9fa22b670f66074880765f02ca5365b, type: 3}
+    - {fileID: 21300000, guid: 950eccaa28f61f24cae7b4bb8403fc6c, type: 3}
     moveSpeed: 100
     _sorceNeed: 0
     _price: 0
@@ -215,13 +239,15 @@ MonoBehaviour:
     frameTex:
     - {fileID: 21300000, guid: c9f98701a4b60834b82a6b04d8d7e6ce, type: 3}
     - {fileID: 21300000, guid: d711d95d6a096b44c869f652a4aff1ab, type: 3}
-    alphaFrameTex: []
+    alphaFrameTex:
+    - {fileID: 21300000, guid: 82e47e8a468d2e84499b1bedc50e98c7, type: 3}
+    - {fileID: 21300000, guid: 06044ebbad6a36e439a1913547ce6218, type: 3}
     TexOffset: {x: 0, y: 0}
     isRight: 1
     painting:
-    - {fileID: 21300000, guid: a48ec420bfa2e9145961ff1c405853b6, type: 3}
-    - {fileID: 21300000, guid: 3bf68c97ae19f3f41a0bc236a7526b42, type: 3}
-    - {fileID: 21300000, guid: 3098b6b499a722e45846c37d729b8e7a, type: 3}
+    - {fileID: 21300000, guid: 349202dacfb674e41861f63d6cda8e21, type: 3}
+    - {fileID: 21300000, guid: f91b92a2859937046840125a6989e7ab, type: 3}
+    - {fileID: 21300000, guid: 7d04ac011aab75345ab1843a6e7200a7, type: 3}
     moveSpeed: 100
     _sorceNeed: 0
     _price: 0
@@ -230,13 +256,15 @@ MonoBehaviour:
     frameTex:
     - {fileID: 21300000, guid: 7d41a5cec478eda4d8b26e7dddb4e997, type: 3}
     - {fileID: 21300000, guid: 6f00e935a56cfb143a0100fe9dbfad04, type: 3}
-    alphaFrameTex: []
+    alphaFrameTex:
+    - {fileID: 21300000, guid: 82e47e8a468d2e84499b1bedc50e98c7, type: 3}
+    - {fileID: 21300000, guid: 06044ebbad6a36e439a1913547ce6218, type: 3}
     TexOffset: {x: 0, y: 0}
     isRight: 0
     painting:
-    - {fileID: 21300000, guid: ac1c71838a8ec734fad776d815084d49, type: 3}
-    - {fileID: 21300000, guid: af41b96b191358441895d7fe5739b121, type: 3}
-    - {fileID: 21300000, guid: c283c9bede53096489f2f8395e9c040a, type: 3}
+    - {fileID: 21300000, guid: d9367f53f47d6df448fc062041f9052d, type: 3}
+    - {fileID: 21300000, guid: 655a44c4b0b3f7c43a719536dfcc375f, type: 3}
+    - {fileID: 21300000, guid: 3502bb23e3c72794987d99896ae3eb44, type: 3}
     moveSpeed: 100
     _sorceNeed: 0
     _price: 0
@@ -245,13 +273,15 @@ MonoBehaviour:
     frameTex:
     - {fileID: 21300000, guid: 63186b49025d53247a1c2693e4f5954d, type: 3}
     - {fileID: 21300000, guid: 5e5306489b82f3049834b8b3dea0041c, type: 3}
-    alphaFrameTex: []
+    alphaFrameTex:
+    - {fileID: 21300000, guid: 61412e4d85053304a84927034a01191b, type: 3}
+    - {fileID: 21300000, guid: af8fbb2750d5d2641a90e558919ad14d, type: 3}
     TexOffset: {x: 0, y: 0}
     isRight: 0
     painting:
-    - {fileID: 21300000, guid: a90c3ee22b998f0418c757ce896ee478, type: 3}
-    - {fileID: 21300000, guid: d4477391a039fed4eac4b59d40f56a48, type: 3}
-    - {fileID: 21300000, guid: eb6c567dec2b3b24882a2b905161f8c1, type: 3}
+    - {fileID: 21300000, guid: 8e6470b3bd6d190449fd8d815f4f187d, type: 3}
+    - {fileID: 21300000, guid: 1ff69503e42f60944b5973e72aacf698, type: 3}
+    - {fileID: 21300000, guid: 90889696ed2622548b57a1c8920c3bd3, type: 3}
     moveSpeed: 100
     _sorceNeed: 0
     _price: 0
@@ -260,13 +290,15 @@ MonoBehaviour:
     frameTex:
     - {fileID: 21300000, guid: a0ebdda226e9f8d4bab83e6d37fd5eb8, type: 3}
     - {fileID: 21300000, guid: 98cd8e9edd0ff944c9b144c5a743f2fc, type: 3}
-    alphaFrameTex: []
+    alphaFrameTex:
+    - {fileID: 21300000, guid: fb7e6bcec4423c242b50ed6be500b17b, type: 3}
+    - {fileID: 21300000, guid: fd1fa65b0ece5bf41bffba707f4b3080, type: 3}
     TexOffset: {x: 0, y: 0}
     isRight: 0
     painting:
-    - {fileID: 21300000, guid: c3c5147d9e6b798489d6a40f14ab12e5, type: 3}
-    - {fileID: 21300000, guid: 0230af933a03f234f878814b77edaaf1, type: 3}
-    - {fileID: 21300000, guid: 0499eabd2180d1740bc0718d3abd08ec, type: 3}
+    - {fileID: 21300000, guid: e8ee6485ba1bfc74d83382d024649f4c, type: 3}
+    - {fileID: 21300000, guid: 8ec398723e4de01449bf681e1eb4bcf5, type: 3}
+    - {fileID: 21300000, guid: e1bdb73ea0fd41e4ab088374cea2e18e, type: 3}
     moveSpeed: 100
     _sorceNeed: 0
     _price: 0
@@ -275,13 +307,15 @@ MonoBehaviour:
     frameTex:
     - {fileID: 21300000, guid: f154cabca9a77214aac07b5b928afb3a, type: 3}
     - {fileID: 21300000, guid: b424932781d381747803a94b35dbd61c, type: 3}
-    alphaFrameTex: []
+    alphaFrameTex:
+    - {fileID: 21300000, guid: eacf31da866368540a5a2f4874f1876c, type: 3}
+    - {fileID: 21300000, guid: bac587ef323fb0a41a49db62cde991cf, type: 3}
     TexOffset: {x: 0, y: 0}
     isRight: 0
     painting:
-    - {fileID: 21300000, guid: 76d35650ad1223648a2605023b7213e0, type: 3}
-    - {fileID: 21300000, guid: d6f4a9b6adb46cc4f8d292a32d247284, type: 3}
-    - {fileID: 21300000, guid: 42680369490c74a4d8ebfa837cfeb915, type: 3}
+    - {fileID: 21300000, guid: a7a6e0b8707a7044eb451ad96f28337d, type: 3}
+    - {fileID: 21300000, guid: 3e56e653d319dba47b0dde39c347e695, type: 3}
+    - {fileID: 21300000, guid: a66a45845b12a2a4c884e4097dbdb100, type: 3}
     moveSpeed: 100
     _sorceNeed: 0
     _price: 0
@@ -290,13 +324,15 @@ MonoBehaviour:
     frameTex:
     - {fileID: 21300000, guid: fc63fd0bc0492bb4c81a7a2efb4635fe, type: 3}
     - {fileID: 21300000, guid: 09728ece5983cb0488230998bcc289c7, type: 3}
-    alphaFrameTex: []
+    alphaFrameTex:
+    - {fileID: 21300000, guid: 0ee5389a50a57a14a9ed760aecc491dc, type: 3}
+    - {fileID: 21300000, guid: b39bc21f27109b94583bea82d269fe08, type: 3}
     TexOffset: {x: 0, y: 0}
     isRight: 0
     painting:
-    - {fileID: 21300000, guid: 31d26b45637f425478035f5101b6b9f0, type: 3}
-    - {fileID: 21300000, guid: a7b10d2ef0ebc11429103db16b280e8f, type: 3}
-    - {fileID: 21300000, guid: 44156c621e0242a45bdd32e6ca2db25b, type: 3}
+    - {fileID: 21300000, guid: bbb55eb8908068647aec2f0f0811543d, type: 3}
+    - {fileID: 21300000, guid: 908e652a7dcf63c40bbb8df21ed142e5, type: 3}
+    - {fileID: 21300000, guid: 99a6cc692f93fe3428a5cff7aaa2c5d7, type: 3}
     moveSpeed: 100
     _sorceNeed: 0
     _price: 0
@@ -305,13 +341,15 @@ MonoBehaviour:
     frameTex:
     - {fileID: 21300000, guid: d2dafdedd6bf63245993ca6cbcea2fc2, type: 3}
     - {fileID: 21300000, guid: d0f2dc0162649a94aa0c229115903331, type: 3}
-    alphaFrameTex: []
+    alphaFrameTex:
+    - {fileID: 21300000, guid: 007a21d09683f004c9435319a98def92, type: 3}
+    - {fileID: 21300000, guid: 919cc27dc4aa56846824360e614beaf8, type: 3}
     TexOffset: {x: 0, y: 0}
     isRight: 1
     painting:
-    - {fileID: 21300000, guid: 9ff85f7bb23afbf4fa1b033c64f917e3, type: 3}
-    - {fileID: 21300000, guid: 6208f9c970eaef14eb342256b117f234, type: 3}
-    - {fileID: 21300000, guid: 898ca72bd2c4caa4ca5bf11d1a6b163f, type: 3}
+    - {fileID: 21300000, guid: 5d9b0fff2a09ee24b8bd69bd589e9288, type: 3}
+    - {fileID: 21300000, guid: d18aa89a75389d4498d7682599d65100, type: 3}
+    - {fileID: 21300000, guid: 30c3da004fcba3647981ab9833ba4a0f, type: 3}
     moveSpeed: 100
     _sorceNeed: 0
     _price: 0
@@ -320,13 +358,15 @@ MonoBehaviour:
     frameTex:
     - {fileID: 21300000, guid: b34433b94472f6445802c701b2ed9335, type: 3}
     - {fileID: 21300000, guid: 78ce637152359c1479e7b43c92dda767, type: 3}
-    alphaFrameTex: []
+    alphaFrameTex:
+    - {fileID: 21300000, guid: 0c2af1203b7f28048a476e2716f7e3e6, type: 3}
+    - {fileID: 21300000, guid: c11cc45fdf1954d4b9d545459f26d5b2, type: 3}
     TexOffset: {x: 0, y: 0}
     isRight: 0
     painting:
-    - {fileID: 21300000, guid: 329ec267b8ff185429422afd0f9f4a1d, type: 3}
-    - {fileID: 21300000, guid: 2ffc0c1db521a1c4d884980b54fc7f1c, type: 3}
-    - {fileID: 21300000, guid: 34d7533ea79164940aa93c8b2e16dae9, type: 3}
+    - {fileID: 21300000, guid: ff9727e856a24f444b46aeeaee2a5fd3, type: 3}
+    - {fileID: 21300000, guid: b73412f8bd722504285dcfdaf39a20ad, type: 3}
+    - {fileID: 21300000, guid: 906d23676bb46a44491ad340e219bcd7, type: 3}
     moveSpeed: 100
     _sorceNeed: 0
     _price: 0

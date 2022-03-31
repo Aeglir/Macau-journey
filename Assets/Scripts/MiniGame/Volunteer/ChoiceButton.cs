@@ -6,52 +6,53 @@ using Random = System.Random;
 
 public class ChoiceButton : MonoBehaviour
 {
-    [Header("°´Å¥×é¼þ")]
-    public Button button1; //ÂÖÅÌÑ¡Ïî
+    [Header("ï¿½ï¿½Å¥ï¿½ï¿½ï¿½")]
+    public Button button1; //ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½
     public Button button2;
     public Button button3;
     public Button button4;
 
-    //¶Ô»°Ñ¡Ïî
+    //ï¿½Ô»ï¿½Ñ¡ï¿½ï¿½
     private class Choice
     {
-        public Sprite isChosen;//±»Ñ¡ÖÐ
-        public Sprite notChosen;//Î´±»Ñ¡ÖÐ
-        public int score;//·ÖÊý
-        public int flag;//ÊÇ·ñ±»Ñ¡Ôñ¹ý
+        public Sprite isChosen;//ï¿½ï¿½Ñ¡ï¿½ï¿½
+        public Sprite notChosen;//Î´ï¿½ï¿½Ñ¡ï¿½ï¿½
+        public int score;//ï¿½ï¿½ï¿½ï¿½
+        public int flag;//ï¿½Ç·ï¿½Ñ¡ï¿½ï¿½ï¿½
     }
 
-    [Header("Ñ¡Ïî×é¼þ")]
-    public List<Sprite> isChosenList = new List<Sprite>(); //Ñ¡ÖÐÑ¡ÏîÍ¼Æ¬ÁÐ±í
-    public List<Sprite> notChosenList = new List<Sprite>(); //Î´Ñ¡ÖÐÑ¡ÏîÍ¼Æ¬ÁÐ±í
-    private List<int> choiceFirstNO = new List<int>();//±¾´ÎÂÖÅÌÖÐ±»Ñ¡ÖÐµÄ6¸ö¶Ô»°µÄÁÐ±í
-    private List<int> choiceSecondNO = new List<int>();//ÂÖÅÌÖÐÃ¿ÂÖ±»Ñ¡ÖÐµÄ4¸ö¶Ô»°µÄÁÐ±í
+    [Header("Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½")]
+    public List<Sprite> isChosenList = new List<Sprite>(); //Ñ¡ï¿½ï¿½Ñ¡ï¿½ï¿½Í¼Æ¬ï¿½Ð±ï¿½
+    public List<Sprite> notChosenList = new List<Sprite>(); //Î´Ñ¡ï¿½ï¿½Ñ¡ï¿½ï¿½Í¼Æ¬ï¿½Ð±ï¿½
+    private List<int> choiceFirstNO = new List<int>();//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½Ñ¡ï¿½Ðµï¿½6ï¿½ï¿½ï¿½Ô»ï¿½ï¿½ï¿½ï¿½Ð±ï¿½
+    private List<int> choiceSecondNO = new List<int>();//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¿ï¿½Ö±ï¿½Ñ¡ï¿½Ðµï¿½4ï¿½ï¿½ï¿½Ô»ï¿½ï¿½ï¿½ï¿½Ð±ï¿½
     private Choice[] Choices = new Choice[12];
 
-    [Header("±êÖ¾×é¼þ")]
-    private int isChosen = 1; //ÂÖÅÌ±êÖ¾Î»£¬Ä¬ÈÏµÚÒ»¸ö°´Å¥Ñ¡ÖÐ
-    public int turn = 1; //¶Ô»°ÂÖ´Î±êÖ¾Î»£¬Ä¬ÈÏÎªµÚÒ»ÂÖ
-    private float changeSpeed = 1; //ÂÖÅÌ±ä»»ËÙ¶È
+    [Header("ï¿½ï¿½Ö¾ï¿½ï¿½ï¿½")]
+    private int isChosen = 1; //ï¿½ï¿½ï¿½Ì±ï¿½Ö¾Î»ï¿½ï¿½Ä¬ï¿½Ïµï¿½Ò»ï¿½ï¿½ï¿½ï¿½Å¥Ñ¡ï¿½ï¿½
+    private int turn = 1; //ï¿½Ô»ï¿½ï¿½Ö´Î±ï¿½Ö¾Î»ï¿½ï¿½Ä¬ï¿½ï¿½Îªï¿½ï¿½Ò»ï¿½ï¿½
+    private float changeSpeed = 1; //ï¿½ï¿½ï¿½Ì±ä»»ï¿½Ù¶ï¿½
 
-    [Header("·ÖÊý×é¼þ")]
-    private int score = 0; //Íæ¼ÒµÃ·Ö
+    [Header("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")]
+    private int score = 0; //ï¿½ï¿½ÒµÃ·ï¿½
     private int npcScore;
 
-    [Header("Á¢»æ×é¼þ")]
+    [Header("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")]
     public Image npc;
     public Image player;
-    private Sprite npcNormal;//Õý³£±íÇé
+    private Sprite npcNormal;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     private Sprite playerNormal;
-    private Sprite npcFail;//Ê§°Ü±íÇé
+    private Sprite npcFail;//Ê§ï¿½Ü±ï¿½ï¿½ï¿½
     private Sprite playerFail;
-    private Sprite npcSucceed;//³É¹¦±íÇé
+    private Sprite npcSucceed;//ï¿½É¹ï¿½ï¿½ï¿½ï¿½ï¿½
     private Sprite playerSucceed;
 
-    [Header("µ¹¼ÆÊ±×é¼þ")]
-    private int TotalTime = 30;//30sµ¹¼ÆÊ±
+    [Header("ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½")]
+    private int TotalTime = 30;//30sï¿½ï¿½ï¿½ï¿½Ê±
 
-    [Header("»­²¼×é¼þ")]
+    [Header("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")]
     public Canvas GameCanvas;
+    public UnityEngine.Events.UnityEvent CloseEvent;
 
     // Start is called before the first frame update
     void Start()
@@ -59,51 +60,57 @@ public class ChoiceButton : MonoBehaviour
         var NPCImageList = LoadData();
         var PlayerImageList = LoadPlayerData();
 
-        // °ó¶¨npcÍ¼Æ¬
+        // ï¿½ï¿½npcÍ¼Æ¬
         npcNormal = NPCImageList[0];
         npcSucceed = NPCImageList[1];
         npcFail = NPCImageList[2];
 
-        //°ó¶¨playerÍ¼Æ¬
+        //ï¿½ï¿½playerÍ¼Æ¬
         playerNormal = PlayerImageList[0];
         playerSucceed = PlayerImageList[1];
         playerFail = PlayerImageList[2];
 
-        npc.sprite = npcNormal;//ÉèÖÃÄ¬ÈÏ±íÇé
+        npc.sprite = npcNormal;//ï¿½ï¿½ï¿½ï¿½Ä¬ï¿½Ï±ï¿½ï¿½ï¿½
         player.sprite = playerNormal;
 
-        //³õÊ¼»¯Ñ¡ÏîÊý¾Ý
+        //ï¿½ï¿½Ê¼ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         for (int i = 0; i < 12; i++)
         {
             Choices[i] = new Choice();
-            Choices[i].isChosen = isChosenList[i];//°ó¶¨Ñ¡ÖÐÍ¼Æ¬
-            Choices[i].notChosen = notChosenList[i];//°ó¶¨Î´Ñ¡ÖÐÍ¼Æ¬
-            //ÉèÖÃ¶Ô»°·ÖÊý
+            Choices[i].isChosen = isChosenList[i];//ï¿½ï¿½Ñ¡ï¿½ï¿½Í¼Æ¬
+            Choices[i].notChosen = notChosenList[i];//ï¿½ï¿½Î´Ñ¡ï¿½ï¿½Í¼Æ¬
+            //ï¿½ï¿½ï¿½Ã¶Ô»ï¿½ï¿½ï¿½ï¿½ï¿½
             if (i <= 3)
                 Choices[i].score = 1;
             else if (i > 3 && i <= 7)
                 Choices[i].score = 0;
             else Choices[i].score = -1;
-            //ÉèÖÃ¶Ô»°±êÖ¾,0±íÊ¾Î´±»Ñ¡Ôñ¹ý
+            //ï¿½ï¿½ï¿½Ã¶Ô»ï¿½ï¿½ï¿½Ö¾,0ï¿½ï¿½Ê¾Î´ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½
             Choices[i].flag = 0;
         }
 
         SetFirstChoices();
         StartCoroutine("ChangeChosenButton");
-        StartCoroutine("Time");//ÉèÖÃ30sµ¹¼ÆÊ±
+        StartCoroutine("Time");//ï¿½ï¿½ï¿½ï¿½30sï¿½ï¿½ï¿½ï¿½Ê±
     }
-
+    private void OnDisable() {
+        
+    }
     // Update is called once per frame
-
+    public void ColseInvoke()
+    {
+        if (CloseEvent != null)
+            CloseEvent.Invoke();
+    }
 
     void Update()
     {
-        //¼ì²âµ¹¼ÆÊ±ÊÇ·ñÍê±Ï
+        //ï¿½ï¿½âµ¹ï¿½ï¿½Ê±ï¿½Ç·ï¿½ï¿½ï¿½ï¿½
         if (TotalTime == 0)
         {
-            GameCanvas.enabled = false;
+            ColseInvoke();
         }
-        //¼ì²âÊÇ·ñ°´ÏÂ»Ø³µ¼ü»òÕßÊó±ê
+        //ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½Â»Ø³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         if (Input.GetKeyUp(KeyCode.Return) || Input.GetMouseButtonDown(0))
         {
             if (button1.GetComponent<UnityEngine.UI.Button>().interactable == true)
@@ -115,53 +122,53 @@ public class ChoiceButton : MonoBehaviour
             if (button4.GetComponent<UnityEngine.UI.Button>().interactable == true)
                 RecordScore(3);
             turn++;
-            if (turn > 3)//·ÖÊýÅÐ¶¨²¢ÍË³öÓÎÏ·
+            if (turn > 3)//ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½Ë³ï¿½ï¿½ï¿½Ï·
             {
-                //·ÖÊý´ï±ê
+                //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                 if (score >= npcScore)
                 {
-
+                    Debug.Log(score);
                 }
-                GameCanvas.enabled = false;
+                ColseInvoke();
             }
             StopCoroutine("ChangeChosenButton");
-            ChangeChoiceImage(turn);//Èç¹ûÄ¿Ç°²»ÊÇ×îºóÒ»ÂÖ¶Ô»°£¬Ôò¸ü»»¶Ô»°ÄÚÈÝ
+            ChangeChoiceImage(turn);//ï¿½ï¿½ï¿½Ä¿Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½Ö¶Ô»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô»ï¿½ï¿½ï¿½ï¿½ï¿½
         }
     }
 
-    //ÂÖÅÌÑ¡Ïî×Ô¶¯×ª»»º¯Êý
+    //ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½Ô¶ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     IEnumerator ChangeChosenButton()
     {
-        //ÂÖÅÌÊµÏÖ¹ö¶¯
+        //ï¿½ï¿½ï¿½ï¿½Êµï¿½Ö¹ï¿½ï¿½ï¿½
         while (true)
         {
-            SetInteractable();//¿ªÊ¼½ûÓÃËùÓÐ°´Å¥
-            if (isChosen > 4) isChosen = 1;//Èç¹û±êÖ¾Î»isChosen>4£¬ÔòÖØÖÃÎª1
+            SetInteractable();//ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð°ï¿½Å¥
+            if (isChosen > 4) isChosen = 1;//ï¿½ï¿½ï¿½ï¿½ï¿½Ö¾Î»isChosen>4ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îª1
             switch (isChosen)
             {
                 case 1:
-                    button1.GetComponent<UnityEngine.UI.Button>().interactable = true; //ÆôÓÃ°´Å¥
+                    button1.GetComponent<UnityEngine.UI.Button>().interactable = true; //ï¿½ï¿½ï¿½Ã°ï¿½Å¥
                     button1.image.sprite = Choices[choiceSecondNO[0]].isChosen;
                     break;
                 case 2:
-                    button2.GetComponent<UnityEngine.UI.Button>().interactable = true; //ÆôÓÃ°´Å¥
+                    button2.GetComponent<UnityEngine.UI.Button>().interactable = true; //ï¿½ï¿½ï¿½Ã°ï¿½Å¥
                     button2.image.sprite = Choices[choiceSecondNO[1]].isChosen;
                     break;
                 case 3:
-                    button3.GetComponent<UnityEngine.UI.Button>().interactable = true; //ÆôÓÃ°´Å¥
+                    button3.GetComponent<UnityEngine.UI.Button>().interactable = true; //ï¿½ï¿½ï¿½Ã°ï¿½Å¥
                     button3.image.sprite = Choices[choiceSecondNO[2]].isChosen;
                     break;
                 case 4:
-                    button4.GetComponent<UnityEngine.UI.Button>().interactable = true; //ÆôÓÃ°´Å¥
+                    button4.GetComponent<UnityEngine.UI.Button>().interactable = true; //ï¿½ï¿½ï¿½Ã°ï¿½Å¥
                     button4.image.sprite = Choices[choiceSecondNO[3]].isChosen;
                     break;
             }
             yield return new WaitForSeconds(changeSpeed);
-            isChosen++; //±êÖ¾Î»+1
+            isChosen++; //ï¿½ï¿½Ö¾Î»+1
         }
     }
 
-    //½ûÓÃËùÓÐ°´Å¥º¯Êý
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð°ï¿½Å¥ï¿½ï¿½ï¿½ï¿½
     private void SetInteractable()
     {
         button1.GetComponent<UnityEngine.UI.Button>().interactable = false;
@@ -174,7 +181,7 @@ public class ChoiceButton : MonoBehaviour
         button4.image.sprite = Choices[choiceSecondNO[3]].notChosen;
     }
 
-    //µ¹¼ÆÊ±º¯Êý
+    //ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½
     IEnumerator Time()
     {
         while (TotalTime >= 0)
@@ -186,9 +193,7 @@ public class ChoiceButton : MonoBehaviour
     public System.Collections.Generic.List<Sprite> LoadPlayerData() => MiniGame.Volunteer.CharacterSystem.Instance.asset.Player.painting;
     public System.Collections.Generic.List<Sprite> LoadData()
     {
-        //int tag = MiniGame.Volunteer.CharacterSystem.Instance.Tag;
-        //tag
-        int tag = 1;
+        int tag = MiniGame.Volunteer.CharacterSystem.Instance.Tag;
         foreach (var info in MiniGame.Volunteer.CharacterSystem.Instance.asset.Npcs)
         {
             if (info.tag == tag)
@@ -200,14 +205,14 @@ public class ChoiceButton : MonoBehaviour
         return null;
     }
 
-    //ÉèÖÃµÚÒ»ÂÖÑ¡Ïî
+    //ï¿½ï¿½ï¿½Ãµï¿½Ò»ï¿½ï¿½Ñ¡ï¿½ï¿½
     private void SetFirstChoices()
     {
-        //Ñ¡³ö±¾´ÎÂÖÅÌÖÐ½«»á³öÏÖµÄ6¸ö¶Ô»°Ñ¡Ïî
+        //Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½6ï¿½ï¿½ï¿½Ô»ï¿½Ñ¡ï¿½ï¿½
         int i = 0, mark1 = 0;
-        while (i < 6) 
+        while (i < 6)
         {
-            if (i<=1)
+            if (i <= 1)
             {
                 Random a = new Random(System.DateTime.Now.Millisecond);
                 int RandKey = a.Next(0, 3);
@@ -221,9 +226,9 @@ public class ChoiceButton : MonoBehaviour
                     i++;
                 }
                 mark1 = 0;
-                
+
             }
-            else if (i>1 && i<=3)
+            else if (i > 1 && i <= 3)
             {
                 Random a = new Random(System.DateTime.Now.Millisecond);
                 int RandKey = a.Next(4, 7);
@@ -254,7 +259,7 @@ public class ChoiceButton : MonoBehaviour
                 mark1 = 0;
             }
         }
-        //Ñ¡³öµÚÒ»ÂÖ¶Ô»°ÖÐ½«»á³öÏÖµÄ4¸ö¶Ô»°Ñ¡Ïî
+        //Ñ¡ï¿½ï¿½ï¿½ï¿½Ò»ï¿½Ö¶Ô»ï¿½ï¿½Ð½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½4ï¿½ï¿½ï¿½Ô»ï¿½Ñ¡ï¿½ï¿½
         int j = 0, mark2 = 0;
         while (j < 4)
         {
@@ -271,40 +276,40 @@ public class ChoiceButton : MonoBehaviour
             }
             mark2 = 0;
         }
-        //°ó¶¨µÚÒ»ÂÖ¶Ô»°ÖÐµÄÑ¡Ïî
+        //ï¿½ó¶¨µï¿½Ò»ï¿½Ö¶Ô»ï¿½ï¿½Ðµï¿½Ñ¡ï¿½ï¿½
         button1.image.sprite = Choices[choiceSecondNO[0]].notChosen;
         button2.image.sprite = Choices[choiceSecondNO[1]].notChosen;
         button3.image.sprite = Choices[choiceSecondNO[2]].notChosen;
         button4.image.sprite = Choices[choiceSecondNO[3]].notChosen;
     }
 
-    //Ñ¡ÔñÑ¡Ïîºó¶ÔÓ¦±ä»¯
+    //Ñ¡ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ä»¯
     private void RecordScore(int i)
     {
-        score += Choices[choiceSecondNO[i]].score;//·ÖÊý±ä¶¯
-        //²î¾¢¶Ô»°
+        score += Choices[choiceSecondNO[i]].score;//ï¿½ï¿½ï¿½ï¿½ï¿½ä¶¯
+        //ï¿½î¾¢ï¿½Ô»ï¿½
         if (Choices[choiceSecondNO[i]].score < 0)
         {
             TotalTime -= 5;
             npc.sprite = npcFail;
             player.sprite = playerFail;
         }
-        //Ò»°ã¶Ô»°
+        //Ò»ï¿½ï¿½Ô»ï¿½
         else if (Choices[choiceSecondNO[i]].score == 0)
         {
             npc.sprite = npcNormal;
             player.sprite = playerNormal;
         }
-        //ÓÅÐã¶Ô»°
+        //ï¿½ï¿½ï¿½ï¿½Ô»ï¿½
         else
         {
             npc.sprite = npcSucceed;
             player.sprite = playerSucceed;
         }
-        Choices[choiceSecondNO[i]].flag = 1;//¶Ô¶Ô»°µÄ±êÖ¾Î»½øÐÐ¸Ä±ä£¬1ÎªÒÑÑ¡Ôñ¹ý
+        Choices[choiceSecondNO[i]].flag = 1;//ï¿½Ô¶Ô»ï¿½ï¿½Ä±ï¿½Ö¾Î»ï¿½ï¿½ï¿½Ð¸Ä±ä£¬1Îªï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½
     }
 
-    //¸ü»»¶Ô»°ÂÖ´ÎÑ¡Ïîº¯Êý
+    //ï¿½ï¿½ï¿½ï¿½ï¿½Ô»ï¿½ï¿½Ö´ï¿½Ñ¡ï¿½îº¯ï¿½ï¿½
     private void ChangeChoiceImage(int turn)
     {
         int i = 0, mark = 0;
@@ -342,13 +347,14 @@ public class ChoiceButton : MonoBehaviour
                 }
                 break;
         }
-        //°ó¶¨¶Ô»°ÖÐµÄÑ¡Ïî
+        //ï¿½ó¶¨¶Ô»ï¿½ï¿½Ðµï¿½Ñ¡ï¿½ï¿½
         button1.image.sprite = Choices[choiceSecondNO[0]].notChosen;
         button2.image.sprite = Choices[choiceSecondNO[1]].notChosen;
         button3.image.sprite = Choices[choiceSecondNO[2]].notChosen;
         button4.image.sprite = Choices[choiceSecondNO[3]].notChosen;
         isChosen = 1;
-        StartCoroutine("ChangeChosenButton");
+        if(gameObject.activeSelf)
+            StartCoroutine("ChangeChosenButton");
     }
 }
 
