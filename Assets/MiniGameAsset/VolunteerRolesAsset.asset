@@ -41,9 +41,9 @@ MonoBehaviour:
     TexOffset: {x: 0, y: 0}
     isRight: 0
     painting:
-    - {fileID: 21300000, guid: 6c8fae2b2d8fb02428450ae77ccf3886, type: 3}
-    - {fileID: 21300000, guid: 19d9f3c2f1eda004b9e232575041f0ca, type: 3}
-    - {fileID: 21300000, guid: 25923785760755346aff076eed370660, type: 3}
+    - {fileID: 21300000, guid: 724a5598080158d44a5825b4089cd499, type: 3}
+    - {fileID: 21300000, guid: 434406a991d206944bf24eaf0f3a1ae9, type: 3}
+    - {fileID: 21300000, guid: ad10df39ed1e7f54cbb7348cfcb048e0, type: 3}
     moveSpeed: 100
     _sorceNeed: 0
     _price: 0

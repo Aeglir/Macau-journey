@@ -53,10 +53,9 @@ public class ChoiceButton : MonoBehaviour
     [Header("�������")]
     public Canvas GameCanvas;
     public UnityEngine.Events.UnityEvent CloseEvent;
-
-    // Start is called before the first frame update
-    void Start()
+    public void Open()
     {
+        Debug.Log("Start!");
         var NPCImageList = LoadData();
         var PlayerImageList = LoadPlayerData();
 
@@ -93,12 +92,17 @@ public class ChoiceButton : MonoBehaviour
         StartCoroutine("ChangeChosenButton");
         StartCoroutine("Time");//����30s����ʱ
     }
-    private void OnDisable() {
-        
+    private void OnDisable()
+    {
+
     }
     // Update is called once per frame
     public void ColseInvoke()
     {
+        score=0;
+        turn=1;
+        choiceFirstNO.Clear();
+        choiceSecondNO.Clear();
         if (CloseEvent != null)
             CloseEvent.Invoke();
     }
@@ -108,10 +112,12 @@ public class ChoiceButton : MonoBehaviour
         //��⵹��ʱ�Ƿ����
         if (TotalTime == 0)
         {
+            StopCoroutine("ChangeChosenButton");
+            StopCoroutine("Time");
             ColseInvoke();
         }
         //����Ƿ��»س����������
-        if (Input.GetKeyUp(KeyCode.Return) || Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
             if (button1.GetComponent<UnityEngine.UI.Button>().interactable == true)
                 RecordScore(0);
@@ -129,10 +135,13 @@ public class ChoiceButton : MonoBehaviour
                 {
                     Debug.Log(score);
                 }
+                StopCoroutine("ChangeChosenButton");
+                StopCoroutine("Time");
                 ColseInvoke();
             }
             StopCoroutine("ChangeChosenButton");
-            ChangeChoiceImage(turn);//���Ŀǰ�������һ�ֶԻ���������Ի�����
+            if(gameObject.activeSelf)
+                ChangeChoiceImage(turn);//���Ŀǰ�������һ�ֶԻ���������Ի�����
         }
     }
 
@@ -353,7 +362,7 @@ public class ChoiceButton : MonoBehaviour
         button3.image.sprite = Choices[choiceSecondNO[2]].notChosen;
         button4.image.sprite = Choices[choiceSecondNO[3]].notChosen;
         isChosen = 1;
-        if(gameObject.activeSelf)
+        if (gameObject.activeSelf)
             StartCoroutine("ChangeChosenButton");
     }
 }

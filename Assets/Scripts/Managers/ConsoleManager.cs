@@ -361,9 +361,9 @@ namespace Managers
         #region private methods
         private void Awake()
         {
-#if !DEVELOPMENT_BUILD && !UNITY_EDITOR
-            DestroyImmediate(gameObject);
-#endif
+// #if !DEVELOPMENT_BUILD && !UNITY_EDITOR
+            // DestroyImmediate(gameObject);
+// #endif
             Enable();
         }
         private void Enable()

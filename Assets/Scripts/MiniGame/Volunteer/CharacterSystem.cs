@@ -371,7 +371,11 @@ namespace MiniGame.Volunteer
             dataBase = new CharacterDataBase();
             emitter = new CharacterEmitter(road, backGround);
             playable = pool.GetPlayer(Player);
-            playable.SetCallAction((t) => TryToCall(t));
+            playable.SetCallAction((t) =>{
+                TryToCall(t);
+                if(callEvent!=null)
+                    callEvent.Invoke();
+            });
             // AddPerson(Random.Range(minTag, maxTag), CharacterEmitter.Road.Front, CharacterEmitter.Road.Front, true, FinishHandle);
             roadController = new RoadPersonAppearController(RandomRoadAppear);
             backRoadController = new BackRoadPersonAppaerController(RandomBackRoadAppear);
@@ -397,7 +401,7 @@ namespace MiniGame.Volunteer
             {
                 _tag = tag;
                 Pause();
-                Debug.Log(_tag);
+                Debug.Log("tag" + _tag);
                 JFCanvas.SetActive(true);
             }
         }
@@ -514,5 +518,6 @@ namespace MiniGame.Volunteer
             isAccelerate = false;
         }
         public void ContinueInvoke() => continueEvent.Invoke();
+        public void Quit()=>Application.Quit();
     }
 }
