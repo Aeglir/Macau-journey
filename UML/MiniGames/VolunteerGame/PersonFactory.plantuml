@@ -8,9 +8,7 @@ end note
 class CharacterInfo
 {
 }
-
 CharactersAsset *-- CharacterInfo
-
 class CharacterPool
 {
 }
@@ -18,27 +16,27 @@ package PersonFactory
 {
     interface Talkable
     {
-
+        ' initWalkingAnimation(targetPos, isRight, action)
+        ' setHide(ishide)
+        ' GameObject getGameObject()
+        ' accelerate()
+        ' getTag()
+        ' getIsRight()
+        Walking()
+        ' Stop()
+        ' Finish()
     }
     interface Playable{
         +TurnLeft()
         +TurnRight()
-        +Call()
+        ' +Call()
     }
     abstract class Person
     {
         +{static} Talkable GetInstance(GameObject obj, PersonType type)
         +{static} Playable GetPlayInstance(GameObject obj)
     }
-    class Man extends Person implements Talkable
-    {
-
-    }
-    class Woman extends Person implements Talkable
-    {
-
-    }
-    class Child extends Person implements Talkable
+    class Npc extends Person implements Talkable
     {
 
     }
