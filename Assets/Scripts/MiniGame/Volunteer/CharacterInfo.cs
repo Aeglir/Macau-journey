@@ -18,7 +18,7 @@ namespace MiniGame.Volunteer
         [Header("源方向")]
         public bool isRight;
         [Header("立绘")]
-        public Sprite painting;
+        public System.Collections.Generic.List<Sprite> painting;
         [Header("移动速度")]
         public float moveSpeed;
         [Header("分数需求")]
