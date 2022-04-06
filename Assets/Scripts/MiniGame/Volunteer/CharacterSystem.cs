@@ -410,6 +410,8 @@ namespace MiniGame.Volunteer
         private System.Collections.Generic.List<int> tagUsingList;
         private int randomStart;
         private int _tag;
+        private int _round;
+        public int round{get=>_round;}
         public int Tag
         {
             get
@@ -469,6 +471,7 @@ namespace MiniGame.Volunteer
                 Pause();
                 Debug.Log("tag" + _tag);
                 JFCanvas.SetActive(true);
+                _round++;
                 if (callEvent != null)
                     callEvent.Invoke();
             }
