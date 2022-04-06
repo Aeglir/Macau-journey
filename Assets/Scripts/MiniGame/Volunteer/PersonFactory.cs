@@ -112,6 +112,11 @@ namespace MiniGame.Volunteer
             void Finish();
             bool hasCalled();
             void Called();
+            bool isUsing();
+            void Lock();
+            void unLock();
+            void SetRoad(CharacterSystem.CharacterEmitter.Road road);
+            CharacterSystem.CharacterEmitter.Road GetRoad();
         }
         class Npc : Person, Talkable
         {
@@ -120,6 +125,8 @@ namespace MiniGame.Volunteer
             private int spriteIndex;
             private Sequence sequence;
             private bool isCalled;
+            private bool isUsed;
+            private CharacterSystem.CharacterEmitter.Road road;
             internal Npc(GameObject obj, CharacterInfo character) : base(obj, character)
             {
             }
@@ -168,7 +175,7 @@ namespace MiniGame.Volunteer
             }
             public void setHide(bool isHide)
             {
-                this.isHide= isHide;
+                this.isHide = isHide;
             }
             public void Pause()
             {
@@ -180,13 +187,13 @@ namespace MiniGame.Volunteer
             {
                 spriteIndex++;
                 spriteIndex = spriteIndex % _character.frameTex.Count;
-                if(isHide)
+                if (isHide)
                     return _character.alphaFrameTex[spriteIndex];
                 else return _character.frameTex[spriteIndex];
             }
             public void Finish()
             {
-                isHide=false;
+                isHide = false;
                 isCalled = false;
                 isStop = true;
                 sequence.Kill();
@@ -194,7 +201,12 @@ namespace MiniGame.Volunteer
             }
             public bool hasCalled() => isCalled;
             public void Called() => isCalled = true;
-            public bool GetisHide()=>isHide;
+            public bool GetisHide() => isHide;
+            public bool isUsing() => isUsed;
+            public void Lock() => isUsed = true;
+            public void unLock() => isUsed = false;
+            public void SetRoad(CharacterSystem.CharacterEmitter.Road road) => this.road = road;
+            public CharacterSystem.CharacterEmitter.Road GetRoad() => road;
         }
         #endregion
         #region player
@@ -210,6 +222,8 @@ namespace MiniGame.Volunteer
             void TurnRight();
             bool isRight();
             void Call();
+            void Disable();
+            void Enable();
             public void SetCallAction(System.Action<bool> action);
         }
         class Player : Person, Playable
@@ -228,18 +242,15 @@ namespace MiniGame.Volunteer
                     TrunLeftInput.AddListener((c) =>
                     {
                         TurnLeft();
-                    },Managers.InputManager.Response.Canceled);
+                    }, Managers.InputManager.Response.Canceled);
                     TrunRightInput.AddListener((c) =>
                     {
                         TurnRight();
-                    },Managers.InputManager.Response.Canceled);
+                    }, Managers.InputManager.Response.Canceled);
                     CallInput.AddListener((c) =>
                     {
                         Call();
-                    },Managers.InputManager.Response.Canceled);
-                    TrunLeftInput.Enable();
-                    TrunRightInput.Enable();
-                    CallInput.Enable();
+                    }, Managers.InputManager.Response.Canceled);
                 }
             }
             public void Call()
@@ -258,6 +269,36 @@ namespace MiniGame.Volunteer
             public void TurnRight()
             {
                 _sprite.flipX = !_character.isRight;
+            }
+            public void Enable()
+            {
+                if (TrunLeftInput != null)
+                {
+                    TrunLeftInput.Enable();
+                }
+                if (TrunRightInput != null)
+                {
+                    TrunRightInput.Enable();
+                }
+                if (CallInput != null)
+                {
+                    CallInput.Enable();
+                }
+            }
+            public void Disable()
+            {
+                if (TrunLeftInput != null)
+                {
+                    TrunLeftInput.Disable();
+                }
+                if (TrunRightInput != null)
+                {
+                    TrunRightInput.Disable();
+                }
+                if (CallInput != null)
+                {
+                    CallInput.Disable();
+                }
             }
             ~Player()
             {

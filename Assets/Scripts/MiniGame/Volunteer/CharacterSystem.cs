@@ -102,7 +102,7 @@ namespace MiniGame.Volunteer
                     foreach (var item in pair.Value)
                     {
                         RectTransform rectTransform = (item.getGameObject().transform as RectTransform);
-                        if (rectTransform.anchoredPosition.x < right && rectTransform.anchoredPosition.x > left)
+                        if (rectTransform.anchoredPosition.x < right && rectTransform.anchoredPosition.x > left && !item.hasCalled())
                         {
                             item.Called();
                             return item.getTag();
@@ -116,6 +116,7 @@ namespace MiniGame.Volunteer
         {
             public enum Road
             {
+                Busy,
                 Behind,
                 Middle,
                 Front
@@ -123,19 +124,41 @@ namespace MiniGame.Volunteer
             private GameObject road;
             private GameObject backGround;
             private readonly Vector3 scale = new Vector3(100, 100, 1);
+            private System.Collections.Generic.Dictionary<Road, bool> roadDic;
+            private bool _back;
+            public bool backState { get => _back; }
             public CharacterEmitter(GameObject road, GameObject backGround)
             {
                 this.road = road;
                 this.backGround = backGround;
+                roadDic = new System.Collections.Generic.Dictionary<Road, bool>();
+                roadDic.Add(Road.Behind, false);
+                roadDic.Add(Road.Middle, false);
+                roadDic.Add(Road.Front, false);
             }
-            public void AddRoad(PersonFactory.Talkable person, Road source, Road destination, bool isRight = true, TweenCallback action = null)
+            public void AddRoad(PersonFactory.Talkable person, Road walkRoad, bool isRight = true, TweenCallback action = null)
             {
+                person.SetRoad(walkRoad);
                 GameObject obj = person.getGameObject();
                 obj.transform.SetParent(road.transform);
                 RectTransform rect = obj.transform as RectTransform;
                 rect.localScale = scale;
-                rect.anchoredPosition3D = GetPos(source, isRight);
-                setAnimation(person, GetPos(destination, isRight, true), isRight, action);
+                rect.anchoredPosition3D = GetPos(walkRoad, isRight);
+                setAnimation(person, GetPos(walkRoad, isRight, true), isRight, action);
+            }
+            public void LockRoad(Road road) => roadDic[road] = true;
+            public void UnLockRoad(Road road) => roadDic[road] = false;
+            public void LockBack() => _back = true;
+            public void UnLockBack() => _back = false;
+            public bool checkRoad(Road road) => roadDic[road];
+            public Road GetFreeRoad()
+            {
+                foreach (var road in roadDic)
+                {
+                    if (!road.Value)
+                        return road.Key;
+                }
+                return Road.Busy;
             }
             public void AddBackground(PersonFactory.Talkable person, bool isRight = true, TweenCallback action = null)
             {
@@ -143,8 +166,8 @@ namespace MiniGame.Volunteer
                 obj.transform.SetParent(backGround.transform);
                 RectTransform rect = obj.transform as RectTransform;
                 rect.localScale = scale;
-                rect.anchoredPosition3D = GetPos(Road.Front, isRight);
-                setAnimation(person, GetPos(Road.Front, isRight, true), isRight, action);
+                rect.anchoredPosition3D = GetBackPos(Road.Front, isRight);
+                setAnimation(person, GetBackPos(Road.Front, isRight, true), isRight, action);
             }
             public void AddCenter(PersonFactory.Talkable person)
             {
@@ -153,6 +176,21 @@ namespace MiniGame.Volunteer
                 RectTransform rect = obj.transform as RectTransform;
                 rect.localScale = scale;
                 rect.anchoredPosition3D = Vector3.zero;
+            }
+            private Vector3 GetBackPos(Road type, bool isRight, bool isTarget = false)
+            {
+                Vector3 pos = Vector3.zero;
+                if (isRight)
+                {
+                    pos.x = -GobalSetting.ScreenWidth / 2;
+                }
+                else
+                {
+                    pos.x = GobalSetting.ScreenWidth / 2;
+                }
+                if (isTarget)
+                    pos.x = -pos.x;
+                return pos;
             }
             private Vector3 GetPos(Road type, bool isRight, bool isTarget = false)
             {
@@ -194,15 +232,18 @@ namespace MiniGame.Volunteer
                 obj.transform.SetParent(backGround.transform);
             }
         }
-        public class CharacterPool : DicPool<int, PersonFactory.Talkable>
+        public class CharacterPool : SinglePool<int, PersonFactory.Talkable>
         {
             public CharacterPool(GameObject obj) : base(obj) { }
             public PersonFactory.Playable GetPlayer(GameObject obj) => PersonFactory.Person.GetPlayerInstance(obj) as PersonFactory.Playable;
             public override PersonFactory.Talkable get(int tag)
             {
-                if (pool.ContainsKey(tag) && pool[tag].Count > 0)
+                if (pool.ContainsKey(tag))
                 {
-                    var person = pool[tag].Dequeue();
+                    if (pool[tag].isUsing())
+                        return null;
+                    var person = pool[tag];
+                    person.Lock();
                     person.getGameObject().SetActive(true);
                     return person;
                 }
@@ -213,11 +254,11 @@ namespace MiniGame.Volunteer
                 GameObject itemObj = item.getGameObject();
                 itemObj.SetActive(false);
                 itemObj.transform.SetParent(obj.transform);
-                base.push(tag, item);
+                item.unLock();
             }
             protected override void DistroyItem(PersonFactory.Talkable item)
             {
-                DistroyItem(item);
+                GameObject.DestroyImmediate(item.getGameObject());
             }
             protected override PersonFactory.Talkable CreateItem(int tag)
             {
@@ -335,8 +376,17 @@ namespace MiniGame.Volunteer
             }
             public void Enable()
             {
-                PauseInput.Enable();
-                AccelerateInput.Enable();
+                if (PauseInput != null)
+                    PauseInput.Enable();
+                if (AccelerateInput != null)
+                    AccelerateInput.Enable();
+            }
+            public void Disable()
+            {
+                if (PauseInput != null)
+                    PauseInput.Disable();
+                if (AccelerateInput != null)
+                    AccelerateInput.Disable();
             }
         }
         public CharactersAsset asset;
@@ -356,8 +406,19 @@ namespace MiniGame.Volunteer
         private RoadPersonAppearController roadController;
         private BackRoadPersonAppaerController backRoadController;
         private CharacterInputManager inputManager;
+        private System.Collections.Generic.List<int> tagFreeList;
+        private System.Collections.Generic.List<int> tagUsingList;
+        private int randomStart;
         private int _tag;
-        public int Tag { get => _tag; }
+        public int Tag
+        {
+            get
+            {
+                int t = _tag;
+                _tag = -1;
+                return t;
+            }
+        }
         private void Awake()
         {
             if (_instance == null)
@@ -367,15 +428,20 @@ namespace MiniGame.Volunteer
                 inputManager = new CharacterInputManager(PauseInvoke, AccelerateStart, AccelerateCancel);
                 inputManager.Enable();
             }
+            tagFreeList = new System.Collections.Generic.List<int>(GobalSetting.MaxTag - GobalSetting.MinTag);
+            tagUsingList = new System.Collections.Generic.List<int>(GobalSetting.MaxTag - GobalSetting.MinTag);
+            for (int i = GobalSetting.MinTag; i < GobalSetting.MaxTag; i++)
+                tagFreeList.Add(i);
+            randomStart = Random.Range(GobalSetting.MinTag, GobalSetting.MaxTag);
             pool = new CharacterPool(gameObject);
             dataBase = new CharacterDataBase();
             emitter = new CharacterEmitter(road, backGround);
             playable = pool.GetPlayer(Player);
-            playable.SetCallAction((t) =>{
+            playable.SetCallAction((t) =>
+            {
                 TryToCall(t);
-                if(callEvent!=null)
-                    callEvent.Invoke();
             });
+            playable.Enable();
             // AddPerson(Random.Range(minTag, maxTag), CharacterEmitter.Road.Front, CharacterEmitter.Road.Front, true, FinishHandle);
             roadController = new RoadPersonAppearController(RandomRoadAppear);
             backRoadController = new BackRoadPersonAppaerController(RandomBackRoadAppear);
@@ -387,31 +453,33 @@ namespace MiniGame.Volunteer
         {
             if (inputManager != null)
                 inputManager.Dispose();
+            playable.Disable();
             roadController.Pause();
+            backRoadController.Pause();
         }
-        public void CallInvoke() => callEvent.Invoke();
-        public void Call()
+        public void CallInvoke()
         {
             TryToCall(playable.isRight());
         }
         private void TryToCall(bool isRight)
         {
-            int tag = dataBase.Check(isRight);
-            if (tag != -1)
+            _tag = dataBase.Check(isRight);
+            if (_tag != -1)
             {
-                _tag = tag;
                 Pause();
                 Debug.Log("tag" + _tag);
                 JFCanvas.SetActive(true);
+                if (callEvent != null)
+                    callEvent.Invoke();
             }
         }
-        public bool AddPerson(int tag, CharacterEmitter.Road road, CharacterEmitter.Road destination, bool isRight = true, System.Action<int, bool> action = null)
+        public bool AddPerson(int tag, CharacterEmitter.Road road, bool isRight = true, System.Action<int, bool> action = null)
         {
             PersonFactory.Talkable person = pool.get(tag);
             if (person == null)
                 return false;
             dataBase.add(person);
-            emitter.AddRoad(person, road, road, isRight, () =>
+            emitter.AddRoad(person, road, isRight, () =>
             {
                 action.Invoke(person.getTag(), person.GetisHide());
             });
@@ -430,20 +498,44 @@ namespace MiniGame.Volunteer
             });
             return true;
         }
-        public void RandomBackRoadAppear() => AddBackPerson(Random.Range(GobalSetting.MinTag, GobalSetting.MaxTag), Random.Range(0, 2) == 1, FinishHandle);
+        public void RandomBackRoadAppear()
+        {
+            if (tagFreeList.Count == 0) return;
+            if (emitter.backState) return;
+            emitter.LockBack();
+            int t = randomStart;
+            while (!tagFreeList.Contains(randomStart))
+            {
+                t = (t + 1) % (GobalSetting.MaxTag - GobalSetting.MinTag) + GobalSetting.MinTag;
+            }
+            while (!AddBackPerson(t, Random.Range(0, 2) == 1, FinishHandle))
+            {
+                t = (t + 1) % (GobalSetting.MaxTag - GobalSetting.MinTag) + GobalSetting.MinTag;
+            }
+            tagFreeList.Remove(t);
+            tagUsingList.Add(t);
+            randomStart = (t + 1) % (GobalSetting.MaxTag - GobalSetting.MinTag) + GobalSetting.MinTag;
+        }
         public void RandomRoadAppear()
         {
             // CharacterEmitter.Road road = CharacterEmitter.Road.Behind;
             // AddPerson(Random.Range(minTag, maxTag), road, road, true, FinishHandle);
-            CharacterEmitter.Road road = (CharacterEmitter.Road)Random.Range(0, 3);
-            if (Random.Range(0f, 1f) < 0.8)
+            if (tagFreeList.Count == 0) return;
+            CharacterEmitter.Road road = emitter.GetFreeRoad();
+            if (road == CharacterEmitter.Road.Busy) return;
+            emitter.LockRoad(road);
+            int t = randomStart;
+            while (!tagFreeList.Contains(randomStart))
             {
-                AddPerson(Random.Range(GobalSetting.MinTag, GobalSetting.MaxTag), road, road, Random.Range(0, 2) == 1, FinishHandle);
+                t = (t + 1) % (GobalSetting.MaxTag - GobalSetting.MinTag) + GobalSetting.MinTag;
             }
-            else
+            while (!AddPerson(t, road, Random.Range(0, 2) == 1, FinishHandle))
             {
-                AddPerson(Random.Range(GobalSetting.MinTag, GobalSetting.MaxTag), road, (CharacterEmitter.Road)(((int)road + Random.Range(1, 3)) % 3), Random.Range(0, 2) == 1, FinishHandle);
+                t = (t + 1) % (GobalSetting.MaxTag - GobalSetting.MinTag) + GobalSetting.MinTag;
             }
+            tagFreeList.Remove(t);
+            tagUsingList.Add(t);
+            randomStart = (t + 1) % (GobalSetting.MaxTag - GobalSetting.MinTag) + GobalSetting.MinTag;
         }
         private void FinishHandle(int tag, bool ishide)
         {
@@ -451,22 +543,30 @@ namespace MiniGame.Volunteer
             if (ishide)
             {
                 person = dataBase.getBack();
+                emitter.UnLockBack();
                 backRoadController.FinishHandle();
             }
             else
             {
                 person = dataBase.get(tag);
+                emitter.UnLockRoad(person.GetRoad());
                 roadController.FinishHandle();
             }
             person.Finish();
-            pool.push(person.getTag(), person);
+            pool.push(tag, person);
+            tagUsingList.Remove(tag);
+            tagFreeList.Add(tag);
         }
         public void Pause()
         {
             if (isAccelerate)
             {
+                Time.timeScale = 1;
                 isAccelerate = false;
             }
+            playable.Disable();
+            if (inputManager != null)
+                inputManager.Disable();
             roadController.Pause();
             backRoadController.Pause();
             foreach (var pair in dataBase.RoadPersonDic)
@@ -498,6 +598,9 @@ namespace MiniGame.Volunteer
             }
             roadController.Start();
             backRoadController.Start();
+            playable.Enable();
+            if (inputManager != null)
+                inputManager.Enable();
             // if (appearTask.Status == System.Threading.Tasks.TaskStatus.WaitingToRun)
             // {
             //     appearTask.Start();
@@ -518,6 +621,6 @@ namespace MiniGame.Volunteer
             isAccelerate = false;
         }
         public void ContinueInvoke() => continueEvent.Invoke();
-        public void Quit()=>Application.Quit();
+        public void Quit() => Application.Quit();
     }
 }

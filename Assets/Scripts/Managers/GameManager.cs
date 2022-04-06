@@ -62,12 +62,12 @@ namespace Managers
         {
             await System.Threading.Tasks.Task.Delay(100);
             ConsoleManager.RegisterCommand(AutoSave);
-            ConsoleManager.RegisterCommand(miniGameMananger.VolunteerGameStart);
+            ConsoleManager.RegisterCommand(miniGameMananger.VolunteerGameStart,"VolunteerGame Open","MiniVol","S");
         }
         private void OnDestroy()
         {
             ConsoleManager.RemoveCommand(AutoSave);
-            ConsoleManager.RemoveCommand(miniGameMananger.VolunteerGameStart);
+            ConsoleManager.RemoveCommand("MiniVol","S");
         }
         #endregion
         /// <summary>

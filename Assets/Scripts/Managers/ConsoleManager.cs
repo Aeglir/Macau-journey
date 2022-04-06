@@ -14,31 +14,31 @@ namespace Managers
         /// </summary>
         /// <param name="action">登记无返回值无参数回调函数</param>
         /// <param name="tip">帮助文本</param>
-        void RegisterCommand(System.Action action, string tip = null);
+        void RegisterCommand(System.Action action, string tip = null, string objectName = null, string methodName = null);
         /// <summary>
         /// 控制台命令登记
         /// </summary>
         /// <param name="action">登记无返回值一个参数回调函数</param>
         /// <param name="tip">帮助文本</param>
-        void RegisterCommand<T>(System.Action<T> action, string tip = null);
+        void RegisterCommand<T>(System.Action<T> action, string tip = null, string objectName = null, string methodName = null);
         /// <summary>
         /// 控制台命令登记
         /// </summary>
         /// <param name="action">登记无返回值两个参数回调函数</param>
         /// <param name="tip">帮助文本</param>
-        void RegisterCommand<T1, T2>(System.Action<T1, T2> action, string tip = null);
+        void RegisterCommand<T1, T2>(System.Action<T1, T2> action, string tip = null, string objectName = null, string methodName = null);
         /// <summary>
         /// 控制台命令登记
         /// </summary>
         /// <param name="action">登记无返回值三个参数回调函数</param>
         /// <param name="tip">帮助文本</param>
-        void RegisterCommand<T1, T2, T3>(System.Action<T1, T2, T3> action, string tip = null);
+        void RegisterCommand<T1, T2, T3>(System.Action<T1, T2, T3> action, string tip = null, string objectName = null, string methodName = null);
         /// <summary>
         /// 控制台命令登记
         /// </summary>
         /// <param name="action">登记无返回值四个参数回调函数</param>
         /// <param name="tip">帮助文本</param>
-        void RegisterCommand<T1, T2, T3, T4>(System.Action<T1, T2, T3, T4> action, string tip = null);
+        void RegisterCommand<T1, T2, T3, T4>(System.Action<T1, T2, T3, T4> action, string tip = null, string objectName = null, string methodName = null);
         /// <summary>
         /// 控制台命令移除
         /// </summary>
@@ -48,6 +48,7 @@ namespace Managers
         /// 控制台命令移除
         /// </summary>
         /// <param name="action"登记无返回值无参数回调函数></param>
+        void RemoveCommand(string objectName, string methodName);
         void RemoveCommand(Action action);
         /// <summary>
         /// 控制台命令移除
@@ -239,7 +240,7 @@ namespace Managers
             /// <param name="str">输入文本</param>
             public void FinishInput(string str)
             {
-                if(str==string.Empty)
+                if (str == string.Empty)
                     return;
                 inputField.text = string.Empty;
                 action.Invoke(str);
@@ -292,7 +293,7 @@ namespace Managers
         }
         class ConsoleEmitter
         {
-            private const string SuccessfulText="\nsucceed!!!";
+            private const string SuccessfulText = "\nsucceed!!!";
             private ScrollRect scrollRect;
             private Text text;
             private System.Text.StringBuilder stringBuilder;
@@ -361,9 +362,9 @@ namespace Managers
         #region private methods
         private void Awake()
         {
-// #if !DEVELOPMENT_BUILD && !UNITY_EDITOR
+            // #if !DEVELOPMENT_BUILD && !UNITY_EDITOR
             // DestroyImmediate(gameObject);
-// #endif
+            // #endif
             Enable();
         }
         private void Enable()
@@ -411,7 +412,9 @@ namespace Managers
             if (runner.AnalyzeCommand(inputToken.GetTokens(token)) && !runner.RunCommand(commandHelper.GetCommand(runner.ObjectName, runner.MethodName)))
             {
                 emitter.AppendText(runner.ErrorMessage);
-            }else{
+            }
+            else
+            {
                 emitter.AppendSucceed();
             }
         }
@@ -420,10 +423,13 @@ namespace Managers
         /// </summary>
         /// <param name="action">回调</param>
         /// <param name="tip">帮助文本</param>
-        public void SetCommand(Delegate action, string tip = null)
+        public void SetCommand(Delegate action, string tip = null, string objectName = null, string methodName = null)
         {
             Command command = new Command(action, tip);
-            commandHelper.SetCommand(action.Target.GetType().Name, action.Method.Name, command);
+            if (objectName != null && methodName != null)
+                commandHelper.SetCommand(objectName, methodName, command);
+            else
+                commandHelper.SetCommand(action.Target.GetType().Name, action.Method.Name, command);
         }
         /// <summary>
         /// 命令删除函数
@@ -432,16 +438,17 @@ namespace Managers
         public void DeleteCommand(Delegate action) => commandHelper.RemoveCommand(action.Target.GetType().Name, action.Method.Name);
         #region interface methods
         public void RemobeAllCommand(System.Object obj) => commandHelper.RemoveCommand(obj.GetType().Name);
+        public void RemoveCommand(string objectName, string methodName) => commandHelper.RemoveCommand(objectName, methodName);
         public void RemoveCommand(Action action) => SetCommand(action as Delegate);
         public void RemoveCommand<T>(Action<T> action) => SetCommand(action as Delegate);
         public void RemoveCommand<T1, T2>(Action<T1, T2> action) => SetCommand(action as Delegate);
         public void RemoveCommand<T1, T2, T3>(Action<T1, T2, T3> action) => SetCommand(action as Delegate);
         public void RemoveCommand<T1, T2, T3, T4>(Action<T1, T2, T3, T4> action) => SetCommand(action as Delegate);
-        public void RegisterCommand(Action action, string tip = null) => SetCommand(action as Delegate, tip);
-        public void RegisterCommand<T>(Action<T> action, string tip = null) => SetCommand(action as Delegate, tip);
-        public void RegisterCommand<T1, T2>(Action<T1, T2> action, string tip = null) => SetCommand(action as Delegate, tip);
-        public void RegisterCommand<T1, T2, T3>(Action<T1, T2, T3> action, string tip = null) => SetCommand(action as Delegate, tip);
-        public void RegisterCommand<T1, T2, T3, T4>(Action<T1, T2, T3, T4> action, string tip = null) => SetCommand(action as Delegate, tip);
+        public void RegisterCommand(Action action, string tip = null, string objectName = null, string methodName = null) => SetCommand(action as Delegate, tip, objectName, methodName);
+        public void RegisterCommand<T>(Action<T> action, string tip = null, string objectName = null, string methodName = null) => SetCommand(action as Delegate, tip, objectName, methodName);
+        public void RegisterCommand<T1, T2>(Action<T1, T2> action, string tip = null, string objectName = null, string methodName = null) => SetCommand(action as Delegate, tip, objectName, methodName);
+        public void RegisterCommand<T1, T2, T3>(Action<T1, T2, T3> action, string tip = null, string objectName = null, string methodName = null) => SetCommand(action as Delegate, tip, objectName, methodName);
+        public void RegisterCommand<T1, T2, T3, T4>(Action<T1, T2, T3, T4> action, string tip = null, string objectName = null, string methodName = null) => SetCommand(action as Delegate, tip, objectName, methodName);
         #endregion
     }
 }

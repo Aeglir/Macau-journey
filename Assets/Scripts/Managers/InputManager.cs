@@ -242,6 +242,7 @@ namespace Managers
             private List<System.Action<InputAction.CallbackContext>> startedActions;
             private List<System.Action<InputAction.CallbackContext>> performedActions;
             private List<System.Action<InputAction.CallbackContext>> canceledActions;
+            private bool isDiable;
             #endregion
             /// <summary>
             /// 构造函数
@@ -282,6 +283,7 @@ namespace Managers
             #region Invoke
             private void StartedInvoke(InputAction.CallbackContext context)
             {
+                if(isDiable) return;
                 for (int i = 0; i < startedActions.Count; i++)
                 {
                     startedActions[i].Invoke(context);
@@ -289,6 +291,7 @@ namespace Managers
             }
             private void PerformedInvoke(InputAction.CallbackContext context)
             {
+                if(isDiable) return;
                 for (int i = 0; i < performedActions.Count; i++)
                 {
                     performedActions[i].Invoke(context);
@@ -296,6 +299,7 @@ namespace Managers
             }
             private void CanceledInvoke(InputAction.CallbackContext context)
             {
+                if(isDiable) return;
                 for (int i = 0; i < canceledActions.Count; i++)
                 {
                     canceledActions[i].Invoke(context);
@@ -352,8 +356,16 @@ namespace Managers
                 }
                 return this;
             }
-            public void Enable()=>inputAction.Enable();
-            public void Disable()=>inputAction.Disable();
+            public void Enable()
+            {
+                isDiable=false;
+                inputAction.Enable();
+            }
+            public void Disable()
+            {
+                isDiable=true;
+                inputAction.Disable();
+            }
         }
         private InputDataBank _data;
         private void Awake()
