@@ -279,7 +279,7 @@ namespace MiniGame.Volunteer
                 // int tag=1;
                 // CharacterEmitter.Road road = (CharacterEmitter.Road)Random.Range(0, 3);
                 // while(tag<21)
-                while (!isStop && currentPerson < GobalSetting.MaxPerson)
+                while (!_isStop && currentPerson < GobalSetting.MaxPerson)
                 {
                     // AddPerson(tag, road, road, true, FinishHandle);
                     // Debug.Log("pass");
@@ -313,12 +313,14 @@ namespace MiniGame.Volunteer
                 // int tag=1;
                 // CharacterEmitter.Road road = (CharacterEmitter.Road)Random.Range(0, 3);
                 // while(tag<21)
-                while (!isStop && currentPerson < GobalSetting.maxAlphaPerson)
+                while (!_isStop && currentPerson < GobalSetting.maxAlphaPerson)
                 {
                     // AddPerson(tag, road, road, true, FinishHandle);
                     // Debug.Log("pass");
                     // tag++;
+                    // Debug.Log("start async");
                     await System.Threading.Tasks.Task.Delay((int)((int)(1000 * Random.Range(GobalSetting.MinDelay, GobalSetting.MaxDelay)) / Time.timeScale), _tokenSource.Token);
+                    // Debug.Log("finish async");
                     action.Invoke();
                     currentPerson++;
                     // Debug.Log(_task.Status);
@@ -411,7 +413,7 @@ namespace MiniGame.Volunteer
         private int randomStart;
         private int _tag;
         private int _round;
-        public int round{get=>_round;}
+        public int round { get => _round; }
         public int Tag
         {
             get
@@ -469,9 +471,9 @@ namespace MiniGame.Volunteer
             if (_tag != -1)
             {
                 Pause();
-                Debug.Log("tag" + _tag);
-                JFCanvas.SetActive(true);
+                Debug.Log("tag " + _tag);
                 _round++;
+                JFCanvas.SetActive(true);
                 if (callEvent != null)
                     callEvent.Invoke();
             }
@@ -518,6 +520,17 @@ namespace MiniGame.Volunteer
             tagFreeList.Remove(t);
             tagUsingList.Add(t);
             randomStart = (t + 1) % (GobalSetting.MaxTag - GobalSetting.MinTag) + GobalSetting.MinTag;
+            // Debug.Log("RandomBackRoadAppear"+ShowList(tagFreeList));
+            // Debug.Log("RandomBackRoadAppear"+ShowList(tagUsingList));
+        }
+        private string ShowList(System.Collections.Generic.List<int> list)
+        {
+            System.Text.StringBuilder builder = new System.Text.StringBuilder();
+            foreach (int i in list)
+            {
+                builder.Append(" " + i);
+            }
+            return builder.ToString();
         }
         public void RandomRoadAppear()
         {
@@ -539,6 +552,8 @@ namespace MiniGame.Volunteer
             tagFreeList.Remove(t);
             tagUsingList.Add(t);
             randomStart = (t + 1) % (GobalSetting.MaxTag - GobalSetting.MinTag) + GobalSetting.MinTag;
+            // Debug.Log("RandomBackRoadAppear"+ShowList(tagFreeList));
+            // Debug.Log("RandomBackRoadAppear"+ShowList(tagUsingList));
         }
         private void FinishHandle(int tag, bool ishide)
         {
@@ -559,19 +574,21 @@ namespace MiniGame.Volunteer
             pool.push(tag, person);
             tagUsingList.Remove(tag);
             tagFreeList.Add(tag);
+            // Debug.Log("RandomBackRoadAppear"+ShowList(tagFreeList));
+            // Debug.Log("RandomBackRoadAppear"+ShowList(tagUsingList));
         }
         public void Pause()
         {
-            if (isAccelerate)
-            {
-                Time.timeScale = 1;
-                isAccelerate = false;
-            }
             playable.Disable();
             if (inputManager != null)
                 inputManager.Disable();
+            // Debug.Log("pause");
             roadController.Pause();
             backRoadController.Pause();
+            if (isAccelerate)
+            {
+                AccelerateCancel();
+            }
             foreach (var pair in dataBase.RoadPersonDic)
             {
                 foreach (var item in pair.Value)
@@ -587,6 +604,10 @@ namespace MiniGame.Volunteer
         public void PauseInvoke() => pauseEvent.Invoke();
         public void Continue()
         {
+            if (isAccelerate)
+            {
+                AccelerateCancel();
+            }
             // pauseCanvas.SetActive(false);
             foreach (var pair in dataBase.RoadPersonDic)
             {
@@ -599,6 +620,7 @@ namespace MiniGame.Volunteer
             {
                 item.Walk();
             }
+            // Debug.Log("continue");
             roadController.Start();
             backRoadController.Start();
             playable.Enable();
