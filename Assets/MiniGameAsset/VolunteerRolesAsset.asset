@@ -46,7 +46,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: ad10df39ed1e7f54cbb7348cfcb048e0, type: 3}
     moveSpeed: 100
     _sorceNeed: 0
-    _price: 0
+    _price: 1
   - tag: 2
     Name: 
     frameTex:
@@ -62,8 +62,8 @@ MonoBehaviour:
     - {fileID: 21300000, guid: b56f3145d93c6644a9fc98cd7aae6a55, type: 3}
     - {fileID: 21300000, guid: 4243f67955cd92c49b0ff829e79e4047, type: 3}
     moveSpeed: 100
-    _sorceNeed: 0
-    _price: 0
+    _sorceNeed: 1
+    _price: 5
   - tag: 3
     Name: 
     frameTex:
@@ -79,8 +79,8 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 77a8b44b555b7404fb931950ac3eed0b, type: 3}
     - {fileID: 21300000, guid: 600c70cff89749347a6cee157167ce2d, type: 3}
     moveSpeed: 100
-    _sorceNeed: 0
-    _price: 0
+    _sorceNeed: -3
+    _price: 5
   - tag: 4
     Name: 
     frameTex:
@@ -96,8 +96,8 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 64c3e0138f535d4428da5489f469d83f, type: 3}
     - {fileID: 21300000, guid: 4f21b99d2b8d2e942847adabe98c276f, type: 3}
     moveSpeed: 100
-    _sorceNeed: 0
-    _price: 0
+    _sorceNeed: -2
+    _price: 1
   - tag: 5
     Name: 
     frameTex:
@@ -113,8 +113,8 @@ MonoBehaviour:
     - {fileID: 21300000, guid: ba9a2d26a17dd8341aadd5e4012be1aa, type: 3}
     - {fileID: 21300000, guid: e6108b3850f565744aa7f32eb20b92f6, type: 3}
     moveSpeed: 100
-    _sorceNeed: 0
-    _price: 0
+    _sorceNeed: 2
+    _price: 50
   - tag: 6
     Name: 
     frameTex:
@@ -130,8 +130,8 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 78b7622df3c4ab3438a31e5182ab854b, type: 3}
     - {fileID: 21300000, guid: 43be372c236307e41a56a5aa708ef3da, type: 3}
     moveSpeed: 100
-    _sorceNeed: 0
-    _price: 0
+    _sorceNeed: -1
+    _price: 1
   - tag: 7
     Name: 
     frameTex:
@@ -147,8 +147,8 @@ MonoBehaviour:
     - {fileID: 21300000, guid: ccf97b2e1ac9b6741b874245a0528a14, type: 3}
     - {fileID: 21300000, guid: 789cb5b1d76cc5b4f86f2ef6c20b33aa, type: 3}
     moveSpeed: 100
-    _sorceNeed: 0
-    _price: 0
+    _sorceNeed: 3
+    _price: 100
   - tag: 8
     Name: 
     frameTex:
@@ -164,8 +164,8 @@ MonoBehaviour:
     - {fileID: 21300000, guid: b9f8933fdcf4e23458351a0eedb37c47, type: 3}
     - {fileID: 21300000, guid: d58d7ec6f210d9d4db819fd6009551cc, type: 3}
     moveSpeed: 100
-    _sorceNeed: 0
-    _price: 0
+    _sorceNeed: 1
+    _price: 2
   - tag: 9
     Name: 
     frameTex:
@@ -181,8 +181,8 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 123536615e0956f4ebac0fb4a65d23f7, type: 3}
     - {fileID: 21300000, guid: 958741dc77662e14694d9f876faea5af, type: 3}
     moveSpeed: 100
-    _sorceNeed: 0
-    _price: 0
+    _sorceNeed: 1
+    _price: 2
   - tag: 10
     Name: 
     frameTex:
@@ -198,8 +198,8 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 5da821c7c97c63a47939c33fda05e681, type: 3}
     - {fileID: 21300000, guid: eac755daacb6b784d951f7dbbc6d9bf3, type: 3}
     moveSpeed: 100
-    _sorceNeed: 0
-    _price: 0
+    _sorceNeed: 1
+    _price: 2
   - tag: 11
     Name: 
     frameTex:
@@ -215,8 +215,8 @@ MonoBehaviour:
     - {fileID: 21300000, guid: c5eef6ea52d93fd45a1c700f616ba009, type: 3}
     - {fileID: 21300000, guid: 72bb37c5c704d8c4fbec7e0cc5ab3cd9, type: 3}
     moveSpeed: 100
-    _sorceNeed: 0
-    _price: 0
+    _sorceNeed: -2
+    _price: 1
   - tag: 12
     Name: 
     frameTex:
@@ -232,8 +232,8 @@ MonoBehaviour:
     - {fileID: 21300000, guid: d9fa22b670f66074880765f02ca5365b, type: 3}
     - {fileID: 21300000, guid: 950eccaa28f61f24cae7b4bb8403fc6c, type: 3}
     moveSpeed: 100
-    _sorceNeed: 0
-    _price: 0
+    _sorceNeed: -2
+    _price: 1
   - tag: 13
     Name: 
     frameTex:
@@ -249,8 +249,8 @@ MonoBehaviour:
     - {fileID: 21300000, guid: f91b92a2859937046840125a6989e7ab, type: 3}
     - {fileID: 21300000, guid: 7d04ac011aab75345ab1843a6e7200a7, type: 3}
     moveSpeed: 100
-    _sorceNeed: 0
-    _price: 0
+    _sorceNeed: -3
+    _price: 1
   - tag: 14
     Name: 
     frameTex:
@@ -266,8 +266,8 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 655a44c4b0b3f7c43a719536dfcc375f, type: 3}
     - {fileID: 21300000, guid: 3502bb23e3c72794987d99896ae3eb44, type: 3}
     moveSpeed: 100
-    _sorceNeed: 0
-    _price: 0
+    _sorceNeed: 2
+    _price: 1
   - tag: 15
     Name: 
     frameTex:
@@ -284,7 +284,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 90889696ed2622548b57a1c8920c3bd3, type: 3}
     moveSpeed: 100
     _sorceNeed: 0
-    _price: 0
+    _price: 2
   - tag: 16
     Name: 
     frameTex:
@@ -301,7 +301,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: e1bdb73ea0fd41e4ab088374cea2e18e, type: 3}
     moveSpeed: 100
     _sorceNeed: 0
-    _price: 0
+    _price: 5
   - tag: 17
     Name: 
     frameTex:
@@ -318,7 +318,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: a66a45845b12a2a4c884e4097dbdb100, type: 3}
     moveSpeed: 100
     _sorceNeed: 0
-    _price: 0
+    _price: 5
   - tag: 18
     Name: 
     frameTex:
@@ -334,8 +334,8 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 908e652a7dcf63c40bbb8df21ed142e5, type: 3}
     - {fileID: 21300000, guid: 99a6cc692f93fe3428a5cff7aaa2c5d7, type: 3}
     moveSpeed: 100
-    _sorceNeed: 0
-    _price: 0
+    _sorceNeed: 1
+    _price: 5
   - tag: 19
     Name: 
     frameTex:
@@ -351,8 +351,8 @@ MonoBehaviour:
     - {fileID: 21300000, guid: d18aa89a75389d4498d7682599d65100, type: 3}
     - {fileID: 21300000, guid: 30c3da004fcba3647981ab9833ba4a0f, type: 3}
     moveSpeed: 100
-    _sorceNeed: 0
-    _price: 0
+    _sorceNeed: -3
+    _price: 25
   - tag: 20
     Name: 
     frameTex:
@@ -368,5 +368,5 @@ MonoBehaviour:
     - {fileID: 21300000, guid: b73412f8bd722504285dcfdaf39a20ad, type: 3}
     - {fileID: 21300000, guid: 906d23676bb46a44491ad340e219bcd7, type: 3}
     moveSpeed: 100
-    _sorceNeed: 0
+    _sorceNeed: -3
     _price: 0

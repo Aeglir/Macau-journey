@@ -6,7 +6,7 @@ using Random = System.Random;
 
 public class ChoiceButton : MonoBehaviour
 {
-    [Header("��ť���")]
+    [Header("ButtonPart")]
     public Button button1; //����ѡ��
     public Button button2;
     public Button button3;
@@ -21,23 +21,23 @@ public class ChoiceButton : MonoBehaviour
         public int flag;//�Ƿ�ѡ���
     }
 
-    [Header("ѡ�����")]
+    [Header("ChoiceList")]
     public List<Sprite> isChosenList = new List<Sprite>(); //ѡ��ѡ��ͼƬ�б�
     public List<Sprite> notChosenList = new List<Sprite>(); //δѡ��ѡ��ͼƬ�б�
     private List<int> choiceFirstNO = new List<int>();//���������б�ѡ�е�6���Ի����б�
     private List<int> choiceSecondNO = new List<int>();//������ÿ�ֱ�ѡ�е�4���Ի����б�
     private Choice[] Choices = new Choice[12];
 
-    [Header("��־���")]
+    [Header("MarkPart")]
     private int isChosen = 1; //���̱�־λ��Ĭ�ϵ�һ����ťѡ��
     private int turn = 1; //�Ի��ִα�־λ��Ĭ��Ϊ��һ��
     private float changeSpeed = 1; //���̱任�ٶ�
 
-    [Header("�������")]
+    [Header("ScorePart")]
     private int score = 0; //��ҵ÷�
     private int npcScore;
 
-    [Header("�������")]
+    [Header("ImagePart")]
     public Image npc;
     public Image player;
     private Sprite npcNormal;//��������
@@ -47,17 +47,22 @@ public class ChoiceButton : MonoBehaviour
     private Sprite npcSucceed;//�ɹ�����
     private Sprite playerSucceed;
 
-    [Header("����ʱ���")]
-    private int TotalTime = 30;//30s����ʱ
+    [Header("TimePart")]
+    private int totalTime = 30;//30s����ʱ
+    public Text timeShow;
 
-    [Header("�������")]
-    public Canvas GameCanvas;
+    [Header("CanvasPart")]
+    public GameObject GameCanvas;
+    public SucceedSettings settings;
     public UnityEngine.Events.UnityEvent CloseEvent;
+
+    private int price;
+    private bool isTurnLarge = false;
     public void Open()
     {
-        Debug.Log("Start!");
         var NPCImageList = LoadData();
         var PlayerImageList = LoadPlayerData();
+        isTurnLarge = false;
 
         // ��npcͼƬ
         npcNormal = NPCImageList[0];
@@ -87,8 +92,8 @@ public class ChoiceButton : MonoBehaviour
             //���öԻ���־,0��ʾδ��ѡ���
             Choices[i].flag = 0;
         }
-
         SetFirstChoices();
+        SetInteractable();
         StartCoroutine("ChangeChosenButton");
         StartCoroutine("Time");//����30s����ʱ
     }
@@ -99,8 +104,14 @@ public class ChoiceButton : MonoBehaviour
     // Update is called once per frame
     public void ColseInvoke()
     {
-        score=0;
-        turn=1;
+        button1.GetComponent<UnityEngine.UI.Button>().interactable = false;
+        button2.GetComponent<UnityEngine.UI.Button>().interactable = false;
+        button3.GetComponent<UnityEngine.UI.Button>().interactable = false;
+        button4.GetComponent<UnityEngine.UI.Button>().interactable = false;
+        score = 0;
+        turn = 1;
+        totalTime = 30;
+        isChosen = 1;
         choiceFirstNO.Clear();
         choiceSecondNO.Clear();
         if (CloseEvent != null)
@@ -110,14 +121,16 @@ public class ChoiceButton : MonoBehaviour
     void Update()
     {
         //��⵹��ʱ�Ƿ����
-        if (TotalTime == 0)
+        if (totalTime == 0)
         {
             StopCoroutine("ChangeChosenButton");
             StopCoroutine("Time");
+            FailTure();
             ColseInvoke();
         }
+        timeShow.text = string.Format("" + totalTime);
         //����Ƿ��»س����������
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !isTurnLarge)
         {
             if (button1.GetComponent<UnityEngine.UI.Button>().interactable == true)
                 RecordScore(0);
@@ -128,20 +141,39 @@ public class ChoiceButton : MonoBehaviour
             if (button4.GetComponent<UnityEngine.UI.Button>().interactable == true)
                 RecordScore(3);
             turn++;
+            Debug.Log(turn);
             if (turn > 3)//�����ж����˳���Ϸ
             {
+                isTurnLarge = true;
+                StopCoroutine("Time");
+                StopCoroutine("ChangeChosenButton");
                 //�������
                 if (score >= npcScore)
                 {
-                    Debug.Log(score);
+                    Debug.Log("score large");
+                    settings.gameObject.SetActive(true);
+                    if (MiniGame.Volunteer.CharacterSystem.Instance != null)
+                        MiniGame.Volunteer.CharacterSystem.Instance.round++;
+                    settings.LoadData(price);
+                    settings.SetCloseListener(CloseChoiceButton);
                 }
-                StopCoroutine("ChangeChosenButton");
-                StopCoroutine("Time");
-                ColseInvoke();
+                else
+                {
+                    Debug.Log("score less");
+                    FailTure();
+                    CloseChoiceButton();
+                }
             }
             StopCoroutine("ChangeChosenButton");
-            if(gameObject.activeSelf)
+            if (gameObject.activeSelf)
                 ChangeChoiceImage(turn);//���Ŀǰ�������һ�ֶԻ���������Ի�����
+        }
+    }
+    private void FailTure()
+    {
+        if (MiniGame.Volunteer.CharacterSystem.Instance != null)
+        {
+            MiniGame.Volunteer.CharacterSystem.Instance.FailTrue();
         }
     }
 
@@ -193,10 +225,10 @@ public class ChoiceButton : MonoBehaviour
     //����ʱ����
     IEnumerator Time()
     {
-        while (TotalTime >= 0)
+        while (totalTime >= 0)
         {
             yield return new WaitForSeconds(1);
-            TotalTime--;
+            totalTime--;
         }
     }
     public System.Collections.Generic.List<Sprite> LoadPlayerData() => MiniGame.Volunteer.CharacterSystem.Instance.asset.Player.painting;
@@ -208,6 +240,7 @@ public class ChoiceButton : MonoBehaviour
             if (info.tag == tag)
             {
                 npcScore = info._sorceNeed;
+                price = info._price;
                 return info.painting;
             }
         }
@@ -299,7 +332,7 @@ public class ChoiceButton : MonoBehaviour
         //��Ի�
         if (Choices[choiceSecondNO[i]].score < 0)
         {
-            TotalTime -= 5;
+            totalTime -= 5;
             npc.sprite = npcFail;
             player.sprite = playerFail;
         }
@@ -315,44 +348,29 @@ public class ChoiceButton : MonoBehaviour
             npc.sprite = npcSucceed;
             player.sprite = playerSucceed;
         }
-        Choices[choiceSecondNO[i]].flag = 1;//�ԶԻ��ı�־λ���иı䣬1Ϊ��ѡ���
+        choiceFirstNO.Remove(choiceSecondNO[i]);
     }
 
     //�����Ի��ִ�ѡ���
     private void ChangeChoiceImage(int turn)
     {
-        int i = 0, mark = 0;
+        int i = 0;
+        int RandKey = UnityEngine.Random.Range(0, 4);
         switch (turn)
         {
             case 2:
                 while (i < 4)
                 {
-                    Random a = new Random(System.DateTime.Now.Millisecond);
-                    int RandKey = a.Next(0, 5);
-                    for (int z = 0; z <= i; z++)
-                    {
-                        if (choiceFirstNO[RandKey] == choiceSecondNO[z])
-                            mark = 1;
-                    }
-                    if (mark == 0 && Choices[choiceFirstNO[RandKey]].flag == 0)
-                    {
-                        choiceSecondNO[i] = choiceFirstNO[RandKey];
-                        i++;
-                    }
-                    mark = 0;
+                    choiceSecondNO[i] = choiceFirstNO[RandKey];
+                    RandKey = (RandKey + 1) % 5;
+                    i++;
                 }
                 break;
             case 3:
-                while (i < 4)
+                for (; i < 4; i++)
                 {
-                    foreach (var z in choiceFirstNO)
-                    {
-                        if (Choices[z].flag == 0)
-                        {
-                            choiceSecondNO[i] = z;
-                            i++;
-                        }
-                    }
+                    choiceSecondNO[i] = choiceFirstNO[RandKey];
+                    RandKey = (RandKey + 1) % 4;
                 }
                 break;
         }
@@ -362,8 +380,13 @@ public class ChoiceButton : MonoBehaviour
         button3.image.sprite = Choices[choiceSecondNO[2]].notChosen;
         button4.image.sprite = Choices[choiceSecondNO[3]].notChosen;
         isChosen = 1;
-        if (gameObject.activeSelf)
+        if (gameObject.activeSelf && turn <=3)
             StartCoroutine("ChangeChosenButton");
+    }
+
+    public void CloseChoiceButton()
+    {
+        ColseInvoke();
     }
 }
 

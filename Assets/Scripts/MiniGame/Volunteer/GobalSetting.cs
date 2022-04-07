@@ -30,6 +30,8 @@ namespace MiniGame.Volunteer
         public const UnityEngine.InputSystem.Key PauseKey = UnityEngine.InputSystem.Key.Escape;
         public const UnityEngine.InputSystem.Key TipsKey = UnityEngine.InputSystem.Key.T;
         public const UnityEngine.InputSystem.Key AccelerateKey = UnityEngine.InputSystem.Key.Space;
+        public const int FailtrueYoffset = 444;
+        public const float Failtrueduration = 1;
         #endregion
     }
 }
