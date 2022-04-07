@@ -400,6 +400,7 @@ namespace MiniGame.Volunteer
         public UnityEngine.Events.UnityEvent continueEvent;
         public UnityEngine.Events.UnityEvent callEvent;
         public GameObject JFCanvas;
+        public GameObject Failtrue;
         private bool isAccelerate;
         private CharacterPool pool;
         private PersonFactory.Playable playable;
@@ -413,7 +414,7 @@ namespace MiniGame.Volunteer
         private int randomStart;
         private int _tag;
         private int _round;
-        public int round { get => _round; }
+        public int round{ get => _round; set => _round = value; }
         public int Tag
         {
             get
@@ -647,5 +648,17 @@ namespace MiniGame.Volunteer
         }
         public void ContinueInvoke() => continueEvent.Invoke();
         public void Quit() => Application.Quit();
+        public void FailTrue()
+        {
+            RectTransform rect = Failtrue.transform as RectTransform;
+            Failtrue.SetActive(true);
+            var tweener = rect.DOAnchorPosY(0, 1).SetEase(Ease.InQuad).OnComplete(()=>{
+                Failtrue.SetActive(false);
+            }).Pause();
+            rect.DOAnchorPosY(GobalSetting.FailtrueYoffset, 1).OnComplete(() =>
+            {
+                tweener.Play();
+            });
+        }
     }
 }
