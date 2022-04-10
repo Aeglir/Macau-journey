@@ -12,9 +12,6 @@ namespace MiniGame.Volunteer
         public const int CheckLeftRange = -600;
         public const int CheckRightRange = 600;
         public const int ScreenWidth = 2400;
-        public const int ScreenHeight = 100;
-        public const int RoadMaxHeight = 100;
-        public const int RoadMinHeight = 0;
         public const int RoadBehindYoffset = 100;
         public const int RoadBehindZoffset = 0;
         public const int RoadMiddleYoffset = 50;
@@ -32,6 +29,9 @@ namespace MiniGame.Volunteer
         public const UnityEngine.InputSystem.Key AccelerateKey = UnityEngine.InputSystem.Key.Space;
         public const int FailtrueYoffset = 444;
         public const float Failtrueduration = 1;
+        public const float AccelerateTimeMulity = 5.0f;
+        public const float SourceTimeMulity = 5.0f;
+        public const int InvaildTag = -1;
         #endregion
     }
 }

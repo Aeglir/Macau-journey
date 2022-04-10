@@ -2053,7 +2053,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1964386361}
         m_TargetAssemblyTypeName: MiniGame.Volunteer.CharacterSystem, Assembly-CSharp
-        m_MethodName: CallInvoke
+        m_MethodName: AccelerateHandleClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

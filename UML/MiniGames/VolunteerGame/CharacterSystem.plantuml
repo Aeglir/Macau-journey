@@ -3,32 +3,63 @@ skinparam Dpi 200
 
 class CharacterSystem implements GameControlable
 {
-}
-interface GameControlable
-{
-
+    +CharactersAsset asset
+    +UnityEvent pauseEvent
+    +UnityEvent continueEvent
+    +UnityEvent callEvent
+    +int Tag
+    +int round
+    +CallInvoke()
+    +PauseInvoke()
+    +ContinueInvoke()
+    +Quit()
+    +FailTrue()
+    +AccelerateHandleClick()
 }
 class CharacterDataBase
 {
     +get()
     +add()
+    +addBack()
+    +Check()
 }
-class CharacterPool
+class CharacterPool extends SinglePool
 {
-    +getPlayer()
-    +getRandom()
+    +get()
     +push()
 }
 class CharacterEmitter
 {
     +enum Road
-    +AddRoad(Talkable, Road, Road)
-    +AddBackground(GameObject)
+    +AddRoad(person,road,isRight,action)
+    +AddBackground(person,isRight,action)
 }
+class RoadPersonAppearController extends AsyncController
+{
+    +int currentPerson
+    +FinishHandle()
+}
+class BackRoadPersonAppaerController extends AsyncController
+{
+    +int currentPerson
+    +FinishHandle()
+}
+class CharacterInputManager
+{
+    +Enable()
+    +Disable()
+    +Dispose()
+}
+
+class GobalSetting
 
 
 CharacterSystem *-- CharacterPool
 CharacterSystem *-- CharacterDataBase
 CharacterSystem *-- CharacterEmitter
+CharacterSystem *-- RoadPersonAppearController
+CharacterSystem *-- BackRoadPersonAppaerController
+CharacterSystem *-- CharacterInputManager
+CharacterSystem <.. GobalSetting
 
 @enduml
