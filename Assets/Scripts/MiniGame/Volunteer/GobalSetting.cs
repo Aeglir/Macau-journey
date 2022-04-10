@@ -28,7 +28,9 @@ namespace MiniGame.Volunteer
         public const UnityEngine.InputSystem.Key TipsKey = UnityEngine.InputSystem.Key.T;
         public const UnityEngine.InputSystem.Key AccelerateKey = UnityEngine.InputSystem.Key.Space;
         public const int FailtrueYoffset = 444;
-        public const float Failtrueduration = 1;
+        public const float FailtrueAppearDuration = 0.75f;
+        public const int FailtrueDelayMillions = 1000;
+        public const float FailtrueDisappearDuration = 0.75f;
         public const float AccelerateTimeMulity = 5.0f;
         public const float SourceTimeMulity = 5.0f;
         public const int InvaildTag = -1;

@@ -701,12 +701,13 @@ namespace MiniGame.Volunteer
         {
             RectTransform rect = Failtrue.transform as RectTransform;
             Failtrue.SetActive(true);
-            var tweener = rect.DOAnchorPosY(0, 1).SetEase(Ease.InQuad).OnComplete(() =>
+            var tweener = rect.DOAnchorPosY(0, GobalSetting.FailtrueAppearDuration).SetEase(Ease.InQuad).OnComplete(() =>
             {
                 Failtrue.SetActive(false);
             }).Pause();
-            rect.DOAnchorPosY(GobalSetting.FailtrueYoffset, 1).OnComplete(() =>
+            rect.DOAnchorPosY(GobalSetting.FailtrueYoffset, GobalSetting.FailtrueDisappearDuration).OnComplete( async () =>
             {
+                await System.Threading.Tasks.Task.Delay(GobalSetting.FailtrueDelayMillions);
                 tweener.Play();
             });
         }
