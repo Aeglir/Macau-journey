@@ -17,29 +17,22 @@ public abstract class AsyncController
         Pause();
     }
     public System.Threading.Tasks.TaskStatus GetTaskStatus() => _task.Status;
-    public void Pause()
+    public virtual void Pause()
     {
-        _isStop = true;
-        tokenSource.Cancel();
+        if(!isStop)
+            _isStop = true;
+        if(_tokenSource!=null)
+            _tokenSource.Cancel();
+        _tokenSource=null;
         _task = null;
-        // UnityEngine.Debug.Log("Pause isStop "+_isStop);
-        // if(_task==null)
-        //     UnityEngine.Debug.Log("Pause task null");
-        // else 
-        //     UnityEngine.Debug.Log("Pause task not null");
     }
-    public void Start()
+    public virtual void Start()
     {
-        if (_isStop)
+        if (AsyncAction!=null&&_isStop)
         {
             _isStop = false;
             _tokenSource = new System.Threading.CancellationTokenSource();
             _task = AsyncAction.Invoke();
-            // UnityEngine.Debug.Log("Start isStop " + _isStop);
-            // if (_task == null)
-            //     UnityEngine.Debug.Log("Start task null");
-            // else
-            //     UnityEngine.Debug.Log("Start task not null");
         }
     }
 }

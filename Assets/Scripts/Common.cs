@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -22,5 +19,34 @@ public static class Common
             return source.Skip(startIndex).ToArray();
         else
             return source.Skip(startIndex).Take(count).ToArray();
+    }
+    public static System.Tuple<int, T> GetRandom<T>(T[] data)
+    {
+        int index = Random.Range(0,data.Length);
+        return new System.Tuple<int, T>(index,data[index]);
+    }
+    public static int[] GetRoandomsInEqa(int start,int end,int len)
+    {
+        System.Collections.Generic.HashSet<int> t=new System.Collections.Generic.HashSet<int>();
+        int[] res = new int[len];
+        for(int i=0;i<len;)
+        {
+            int n=Random.Range(start,end);
+            if(t.Contains(n))
+                continue;
+            t.Add(n);
+            res[i]=n;
+            i++;
+        }
+        return res;
+    }
+    public static T[] GetElements<T>(int[] indexs,T[] elements)
+    {
+        T[] res = new T[indexs.Length];
+        for(int i=0;i<indexs.Length;i++)
+        {
+            res[i]=elements[indexs[i]];
+        }
+        return res;
     }
 }

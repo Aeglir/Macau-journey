@@ -35,7 +35,7 @@ namespace MainMenu
             }
             isPressed=true;
             await System.Threading.Tasks.Task.Delay(time);
-            AsyncOperation operation =  SceneManager.LoadSceneAsync(1);
+            AsyncOperation operation =  SceneManager.LoadSceneAsync(2);
             while(!operation.isDone)
             {
                 await System.Threading.Tasks.Task.Yield();
