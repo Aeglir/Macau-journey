@@ -8,21 +8,29 @@ namespace MiniGame.Bar
     {
         public DBContorller dBContorller;
         public TextMeshProUGUI text;
-        private Order order;
-        private int npcTag;
-        private Order[] orders;
-        private int orderindex;
-        int current;
-        public Order Order { get => order;}
-        public int NpcTag { get => npcTag;}
+        private string[] orderTexts;
+        private MiniGame.Bar.Datas.BarDrink[] drinks;
+        private MiniGame.Bar.Datas.BarDrink curDrink;
+        int cur;
+        public MiniGame.Bar.Datas.BarDrink Drink{get=>curDrink;}
 
-        public void init(Order[] orders){this.orders=orders;}
-        public void SetTable(int npcTag)
+        public void init(string[] orderTexts,MiniGame.Bar.Datas.BarDrink[] drinks)
         {
-            this.npcTag=npcTag;
-            if(current>=GobalSetting.MAXORDERS) return;
-            order=orders[current];
-            text.text=order.Text;
+            this.orderTexts = orderTexts;
+            this.drinks = drinks;
+            cur = 0;
+        }
+        public void SetTable()
+        {
+            if (cur >= GobalSetting.MAXORDERS) return;
+            curDrink = drinks[cur];
+            text.SetText(orderTexts[cur].Replace("\\n", "\n"));
+        }
+        public void Next()
+        {
+            cur++;
+            curDrink=null;
+            text.SetText("");
         }
     }
 }

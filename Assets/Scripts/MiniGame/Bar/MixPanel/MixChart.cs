@@ -37,6 +37,10 @@ namespace MiniGame.Bar.Mix
             drinks = new List<int>();
             flavorings = new List<int>();
         }
+        internal bool isEmpty()
+        {
+            return wines.Count==0&&drinks.Count==0&&flavorings.Count==0;
+        }
         internal void Clear()
         {
             wines.Clear();

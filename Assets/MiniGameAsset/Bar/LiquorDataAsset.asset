@@ -31,13 +31,15 @@ MonoBehaviour:
     - "\u4F4E"
     - "\u4E2D"
     - "\u9AD8"
+    - "\u65E0"
     liqudkind:
     - "\u70C8\u9152"
     - "\u9E21\u5C3E\u9152"
     - "\u70C8\u6027\u9E21\u5C3E\u9152"
     - "\u65E0\u9152\u7CBE\u996E\u6599"
   bardrinks:
-  - name: "\u4E00\u53E3\u67E0\u6AAC"
+  - id: 0
+    name: "\u4E00\u53E3\u67E0\u6AAC"
     wines: 05000000
     drinks: 
     flavourings: 010000000500000007000000
@@ -45,7 +47,8 @@ MonoBehaviour:
     tastes: 0100000005000000
     deg: 2
     kind: 0
-  - name: "\u5A01\u58EB\u5FCC"
+  - id: 1
+    name: "\u5A01\u58EB\u5FCC"
     wines: 01000000
     drinks: 02000000
     flavourings: 09000000
@@ -53,6 +56,249 @@ MonoBehaviour:
     tastes: 0400000005000000
     deg: 2
     kind: 0
+  - id: 2
+    name: "\u5973\u5DEB\u6C64"
+    wines: 05000000090000000900000009000000
+    drinks: 03000000
+    flavourings: 0200000007000000
+    cup: 7
+    tastes: 0100000005000000
+    deg: 2
+    kind: 1
+  - id: 3
+    name: "\u9A6C\u5929\u5C3C"
+    wines: 0200000002000000020000000200000003000000
+    drinks: 
+    flavourings: 06000000
+    cup: 5
+    tastes: 020000000300000007000000
+    deg: 2
+    kind: 2
+  - id: 4
+    name: "\u706B\u8FA3\u8352\u5730"
+    wines: 0600000006000000
+    drinks: 02000000
+    flavourings: 0200000005000000
+    cup: 3
+    tastes: 000000000200000005000000
+    deg: 2
+    kind: 1
+  - id: 5
+    name: "\u673A\u573A\u4E03\u5385"
+    wines: 01000000
+    drinks: 0700000007000000070000000700000007000000
+    flavourings: 08000000
+    cup: 9
+    tastes: 000000000500000007000000
+    deg: 2
+    kind: 1
+  - id: 6
+    name: "\u6C99\u6F20\u70C8\u65E5"
+    wines: 06000000
+    drinks: 
+    flavourings: 0500000007000000
+    cup: 0
+    tastes: 0200000003000000
+    deg: 2
+    kind: 0
+  - id: 7
+    name: "\u7EAF\u7CB9\u6B32\u671B"
+    wines: 000000000000000000000000
+    drinks: 
+    flavourings: 05000000
+    cup: 2
+    tastes: 010000000500000007000000
+    deg: 2
+    kind: 0
+  - id: 8
+    name: "\u82E6\u594E\u5B81"
+    wines: 030000000300000003000000
+    drinks: 05000000
+    flavourings: 0500000006000000
+    cup: 3
+    tastes: 030000000500000007000000
+    deg: 2
+    kind: 1
+  - id: 9
+    name: "\u8FF7\u9189\u6ECB\u5473"
+    wines: 0200000004000000050000000600000008000000
+    drinks: 00000000
+    flavourings: 05000000
+    cup: 10
+    tastes: 00000000020000000500000006000000
+    deg: 2
+    kind: 2
+  - id: 10
+    name: "\u6D77\u98CE\u55E8\u68D2"
+    wines: 030000000400000004000000
+    drinks: 00000000
+    flavourings: 0500000009000000
+    cup: 10
+    tastes: 000000000400000007000000
+    deg: 2
+    kind: 1
+  - id: 11
+    name: "\u751C\u871C\u8235\u624B"
+    wines: 040000000400000004000000
+    drinks: 03000000
+    flavourings: 0300000009000000
+    cup: 5
+    tastes: 0000000004000000
+    deg: 2
+    kind: 2
+  - id: 12
+    name: "\u7F6A\u6076\u679C\u56ED"
+    wines: 050000000500000005000000
+    drinks: 03000000
+    flavourings: 0500000009000000
+    cup: 3
+    tastes: 000000000400000005000000
+    deg: 2
+    kind: 1
+  - id: 13
+    name: "\u5FAE\u91BA\u8584\u8377"
+    wines: 050000000500000005000000
+    drinks: 
+    flavourings: 000000000300000005000000
+    cup: 3
+    tastes: 000000000400000005000000
+    deg: 2
+    kind: 1
+  - id: 14
+    name: "\u58A8\u897F\u54E5\u70B8\u5F39"
+    wines: 06000000
+    drinks: 0000000000000000
+    flavourings: 
+    cup: 0
+    tastes: 000000000200000006000000
+    deg: 2
+    kind: 2
+  - id: 15
+    name: "\u9752\u7EFF\u5FC3\u60C5"
+    wines: 02000000
+    drinks: 0400000004000000
+    flavourings: 0300000009000000
+    cup: 10
+    tastes: 000000000400000005000000
+    deg: 1
+    kind: 1
+  - id: 16
+    name: "\u7ECF\u5178\u55E8\u68D2"
+    wines: 0100000001000000
+    drinks: 0100000001000000
+    flavourings: 0500000009000000
+    cup: 6
+    tastes: 010000000400000006000000
+    deg: 1
+    kind: 1
+  - id: 17
+    name: "\u9EC4\u91D1\u5496\u5561"
+    wines: 040000000800000008000000
+    drinks: 0700000007000000
+    flavourings: 08000000
+    cup: 0
+    tastes: 0000000005000000
+    deg: 1
+    kind: 1
+  - id: 18
+    name: "\u7C89\u7EA2\u5973\u90CE"
+    wines: 05000000
+    drinks: 03000000030000000400000004000000
+    flavourings: 
+    cup: 8
+    tastes: 0000000005000000
+    deg: 1
+    kind: 1
+  - id: 19
+    name: "\u9163\u751C\u5982\u68A6"
+    wines: 00000000
+    drinks: 060000000600000006000000
+    flavourings: 03000000
+    cup: 3
+    tastes: 0000000005000000
+    deg: 1
+    kind: 1
+  - id: 20
+    name: BeisiBeer
+    wines: 0900000009000000
+    drinks: 0000000000000000
+    flavourings: 0500000009000000
+    cup: 4
+    tastes: 000000000400000006000000
+    deg: 0
+    kind: 1
+  - id: 21
+    name: "\u8840\u8165\u739B\u4E3D"
+    wines: 05000000
+    drinks: 
+    flavourings: 01000000020000000400000005000000
+    cup: 7
+    tastes: 010000000200000003000000
+    deg: 0
+    kind: 1
+  - id: 22
+    name: "\u739B\u683C\u4E3D\u7279"
+    wines: 0900000009000000
+    drinks: 0300000003000000
+    flavourings: 0500000007000000
+    cup: 8
+    tastes: 000000000100000006000000
+    deg: 0
+    kind: 1
+  - id: 23
+    name: "\u91D1\u6C64\u529B"
+    wines: 02000000
+    drinks: 050000000500000005000000
+    flavourings: 05000000
+    cup: 6
+    tastes: 000000000600000007000000
+    deg: 0
+    kind: 1
+  - id: 24
+    name: "\u9152\u7A96\u5438\u8840\u9B3C"
+    wines: 0900000009000000
+    drinks: 0300000003000000
+    flavourings: 0200000004000000
+    cup: 4
+    tastes: 000000000100000002000000
+    deg: 0
+    kind: 1
+  - id: 25
+    name: "\u6DF7\u5408\u7EA2\u9152"
+    wines: 070000000700000007000000
+    drinks: 01000000
+    flavourings: 0100000005000000
+    cup: 9
+    tastes: 040000000500000006000000
+    deg: 0
+    kind: 1
+  - id: 26
+    name: "\u5929\u4F7F\u83AB\u5409\u6258"
+    wines: 
+    drinks: 00000000000000000300000003000000
+    flavourings: 0000000009000000
+    cup: 5
+    tastes: 000000000400000006000000
+    deg: 3
+    kind: 3
+  - id: 27
+    name: "\u6C34\u679C\u82CF\u6253"
+    wines: 
+    drinks: 0100000001000000030000000300000003000000
+    flavourings: 0000000009000000
+    cup: 10
+    tastes: 000000000400000006000000
+    deg: 3
+    kind: 3
+  - id: 28
+    name: "\u6E05\u98CE\u8336\u56ED"
+    wines: 
+    drinks: 03000000030000000400000004000000
+    flavourings: 0500000009000000
+    cup: 10
+    tastes: 000000000400000005000000
+    deg: 3
+    kind: 3
   materials:
     cups:
     - name: "\u4E00\u53E3\u676F"
@@ -62,6 +308,22 @@ MonoBehaviour:
     - name: "\u77EE\u811A\u9152\u676F"
       cap: 1
     - name: "\u53E4\u5178\u676F"
+      cap: 1
+    - name: "\u5564\u9152"
+      cap: 1
+    - name: "\u9E21\u5C3E\u9152\u4E00\u53F7\u676F"
+      cap: 1
+    - name: "\u9E21\u5C3E\u9152\u4E8C\u53F7\u676F"
+      cap: 1
+    - name: "\u9E21\u5C3E\u9152\u4E09\u53F7\u676F"
+      cap: 1
+    - name: "\u9E21\u5C3E\u9152\u56DB\u53F7\u676F"
+      cap: 1
+    - name: "\u7EA2\u9152\u676F"
+      cap: 1
+    - name: "\u6C34\u676F"
+      cap: 1
+    - name: "\u5496\u5561\u676F"
       cap: 1
     wines:
     - name: "\u9AD8\u8D35\u7684\u70C8\u9152"

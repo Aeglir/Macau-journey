@@ -52,5 +52,6 @@ namespace MiniGame.Bar.Datas
         public NpcEvaluations[] NpcEvas { get => npcEvas; }
         public FinishFirstPImg[] First { get => first; }
         public Sprite[] Second { get => second; }
+        public NpcEvaluations[] Third { get => npcEvas;}
     }
 }

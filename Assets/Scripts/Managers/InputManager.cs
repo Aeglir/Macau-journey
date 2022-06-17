@@ -1,8 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.InputSystem;
 namespace Managers
 {
@@ -370,6 +367,11 @@ namespace Managers
         private InputDataBank _data;
         private void Awake()
         {
+            if (GameManager.Instance.hasLoad)
+            {
+                DestroyImmediate(this);
+                return;
+            }
             _data = new InputDataBank();
         }
         public InputEvent AddInput(Key key, InputActionType type = InputActionType.Button, string Name = null) => _data.AddInput(key, type, name);

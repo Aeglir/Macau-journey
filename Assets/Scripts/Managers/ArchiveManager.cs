@@ -20,6 +20,11 @@ namespace Managers
         #region private method
         private void Awake()
         {
+            if (GameManager.Instance.hasLoad)
+            {
+                DestroyImmediate(this);
+                return;
+            }
             ArchiveInfoStream.loadInfoData();
         }
         #endregion

@@ -49,6 +49,11 @@ namespace Managers
         #region private methods
         private void Awake()
         {
+            if (GameManager.Instance.hasLoad)
+            {
+                DestroyImmediate(this);
+                return;
+            }
             Application.targetFrameRate = 60;
             dataSaver = new DataSaver();
             dataSaver.LoadAction=(d =>

@@ -2,13 +2,13 @@ using MiniGame.Bar.NPC;
 
 namespace MiniGame.Bar.NPCQUEUE
 {
-    public class NpcQueueCore : System.IDisposable
+    public class NpcQueueCore : System.IDisposable,AnimationControllable
     {
         NAppearCon appearCon;
         NMotionCon motionCon;
         NpcPool pool;
         NpcQueue queue;
-        private event System.Action<int> orderEvent;
+        private event System.Action orderEvent;
         internal NpcQueueCore(NAppearCon appearCon, NMotionCon motionCon, NpcPool pool)
         {
             queue = new NpcQueue();
@@ -51,11 +51,42 @@ namespace MiniGame.Bar.NPCQUEUE
             npc.Order();
         }
 #endif
-        internal void SetOrderEvent(System.Action<int> action) => orderEvent = action;
+        internal void SetOrderEvent(System.Action action) => orderEvent = action;
         public void OrderHandle()
         {
             if (orderEvent != null)
-                orderEvent(queue.Peek().NpcTag);
+                orderEvent();
+        }
+        public bool OrderComplete()
+        {
+            if (queue.Count == 0)
+                return false;
+            appearCon.Pause();
+            queue.Dequeue();
+            motionCon.MoveStep(() =>
+            {
+                appearCon.TopHasOut();
+                appearCon.Start();
+            });
+            appearCon.Start();
+            return true;
+        }
+
+        public void Start()
+        {
+            appearCon.Start();
+            motionCon.Start();
+        }
+
+        public void Pause()
+        {
+            appearCon.Pause();
+            motionCon.Pause();
+        }
+
+        public void Distory()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

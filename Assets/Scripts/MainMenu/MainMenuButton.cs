@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Managers;
@@ -35,7 +34,7 @@ namespace MainMenu
             }
             isPressed=true;
             await System.Threading.Tasks.Task.Delay(time);
-            AsyncOperation operation =  SceneManager.LoadSceneAsync(2);
+            AsyncOperation operation =  SceneManager.LoadSceneAsync(1);
             while(!operation.isDone)
             {
                 await System.Threading.Tasks.Task.Yield();

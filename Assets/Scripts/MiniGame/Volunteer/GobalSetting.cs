@@ -32,7 +32,7 @@ namespace MiniGame.Volunteer
         public const int FailtrueDelayMillions = 1000;
         public const float FailtrueDisappearDuration = 0.75f;
         public const float AccelerateTimeMulity = 5.0f;
-        public const float SourceTimeMulity = 5.0f;
+        public const float SourceTimeMulity = 1.0f;
         public const int InvaildTag = -1;
         #endregion
     }

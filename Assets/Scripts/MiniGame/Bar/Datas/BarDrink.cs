@@ -4,6 +4,8 @@ namespace  MiniGame.Bar.Datas
     public class BarDrink
     {
         [UnityEngine.SerializeField]
+        private int id;
+        [UnityEngine.SerializeField]
         [UnityEngine.Header("名字")]
         private string name;
         [UnityEngine.SerializeField]
@@ -35,6 +37,7 @@ namespace  MiniGame.Bar.Datas
         public int[] Tastes { get => tastes; }
         public int Deg { get => deg; }
         public int Kind { get => kind; }
+        public int Id { get => id;}
     }
 }
 

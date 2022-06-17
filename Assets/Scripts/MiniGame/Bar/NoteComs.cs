@@ -7,6 +7,8 @@ namespace MiniGame.Bar
     public class NoteComs : MonoBehaviour
     {
         public GameObject contain;
+        public SceneAudioManager audioManager;
+        public GameObject[] imgs;
         [SerializeField]
         private DBContorller contorller;
         [SerializeField]
@@ -18,42 +20,65 @@ namespace MiniGame.Bar
         [SerializeField]
         private GameObject[] pageList;
         private Datas.BarNoteAsset asset;
-        private int currentPage=0;
+        private GameObject curImg;
+        private int currentPage = 0;
         private int maxPage;
         public void init(Datas.BarNoteAsset asset)
         {
-            maxPage=pageList.Length;
+            maxPage = pageList.Length;
             pagebutton.onClick.AddListener(NextPage);
             this.asset = asset;
         }
-
-        public void Enable()=>contain.SetActive(true);
-        public void Disable()=>contain.SetActive(false);
+        public void Enable() => contain.SetActive(true);
+        public void Disable()
+        {
+            Close();
+            contain.SetActive(false);
+        }
         public void SetImage(int n)
         {
-            if(asset==null) return;
-            if(n%24<12)
+            audioManager.Play(GobalSetting.NEXTPAGENAME);
+            if (asset == null || n >= imgs.Length) return;
+            if (curImg != null)
+                curImg.SetActive(false);
+            if (n % 24 < 12)
             {
-                PageOne.sprite=asset.Notetips[n];
+                PageOne.sprite = asset.Notetips[n];
                 PageOne.gameObject.SetActive(true);
             }
-            else 
+            else
             {
-                PageTwo.sprite=asset.Notetips[n];
+                PageTwo.sprite = asset.Notetips[n];
                 PageTwo.gameObject.SetActive(true);
             }
+            curImg = imgs[n];
+            curImg.SetActive(true);
+        }
+        public void Close()
+        {
+            audioManager.Play(GobalSetting.NEXTPAGENAME);
+            if (curImg != null)
+            {
+                curImg.SetActive(false);
+                curImg = null;
+            }
+            PageOne.sprite = null;
+            PageOne.gameObject.SetActive(false);
+            PageTwo.sprite = null;
+            PageTwo.gameObject.SetActive(false);
         }
         private void NextPage()
         {
+            audioManager.Play(GobalSetting.NEXTPAGENAME);
             pageList[currentPage].SetActive(false);
             PageOne.gameObject.SetActive(false);
             PageTwo.gameObject.SetActive(false);
-            currentPage=getNextIndex(currentPage);
+            currentPage = getNextIndex(currentPage);
             pageList[currentPage].SetActive(true);
         }
         private int getNextIndex(int index)
         {
-            return (index+1)%maxPage;
+            return (index + 1) % maxPage;
         }
     }
 }

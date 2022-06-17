@@ -19,6 +19,11 @@ namespace Managers
         #region private methods
         private void Awake()
         {
+            if (GameManager.Instance.hasLoad)
+            {
+                DestroyImmediate(this);
+                return;
+            }
             tagList = new List<string>();
             sourceList = new Dictionary<string, AudioSource>();
             foreach (AudioData data in audioList)
@@ -26,7 +31,6 @@ namespace Managers
                 tagList.Add(data.tag);
             }
             AudioPresenter presenter = new AudioPresenter(audioList, tagList, sourceList, gameObject);
-            presenter.turnOnAudio("op");
         }
         #endregion
     }

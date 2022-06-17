@@ -165,15 +165,15 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 8da177a89d6a8b3439472285ca2c3eda, type: 3}
       - {fileID: 21300000, guid: 69a33872b9e9c634a8e07d5e4c460802, type: 3}
   - bad:
-      text: "\u4F60\u5C45\u7136\u6562\u8BA9\u6211\u4EEC\u559D\u8FD9\u6837\u7684\u4E1C\u897F\uFF1F\uFF01\\n\u5473\u9053\u771F\u6076\u5FC3"
+      text: "\u4F60\u5C45\u7136\u6562\u8BA9\u6211\u4EEC\u559D\u8FD9\u6837\u7684\u4E1C\u897F\uFF1F\uFF01$\u5473\u9053\u771F\u6076\u5FC3"
       img:
       - {fileID: 21300000, guid: cdcc53053f3a3cc41a1f5e1d764a142d, type: 3}
     normal:
-      text: "\u5C0F\u5343\u8FD8\u60F3\u63A5\u7740\u73A9\u5417\uFF1F\u518D\u53BB\u4E00\u5BB6\u5427\uFF1F\\n\u55EF\uFF0C\u4E0D\u591F\u5C3D\u5174"
+      text: "\u5C0F\u5343\u8FD8\u60F3\u63A5\u7740\u73A9\u5417\uFF1F\u518D\u53BB\u4E00\u5BB6\u5427\uFF1F$\u55EF\uFF0C\u4E0D\u591F\u5C3D\u5174"
       img:
       - {fileID: 21300000, guid: e6fb1c69e0f928c4b9833ec0a8be866f, type: 3}
     good:
-      text: "\u55EF\uFF0C\u8FD8\u7B97\u4E0D\u9519\u5566\u3002\\n\u771F\u597D\u559D~\u8C22\u8C22\u4F60\u54E6\u5C0F\u54E5\uFF01"
+      text: "\u55EF\uFF0C\u8FD8\u7B97\u4E0D\u9519\u5566\u3002$\u771F\u597D\u559D~\u8C22\u8C22\u4F60\u54E6\u5C0F\u54E5\uFF01"
       img:
       - {fileID: 21300000, guid: 2be478ffad08f734083bfe40216da1a4, type: 3}
       - {fileID: 21300000, guid: 160481337697f574ab0d6c74ef4382bd, type: 3}
@@ -219,15 +219,15 @@ MonoBehaviour:
       - {fileID: 21300000, guid: fb430dcdd4b716c4b81bfa0d816a16bc, type: 3}
       - {fileID: 21300000, guid: c8ca6e0bdf770c9428dc4d831e735e7c, type: 3}
   - bad:
-      text: "\u4ECA\u665A\u6211\u4E0D\u60F3\u9009\u4E86\uFF0C\u8F6E\u5230\u4F60\u70B9\u3002\\n\u5514\u2026\u2026\u90A3\u4E48\u8BF7\u6765\u4E00\u676F\u8FF7\u9189\u6ECB\u5473\uFF0C\u8C22\u8C22\u3002"
+      text: "\u8FD9\u662F\u4EC0\u4E48\u4E1C\u897F\uFF0C\u4F60\u627E\u7684\u5E97\u5C31\u8FD9\u79CD\u7A0B\u5EA6\uFF1F\uFF01$\u54CE\u5440\uFF0C\u4EBA\u6709\u5931\u624B\u561B\u3002"
       img:
       - {fileID: 21300000, guid: be302fe1e0692f941b07ce1683a55bd0, type: 3}
     normal:
-      text: "\u4F60\u60F3\u559D\u70B9\u4EC0\u4E48\uFF1F\\n\u6211\u660E\u5929\u8FD8\u8981\u53BB\u5267\u9662\uFF0C\u6765\u4E00\u676FBeisiBeer\u5C31\u884C\u4E86\u3002"
+      text: "\u2026\u2026\u4E00\u822C\u822C\u3002$\u662F\u5417\uFF0C\u6211\u89C9\u5F97\u8FD8\u53EF\u4EE5\u3002"
       img:
       - {fileID: 21300000, guid: ad2f03559448cc946945a28cab356490, type: 3}
     good:
-      text: "\u4ECA\u665A\u6211\u8DDF\u4F60\u9009\u5427\u3002\\n\u55EF\uFF0C\u6211\u60F3\u8981\u559D\u70B9\u5E26\u756A\u8304\u7684\uFF0C\u6765\u4E00\u676F\u8840\u8165\u739B\u4E3D\u3002"
+      text: "\u8FD8\u4E0D\u9519\uFF0C\u6B63\u662F\u6211\u60F3\u559D\u7684\u3002$\u5662\uFF0C\u96BE\u5F97\u89C1\u4F60\u6EE1\u610F\u5462\u3002"
       img:
       - {fileID: 21300000, guid: 00ee3be93804e5e4bbb1c8fab2576048, type: 3}
       - {fileID: 21300000, guid: 7eceb761452841b4f85a2feff50225c0, type: 3}
@@ -312,7 +312,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: dd2be26bd58f49a4a93c599bbe0ffc08, type: 3}
       - {fileID: 21300000, guid: 5614a35df4269ea408e7b95fa5c09059, type: 3}
   - bad:
-      text: "\u54C7\u9760\uFF0C\u770B\u4E0A\u53BB\u8D85\u7EA7\u96BE\u559D\uFF01\u592A\u9707\u60CA\u53CD\u800C\u5F88\u60F3\u8BD5\u4E00\u8BD5\u54C8\u54C8\u54C8\u54C8\uFF01"
+      text: "\u54C7\uFF0C\u770B\u4E0A\u53BB\u8D85\u7EA7\u96BE\u559D\uFF01\u592A\u9707\u60CA\u53CD\u800C\u5F88\u60F3\u8BD5\u4E00\u8BD5\u54C8\u54C8\u54C8\u54C8\uFF01"
       img:
       - {fileID: 21300000, guid: ee1c8eace44e0934194228368a3f564b, type: 3}
     normal:
@@ -324,6 +324,7 @@ MonoBehaviour:
       img:
       - {fileID: 21300000, guid: f09a8c5991948fb479640c9a64c54243, type: 3}
       - {fileID: 21300000, guid: a38aa8d52398b6e4d82ba596e64c24af, type: 3}
+      - {fileID: 21300000, guid: 48124f11de4e986408642b1aa17575ad, type: 3}
   - bad:
       text: "\u6076\u3002"
       img:
@@ -414,7 +415,7 @@ MonoBehaviour:
       img:
       - {fileID: 21300000, guid: 55dd173b9b2d3df45a1b7638ed70efae, type: 3}
     good:
-      text: "\u55EF\uFF5E\u597D\u559D\u3002"
+      text: "\u55EF\uFF0C\u597D\u559D\uFF01\uFF01"
       img:
       - {fileID: 21300000, guid: 8ee5685cb67ca3a46af7477b8a126d77, type: 3}
       - {fileID: 21300000, guid: 289d3fd7e67e73140914872ee174a1a3, type: 3}

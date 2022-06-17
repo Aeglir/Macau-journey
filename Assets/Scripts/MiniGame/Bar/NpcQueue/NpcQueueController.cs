@@ -1,10 +1,9 @@
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 namespace MiniGame.Bar.NPCQUEUE
 {
-    [System.Serializable]
-    public class OrderEvent : UnityEvent<int> { }
     public class NpcQueueController : MonoBehaviour
     {
         NpcQueueCore core;
@@ -15,34 +14,53 @@ namespace MiniGame.Bar.NPCQUEUE
         public GameObject prefabs;
         public GameObject layer;
         public GameObject pool;
-        public OrderEvent OrderEvent;
-        public void init(int[] tags, Sprite[] orders, Sprite[] waits){
+        public Button shakeButton;
+        public UnityEvent OrderEvent;
+        public UnityEvent NextEvent;
+        public void init(int[] tags, Sprite[] orders, Sprite[] waits)
+        {
             var fac = new NpcQueueFactory();
             fac.BuildNAppearCon();
             fac.BuildNMotionCon(layer);
-            fac.BuildNPCPool(pool, prefabs,tags,orders,waits);
+            fac.BuildNPCPool(pool, prefabs, tags, orders, waits);
             core = fac.GetResult();
             core.init();
-            core.SetOrderEvent((d) =>
+            core.SetOrderEvent(() =>
             {
-                OrderEvent.Invoke(d);
-                Debug.Log(d);
+                OrderEvent.Invoke();
+                shakeButton.interactable=true;
             });
 #if DEBUGMODE
-            if(!debug)
+            if (!debug)
                 core.AppearCon.Start();
-            else{
+            else
+            {
                 core.AddNpc();
             }
 #else
             core.AppearCon.Start();
 #endif
         }
-
+        public void FinishOrder()
+        {
+            shakeButton.interactable=false;
+            
+            if(core.OrderComplete())
+                NextEvent.Invoke();
+        }
         private void OnDestroy()
         {
-            if(core!=null)
+            if (core != null)
                 core.Dispose();
+        }
+        public void Start(){
+            if (core!=null)
+                core.Start();
+        }
+
+        public void Pasue(){
+            if (core!=null)
+                core.Pause();
         }
     }
 }

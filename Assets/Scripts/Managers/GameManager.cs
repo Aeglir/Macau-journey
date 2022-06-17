@@ -4,7 +4,7 @@ using UnityEngine.Events;
 namespace Managers
 {
     [DefaultExecutionOrder(-1)]
-    public class GameManager : Singleton<GameManager,GameManager>
+    public class GameManager : Singleton<GameManager, GameManager>
     {
         #region private fields
         //数据存储管理器
@@ -35,6 +35,7 @@ namespace Managers
         #endregion
         #region properties
         public bool isNewGame { get => isNew; }
+        public bool hasLoad;
         public ArchiveManager ArchiveManager { get => archiveManager; }
         public ConfigManager ConfigManager { get => configManager; }
         public AudioManager AudioManager { get => audioManager; }
@@ -49,10 +50,12 @@ namespace Managers
             //若已存在实例则销毁当前新建的gameObject
             if (_instance != null)
             {
+                hasLoad = true;
                 DestroyImmediate(gameObject);
                 return;
             }
             _instance = this;
+            hasLoad = false;
             //防止被销毁
             DontDestroyOnLoad(gameObject);
             miniGameMananger = new MiniGameManager();
@@ -62,12 +65,16 @@ namespace Managers
         {
             await System.Threading.Tasks.Task.Delay(100);
             ConsoleManager.RegisterCommand(AutoSave);
-            ConsoleManager.RegisterCommand(miniGameMananger.VolunteerGameStart,"VolunteerGame Open","MiniVol","S");
+            ConsoleManager.RegisterCommand(miniGameMananger.VolunteerGameStart, "VolunteerGame Open", "MiniVol", "S");
         }
         private void OnDestroy()
         {
-            ConsoleManager.RemoveCommand(AutoSave);
-            ConsoleManager.RemoveCommand("MiniVol","S");
+            if (!hasLoad)
+            {
+                ConsoleManager.RemoveCommand(AutoSave);
+                ConsoleManager.RemoveCommand("MiniVol", "S");
+            }
+            hasLoad=false;
         }
         #endregion
         /// <summary>

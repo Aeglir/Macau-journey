@@ -365,6 +365,11 @@ namespace Managers
             // #if !DEVELOPMENT_BUILD && !UNITY_EDITOR
             // DestroyImmediate(gameObject);
             // #endif
+            if (GameManager.Instance.hasLoad)
+            {
+                DestroyImmediate(this);
+                return;
+            }
             Enable();
         }
         private void Enable()

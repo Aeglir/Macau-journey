@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MiniGameManager
+namespace Managers
 {
-    public void VolunteerGameStart()
+    public class MiniGameManager
     {
-        UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(1);
+        public void VolunteerGameStart()
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(1);
+        }
     }
 }

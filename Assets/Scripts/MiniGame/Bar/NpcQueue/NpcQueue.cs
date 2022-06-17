@@ -7,6 +7,7 @@ namespace MiniGame.Bar.NPCQUEUE{
         public Npc Peek()=>queue.Peek() as Npc ;
         public void Enqueue(Npc data)=>queue.Enqueue(data);
         public void Dequeue()=>queue.Dequeue();
+        public int Count{get=>queue.Count;}
         ~NpcQueue()
         {
             Dispose();
