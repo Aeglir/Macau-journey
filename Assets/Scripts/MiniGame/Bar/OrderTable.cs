@@ -1,13 +1,13 @@
-using TMPro;
 using UnityEngine;
 using MiniGame.Bar.Datas;
+using UnityEngine.UI;
 
 namespace MiniGame.Bar
 {
     public class OrderTable : MonoBehaviour
     {
         public DBContorller dBContorller;
-        public TextMeshProUGUI text;
+        public Text text;
         private string[] orderTexts;
         private MiniGame.Bar.Datas.BarDrink[] drinks;
         private MiniGame.Bar.Datas.BarDrink curDrink;
@@ -24,13 +24,13 @@ namespace MiniGame.Bar
         {
             if (cur >= GobalSetting.MAXORDERS) return;
             curDrink = drinks[cur];
-            text.SetText(orderTexts[cur].Replace("\\n", "\n"));
+            text.text = orderTexts[cur].Replace("\\n", "\n");
         }
         public void Next()
         {
             cur++;
             curDrink=null;
-            text.SetText("");
+            text.text="";
         }
     }
 }

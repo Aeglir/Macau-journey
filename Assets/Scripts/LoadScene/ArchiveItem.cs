@@ -1,6 +1,5 @@
 using System;
 using System.Net.Mime;
-using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -15,9 +14,9 @@ namespace ArchiveGUI
         [Header("存档图片")]
         public Image image;
         [Header("标题文本")]
-        public TextMeshProUGUI titleText;
+        public Text titleText;
         [Header("描述文本")]
-        public TextMeshProUGUI descriptionText;
+        public Text descriptionText;
         [Header("点击按钮")]
         public Button button;
         public void initItem(Sprite image, string titleString, string descriptionString, int archiveTag, UnityAction<int> action)
@@ -40,22 +39,22 @@ namespace ArchiveGUI
         {
             if (titleString == null)
             {
-                titleText.SetText(DefaultTitle);
+                titleText.text = DefaultTitle;
             }
             else
             {
-                titleText.SetText(titleString);
+                titleText.text = titleString;
             }
         }
         private void setDescriptionString(string descriptionString)
         {
             if (descriptionString == null)
             {
-                descriptionText.SetText(DefaultDesctiption);
+                descriptionText.text=DefaultDesctiption;
             }
             else
             {
-                descriptionText.SetText(descriptionString);
+                descriptionText.text = descriptionString;
             }
         }
         private void setClickAction(UnityAction<int> action)

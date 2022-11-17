@@ -1,6 +1,5 @@
 using DG.Tweening;
 using MiniGame.Bar.Datas;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -26,7 +25,7 @@ namespace MiniGame.Bar
         public GameObject content;
         public GameObject[] PageList;
         public Image[] textContainer;
-        public TextMeshProUGUI[] textCom;
+        public Text[] textCom;
         private Image First;
         private Image Second;
         private Image Third;
@@ -45,9 +44,9 @@ namespace MiniGame.Bar
             First = PageList[0].GetComponent<Image>();
             Second = PageList[1].GetComponent<Image>();
             Third = PageList[2].GetComponent<Image>();
-            textCom = new TextMeshProUGUI[3];
-            textCom[0] = textContainer[0].GetComponentInChildren<TextMeshProUGUI>();
-            var tc = textContainer[1].GetComponentsInChildren<TextMeshProUGUI>();
+            textCom = new Text[3];
+            textCom[0] = textContainer[0].GetComponentInChildren<Text>();
+            var tc = textContainer[1].GetComponentsInChildren<Text>();
             textCom[1] = tc[0];
             textCom[2] = tc[1];
             sequences = new Sequence[3];

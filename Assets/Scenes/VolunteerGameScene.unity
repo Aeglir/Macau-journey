@@ -1028,19 +1028,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   money: {fileID: 801225590}
   turns: {fileID: 175267997}
-  vol1: {fileID: 21300000, guid: 20baa11e1982c58488a208ea22ca3bd3, type: 3}
-  vol2: {fileID: 21300000, guid: 63542915209c26d429fc9a0ed5169994, type: 3}
-  vol3: {fileID: 21300000, guid: 6d1862e70d92b4948bbc8fa0339f0c0c, type: 3}
-  vol4: {fileID: 21300000, guid: 1c9a8472f46582145b0d0e34df7c7adc, type: 3}
-  vol5: {fileID: 21300000, guid: f8ddf589955482e4db248c571b0e47f5, type: 3}
-  vol6: {fileID: 21300000, guid: b476dea2543667442971e02f6120c8e0, type: 3}
-  vol7: {fileID: 21300000, guid: af6d7e3ae5cef9c438fb128b4e29dd52, type: 3}
-  vo0: {fileID: 21300000, guid: 1be5a3146eab5fe4ba8a95918c1d2ab8, type: 3}
-  vo1: {fileID: 21300000, guid: e2ef204cbdc01b24ea3d3fad9f5f0ab0, type: 3}
-  vo2: {fileID: 21300000, guid: 21a4aa0b5b95dcb4bb0d282d603924db, type: 3}
-  vo3: {fileID: 21300000, guid: 58ec5d4a14d58964495c1103a01dcde3, type: 3}
-  vo4: {fileID: 21300000, guid: 459c559b8acfda34cba92a139ed5b3ea, type: 3}
-  vo5: {fileID: 21300000, guid: 3afd950f736a99441abd0c1348706c1f, type: 3}
+  vol1: {fileID: 21300000, guid: eca51e5ca76c77c4487a3b53710cbee3, type: 3}
+  vol2: {fileID: 21300000, guid: c37ae41ea4e58454f8c704c0c425a0e1, type: 3}
+  vol3: {fileID: 21300000, guid: 15a125f74de012a47b426a9c18702e35, type: 3}
+  vol4: {fileID: 21300000, guid: 908b9a5acbd577f4fa20fc1314a4edfd, type: 3}
+  vol5: {fileID: 21300000, guid: 7944164125c420c46a289ccda623ca59, type: 3}
+  vol6: {fileID: 21300000, guid: bb3cbad6cb0e431459387f77d21f03e2, type: 3}
+  vol7: {fileID: 21300000, guid: 562ba25fb0ccd3c4a8be5e2373aee498, type: 3}
+  vo0: {fileID: 21300000, guid: d9d0834e34f431749893fe703b906ad8, type: 3}
+  vo1: {fileID: 21300000, guid: 86d8942d8bba9c940b33cd1f6191d915, type: 3}
+  vo2: {fileID: 21300000, guid: 48bc6db69ea6c4749845964bc1e5a3e6, type: 3}
+  vo3: {fileID: 21300000, guid: 36c3948c6ba6812498a6bbb6c76c25b7, type: 3}
+  vo4: {fileID: 21300000, guid: c8e493b75ebef624999a0819de7e47a4, type: 3}
+  vo5: {fileID: 21300000, guid: 56b19dc59b9fe084cbc492a919fd2945, type: 3}
   succeedCanvas: {fileID: 434448979}
   closeEvent:
     m_PersistentCalls:
@@ -1535,7 +1535,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c3b1972b8b312b14093c59b8e284e8e3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 00a04036ead592d4793f9dc6fc57605d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2251,7 +2251,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 63158cfb3cec7654d965e4b5ffd0dec9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f40452525e5934647af40c6aafef5548, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4979,6 +4979,18 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1634942231}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1935808377
 MonoBehaviour:
